@@ -10,8 +10,6 @@
 -- Change the email on the next line first.
 -- ---------------------------------------------------------------------------
 
-
-
 DO $$
 DECLARE
   -- >>> CHANGE THIS to the owner's Google account email <<<
@@ -21,13 +19,16 @@ BEGIN
   -- dashboard on purpose. Bootstrapping happens below that guard.
   ALTER TABLE public.whitelist DISABLE TRIGGER USER;
 
-  INSERT INTO public.whitelist (email, role, status, is_super_admin)
-  VALUES (lower(v_email), 'admin', 'approved', true)
-  ON CONFLICT DO NOTHING;
-
-  UPDATE public.whitelist
-     SET role = 'admin', status = 'approved', is_super_admin = true
-   WHERE lower(email) = lower(v_email);
+  -- Ensure existing admin whitelist row for this email is updated cleanly
+  -- or inserted without violating unique (email, role, assigned_school_id) constraint
+  IF EXISTS (SELECT 1 FROM public.whitelist WHERE lower(email) = lower(v_email) AND role = 'admin') THEN
+    UPDATE public.whitelist
+       SET status = 'approved', is_super_admin = true
+     WHERE lower(email) = lower(v_email) AND role = 'admin';
+  ELSE
+    INSERT INTO public.whitelist (email, role, status, is_super_admin)
+    VALUES (lower(v_email), 'admin', 'approved', true);
+  END IF;
 
   ALTER TABLE public.whitelist ENABLE TRIGGER USER;
 

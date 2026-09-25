@@ -64,6 +64,8 @@ test-results/
 # ==========================================
 supabase/.branches
 supabase/.temp
+supabase/combined_migrations.sql
+
 
 # ==========================================
 # Cloudflare / Serverless
