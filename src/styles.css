@@ -1,0 +1,808 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * AstroBot Academy Design System
+ * Deep Space Indigo: near-black navy surfaces, electric indigo primary, cyan accent.
+ * Fonts: Space Grotesk (display) + DM Sans (body) — loaded via <link> in __root.tsx.
+ * NOTE: the --gold* tokens now carry the electric-indigo brand color (name kept
+ * for compatibility with existing bg-gold / text-gold utilities across the app).
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  /* Brand palette */
+  --color-navy-950: var(--navy-950);
+  --color-navy-900: var(--navy-900);
+  --color-navy-800: var(--navy-800);
+  --color-brand-navy: var(--brand-navy);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-cyan: var(--cyan);
+  --color-cyan-bright: var(--cyan-bright);
+  --color-offwhite: var(--offwhite);
+  --color-gray-mid: var(--gray-mid);
+  --color-gray-body: var(--gray-body);
+  --color-panel-light: var(--panel-light);
+
+  /* Fonts */
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+
+  /* Type scale (6 types) */
+  --text-display-xl: 3.75rem;
+  --text-display-xl--line-height: 1.08;
+  --text-display-xl--letter-spacing: -0.02em;
+  --text-display: 2.75rem;
+  --text-display--line-height: 1.12;
+  --text-display--letter-spacing: -0.015em;
+  --text-heading: 2rem;
+  --text-heading--line-height: 1.2;
+  --text-heading--letter-spacing: -0.01em;
+  --text-subheading: 1.375rem;
+  --text-subheading--line-height: 1.35;
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.5;
+
+  /* Shadows & glows */
+  --shadow-gold-glow: 0 0 40px -8px color-mix(in oklab, var(--gold) 45%, transparent);
+  --shadow-panel: 0 12px 40px -16px rgb(0 0 0 / 0.55);
+}
+
+:root {
+  --radius: 0.625rem;
+
+  /* Brand values — Deep Space Indigo */
+  --navy-950: #08081a;
+  --navy-900: #10102a;
+  --navy-800: #1a1a44;
+  --brand-navy: #2a2570;
+  --gold: #4f46e5;
+  --gold-bright: #818cf8;
+  --cyan: #22d3ee;
+  --cyan-bright: #67e8f9;
+  --offwhite: #f4f5ff;
+  --gray-mid: #9ea0cc;
+  --gray-body: #9092c2;
+  --panel-light: #e9e9fb;
+
+  /* Semantic tokens — dark navy site theme */
+  --background: var(--navy-950);
+  --foreground: var(--offwhite);
+  --card: var(--navy-900);
+  --card-foreground: var(--offwhite);
+  --popover: var(--navy-900);
+  --popover-foreground: var(--offwhite);
+  --primary: var(--gold);
+  --primary-foreground: var(--navy-950);
+  --secondary: var(--navy-800);
+  --secondary-foreground: var(--offwhite);
+  --muted: var(--navy-800);
+  --muted-foreground: var(--gray-mid);
+  --accent: var(--cyan);
+  --accent-foreground: var(--navy-950);
+  --destructive: oklch(0.637 0.237 25.331);
+  --destructive-foreground: var(--offwhite);
+  --border: color-mix(in oklab, var(--offwhite) 12%, transparent);
+  --input: color-mix(in oklab, var(--offwhite) 16%, transparent);
+  --ring: var(--gold);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    background-image:
+      radial-gradient(ellipse 70% 55% at 15% -5%, color-mix(in oklab, var(--gold) 22%, transparent), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 90% 10%, color-mix(in oklab, var(--cyan) 16%, transparent), transparent 55%),
+      radial-gradient(ellipse 80% 60% at 50% 110%, color-mix(in oklab, var(--brand-navy) 60%, transparent), transparent 65%);
+    background-attachment: fixed;
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+  }
+
+  /* Accessibility: gold focus ring, 2px, never removed */
+  :focus-visible {
+    outline: 2px solid var(--gold) !important;
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--gold) 35%, transparent);
+    color: var(--offwhite);
+  }
+
+  /* Subtle, on-brand scrollbar — the vertical Mission Rail carries the real progress cue */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklab, var(--cyan) 30%, transparent) transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: color-mix(in oklab, var(--cyan) 28%, transparent);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: color-mix(in oklab, var(--cyan) 45%, transparent);
+    background-clip: padding-box;
+  }
+
+  /* The page/window itself scrolls freely with no visible scrollbar track —
+     internal panels (modals, dashboard tables, etc.) keep the thin cyan one above. */
+  html {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  html::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Radial glow helpers for section backgrounds */
+@utility glow-gold {
+  background-image:
+    radial-gradient(ellipse 55% 45% at 50% 0%, color-mix(in oklab, var(--gold) 28%, transparent), transparent 65%),
+    radial-gradient(ellipse 45% 40% at 78% 15%, color-mix(in oklab, var(--cyan) 18%, transparent), transparent 60%);
+}
+
+/* Violet → cyan gradient text */
+@utility text-cosmic {
+  background-image: linear-gradient(100deg, var(--gold-bright), var(--cyan-bright));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@utility glow-navy {
+  background-image: radial-gradient(
+    ellipse 70% 55% at 50% 100%,
+    color-mix(in oklab, var(--brand-navy) 55%, transparent),
+    transparent 70%
+  );
+}
+
+/* Skip link — visually hidden until focused */
+@utility skip-link {
+  position: absolute;
+  left: 0.75rem;
+  top: 0.75rem;
+  z-index: 100;
+  transform: translateY(-200%);
+  background-color: var(--gold);
+  color: var(--navy-950);
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  transition: transform 150ms ease;
+
+  &:focus-visible {
+    transform: translateY(0);
+  }
+}
+
+/* ── Bento & high-energy utilities ─────────────────────────────── */
+
+/* Bento tile: glass panel with animated indigo edge glow on hover */
+@utility bento-tile {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  border: 1px solid color-mix(in oklab, var(--offwhite) 10%, transparent);
+  background:
+    linear-gradient(160deg, color-mix(in oklab, var(--navy-900) 92%, transparent), color-mix(in oklab, var(--navy-950) 88%, transparent));
+  backdrop-filter: blur(6px);
+  transition: border-color 300ms ease, transform 300ms ease, box-shadow 300ms ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in oklab, var(--gold) 55%, transparent);
+    box-shadow:
+      0 18px 50px -20px color-mix(in oklab, var(--gold) 55%, transparent),
+      inset 0 1px 0 color-mix(in oklab, var(--offwhite) 12%, transparent);
+  }
+}
+
+/* Conic aurora ring, used behind hero/feature accents */
+@utility aurora-ring {
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    var(--gold) 0deg,
+    var(--cyan) 120deg,
+    var(--gold-bright) 240deg,
+    var(--gold) 360deg
+  );
+  filter: blur(48px);
+  opacity: 0.4;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes grid-pan {
+  0% { background-position: 0 0; }
+  100% { background-position: 48px 48px; }
+}
+
+@utility animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+@utility animate-spin-slow {
+  animation: spin-slow 24s linear infinite;
+}
+
+/* Subtle moving grid backdrop for energetic sections */
+@utility grid-backdrop {
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--gold) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--gold) 8%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  animation: grid-pan 8s linear infinite;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black, transparent 75%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-slow,
+  .animate-spin-slow,
+  .grid-backdrop {
+    animation: none !important;
+  }
+}
+
+/* ── Mission Control / Cinematic Space system ──────────────────── */
+
+/* Utility (telemetry) face — loaded via <link> in __root.tsx */
+@theme inline {
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+}
+
+/* Telemetry readout text */
+@utility telemetry {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.6875rem;
+  line-height: 1.4;
+}
+
+/* Frosted console panel */
+@utility panel {
+  border: 1px solid color-mix(in oklab, var(--offwhite) 10%, transparent);
+  background: linear-gradient(
+    160deg,
+    color-mix(in oklab, var(--navy-900) 70%, transparent),
+    color-mix(in oklab, var(--navy-950) 60%, transparent)
+  );
+  backdrop-filter: blur(14px) saturate(130%);
+}
+
+/* HUD corner bracket — apply to an absolutely-positioned span */
+@utility hud-bracket {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: color-mix(in oklab, var(--cyan) 70%, transparent);
+  border-style: solid;
+  border-width: 0;
+}
+
+/* Animated scanline sweep for cinematic texture */
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+@utility scanlines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 2px,
+    color-mix(in oklab, var(--offwhite) 3%, transparent) 3px
+  );
+}
+
+/* Fine film grain to remove digital sterility */
+@keyframes grain-shift {
+  0%,100% { transform: translate(0,0); }
+  20% { transform: translate(-4%, 3%); }
+  40% { transform: translate(3%, -5%); }
+  60% { transform: translate(-2%, 4%); }
+  80% { transform: translate(4%, -2%); }
+}
+@utility grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  animation: grain-shift 1.2s steps(4) infinite;
+}
+
+/* Blinking status LED */
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+@utility led {
+  animation: blink 1.6s ease-in-out infinite;
+}
+
+@keyframes sweep-x {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+@utility scan-sweep {
+  animation: sweep-x 2.4s linear infinite;
+}
+
+/* Auto-scrolling marquee (mobile affiliations row) — pauses on hover/touch */
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@utility marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+@utility marquee-track {
+  width: max-content;
+  animation: marquee-scroll 26s linear infinite;
+}
+.marquee:hover .marquee-track,
+.marquee:active .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain, .led, .scan-sweep, .marquee-track { animation: none !important; }
+}
+
+/* ============================================================
+   Dashboard theme — Deep Space Indigo (matches marketing site)
+   Scoped to .dashboard-blueprint (class name kept for compatibility).
+   Clean, static, dark navy — no grid, no dashed blueprint borders.
+   ============================================================ */
+.dashboard-blueprint {
+  --bp-paper: #08081a;             /* page background (navy-950) */
+  --bp-paper-2: #10102a;           /* raised surface (navy-900) */
+  --bp-ink: #f4f5ff;               /* primary text (offwhite) */
+  --bp-ink-2: #c9cbe8;             /* secondary text */
+  --bp-muted: #9092c2;             /* tertiary/label text */
+  --bp-line: rgba(244, 245, 255, 0.08);
+  --bp-line-strong: rgba(244, 245, 255, 0.16);
+  --bp-indigo: #818cf8;            /* accent (indigo-bright) */
+  --bp-indigo-soft: rgba(129, 140, 248, 0.14);
+  --bp-danger: #f87171;
+
+  color: var(--bp-ink);
+  font-family: var(--font-sans);
+  background-color: var(--bp-paper);
+  background-image:
+    /* subtle blueprint grid — echoes Mission Control preloader */
+    linear-gradient(rgba(129, 140, 248, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(129, 140, 248, 0.06) 1px, transparent 1px),
+    /* fine secondary grid for depth */
+    linear-gradient(rgba(129, 140, 248, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(129, 140, 248, 0.035) 1px, transparent 1px),
+    /* existing radial glows */
+    radial-gradient(ellipse 60% 45% at 10% -10%, color-mix(in oklab, var(--gold) 18%, transparent), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 95% 5%, color-mix(in oklab, var(--cyan) 12%, transparent), transparent 55%),
+    radial-gradient(ellipse 70% 55% at 50% 115%, color-mix(in oklab, var(--brand-navy) 45%, transparent), transparent 70%);
+  background-size:
+    64px 64px,
+    64px 64px,
+    16px 16px,
+    16px 16px,
+    auto, auto, auto;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+.dashboard-blueprint h1,
+.dashboard-blueprint h2,
+.dashboard-blueprint h3,
+.dashboard-blueprint h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+  color: var(--bp-ink);
+}
+
+/* Surface remap — legacy slate-950/900 become transparent over the page bg,
+   slate-800 becomes a raised navy panel. */
+.dashboard-blueprint [class*="bg-slate-950"],
+.dashboard-blueprint [class*="bg-slate-900"] {
+  background-color: transparent !important;
+}
+.dashboard-blueprint [class*="bg-slate-800"],
+.dashboard-blueprint [class*="bg-white"] {
+  background-color: var(--bp-paper-2) !important;
+}
+
+/* Panel borders — solid hairline, no dashes */
+.dashboard-blueprint [class*="border-slate-8"],
+.dashboard-blueprint [class*="border-slate-7"],
+.dashboard-blueprint [class*="border-slate-6"],
+.dashboard-blueprint [class*="border-dashed"] {
+  border-color: var(--bp-line-strong) !important;
+  border-style: solid !important;
+}
+.dashboard-blueprint [class*="rounded-xl"][class*="border-slate"],
+.dashboard-blueprint [class*="rounded-lg"][class*="border-slate"],
+.dashboard-blueprint [class*="rounded-md"][class*="border-slate"] {
+  background-color: color-mix(in oklab, var(--bp-paper-2) 92%, transparent) !important;
+}
+
+/* Text remap */
+.dashboard-blueprint [class*="text-slate-100"],
+.dashboard-blueprint [class*="text-slate-200"] { color: var(--bp-ink) !important; }
+.dashboard-blueprint [class*="text-slate-300"],
+.dashboard-blueprint [class*="text-slate-400"] { color: var(--bp-ink-2) !important; }
+.dashboard-blueprint [class*="text-slate-500"],
+.dashboard-blueprint [class*="text-slate-600"] { color: var(--bp-muted) !important; }
+
+/* Indigo accents */
+.dashboard-blueprint [class*="bg-indigo-500"]:not(button):not(a) { background-color: var(--bp-indigo-soft) !important; }
+.dashboard-blueprint [class*="text-indigo-200"],
+.dashboard-blueprint [class*="text-indigo-300"],
+.dashboard-blueprint [class*="text-indigo-400"] { color: var(--bp-indigo) !important; }
+.dashboard-blueprint [class*="border-indigo-500"] { border-color: var(--bp-indigo) !important; }
+
+/* Primary buttons — indigo pill */
+.dashboard-blueprint button[class*="bg-indigo-500"],
+.dashboard-blueprint a[class*="bg-indigo-500"] {
+  background-color: var(--bp-indigo) !important;
+  color: #0b0b1e !important;
+  border: 1px solid var(--bp-indigo) !important;
+  border-radius: 9999px !important;
+  transition: filter .15s ease, transform .15s ease;
+}
+.dashboard-blueprint button[class*="bg-indigo-500"]:hover,
+.dashboard-blueprint a[class*="bg-indigo-500"]:hover {
+  filter: brightness(1.08);
+}
+
+/* Inputs */
+.dashboard-blueprint input,
+.dashboard-blueprint select,
+.dashboard-blueprint textarea {
+  background-color: color-mix(in oklab, var(--bp-paper) 60%, transparent) !important;
+  color: var(--bp-ink) !important;
+  border: 1px solid var(--bp-line-strong) !important;
+  border-radius: 6px;
+}
+.dashboard-blueprint input::placeholder,
+.dashboard-blueprint textarea::placeholder { color: var(--bp-muted); }
+.dashboard-blueprint input:focus,
+.dashboard-blueprint select:focus,
+.dashboard-blueprint textarea:focus {
+  outline: 2px solid var(--bp-indigo);
+  outline-offset: 1px;
+  border-color: var(--bp-indigo) !important;
+}
+
+/* Secondary/ghost buttons */
+.dashboard-blueprint button[class*="border-slate"]:not([class*="bg-indigo"]) {
+  background-color: color-mix(in oklab, var(--bp-paper-2) 70%, transparent) !important;
+  color: var(--bp-ink) !important;
+  border-color: var(--bp-line-strong) !important;
+  border-radius: 9999px !important;
+}
+.dashboard-blueprint button[class*="border-slate"]:not([class*="bg-indigo"]):hover {
+  background-color: var(--bp-paper-2) !important;
+  border-color: var(--bp-indigo) !important;
+  color: var(--bp-ink) !important;
+}
+
+/* Tables */
+.dashboard-blueprint table { border-color: var(--bp-line-strong); }
+.dashboard-blueprint thead,
+.dashboard-blueprint th {
+  background-color: color-mix(in oklab, var(--bp-paper-2) 80%, transparent) !important;
+  color: var(--bp-ink-2) !important;
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+}
+.dashboard-blueprint td { color: var(--bp-ink); }
+.dashboard-blueprint tr { border-color: var(--bp-line) !important; }
+
+/* Error banners */
+.dashboard-blueprint [class*="bg-red-950"],
+.dashboard-blueprint [class*="border-red-900"] {
+  background-color: rgba(248, 113, 113, 0.1) !important;
+  border-color: var(--bp-danger) !important;
+  color: var(--bp-danger) !important;
+}
+.dashboard-blueprint [class*="text-red-300"],
+.dashboard-blueprint [class*="text-red-400"] { color: var(--bp-danger) !important; }
+
+/* Panel wrapper — solid navy card (no corner ticks, clean/static) */
+.dashboard-blueprint .bp-panel {
+  position: relative;
+  background: color-mix(in oklab, var(--bp-paper-2) 92%, transparent);
+  border: 1px solid var(--bp-line-strong);
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+}
+.dashboard-blueprint .bp-tick-tl,
+.dashboard-blueprint .bp-tick-tr { display: none; }
+
+/* ============================================================
+   Dashboard tables — horizontal scroll inside panel, no wrapping
+   ============================================================ */
+.dashboard-blueprint main { min-width: 0; }
+.dashboard-blueprint main > * { max-width: 100%; }
+
+/* The panel scrolls horizontally; the page does not */
+.dashboard-blueprint [class*="overflow-x-auto"] {
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  -webkit-overflow-scrolling: touch;
+}
+.dashboard-blueprint [class*="overflow-x-auto"]::-webkit-scrollbar { height: 8px; }
+.dashboard-blueprint [class*="overflow-x-auto"]::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--bp-indigo) 40%, transparent);
+  border-radius: 999px;
+}
+
+/* Table sizes to its content — no column crushing / no wrap */
+.dashboard-blueprint table {
+  width: 100%;
+  table-layout: auto;
+}
+.dashboard-blueprint table th,
+.dashboard-blueprint table td {
+  white-space: nowrap;
+  vertical-align: middle;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+/* Tighter cells on narrow viewports so more columns fit before scrolling */
+@media (max-width: 1280px) {
+  .dashboard-blueprint table th,
+  .dashboard-blueprint table td {
+    font-size: 0.8125rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+/* Cells that intentionally hold long prose can opt out */
+.dashboard-blueprint table td.cell-wrap,
+.dashboard-blueprint table td [class*="whitespace-normal"],
+.dashboard-blueprint table td [class*="break-words"] {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+/* Scroll-hint fade on BOTH edges of scrollable table panels; touch-friendly */
+.dashboard-blueprint .bp-panel:has(> [class*="overflow-x-auto"]),
+.dashboard-blueprint .bp-panel > [class*="overflow-x-auto"] {
+  position: relative;
+}
+.dashboard-blueprint [class*="overflow-x-auto"] {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, var(--bp-indigo) 45%, transparent) transparent;
+}
+@media (pointer: coarse) {
+  .dashboard-blueprint [class*="overflow-x-auto"]::-webkit-scrollbar { height: 10px; }
+}
+.dashboard-blueprint .bp-panel > [class*="overflow-x-auto"]::before,
+.dashboard-blueprint .bp-panel > [class*="overflow-x-auto"]::after {
+  content: "";
+  position: sticky;
+  top: 0;
+  width: 28px;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+.dashboard-blueprint .bp-panel > [class*="overflow-x-auto"]::before {
+  left: 0;
+  float: left;
+  margin-right: -28px;
+  background: linear-gradient(to right, color-mix(in oklab, var(--bp-paper) 92%, transparent), transparent);
+}
+.dashboard-blueprint .bp-panel > [class*="overflow-x-auto"]::after {
+  right: 0;
+  float: right;
+  margin-left: -28px;
+  background: linear-gradient(to left, color-mix(in oklab, var(--bp-paper) 92%, transparent), transparent);
+}
+
+/* Responsive filter bar — stacks full-width on mobile, wraps inline on tablet+ */
+.filter-bar {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  width: 100%;
+}
+.filter-bar > * { min-width: 0; width: 100%; }
+@media (min-width: 640px) {
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .filter-bar > * { width: auto; }
+}
+
+
+/* Preserve mobile pill-nav scroll but hide its scrollbar */
+.dashboard-blueprint nav[class*="overflow-x-auto"] {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+.dashboard-blueprint nav[class*="overflow-x-auto"]::-webkit-scrollbar { display: none; }
+.dashboard-blueprint nav[class*="overflow-x-auto"] { scrollbar-width: none; }
+
+
+/* Preserve mobile pill-nav scroll but hide its scrollbar */
+.dashboard-blueprint nav[class*="overflow-x-auto"] {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+.dashboard-blueprint nav[class*="overflow-x-auto"]::-webkit-scrollbar { display: none; }
+.dashboard-blueprint nav[class*="overflow-x-auto"] { scrollbar-width: none; }
+
+/* Responsive column-hiders — apply on <th>/<td> alongside table-cell base */
+.dash-col-sm { display: none; }
+.dash-col-md { display: none; }
+.dash-col-lg { display: none; }
+@media (min-width: 640px)  { .dash-col-sm { display: table-cell; } }
+@media (min-width: 768px)  { .dash-col-md { display: table-cell; } }
+@media (min-width: 1024px) { .dash-col-lg { display: table-cell; } }
+
+/* ============================================================
+   Unified Badge / Chip
+   ============================================================ */
+.dash-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  height: 1.375rem;
+  padding: 0 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  font-size: 0.6875rem;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  vertical-align: middle;
+  text-transform: capitalize;
+  flex: none;
+}
+.dash-badge--neutral  { background: rgba(148, 163, 184, 0.12); border-color: rgba(148, 163, 184, 0.25); color: #cbd5e1; }
+.dash-badge--success  { background: rgba(16, 185, 129, 0.12); border-color: rgba(16, 185, 129, 0.30); color: #6ee7b7; }
+.dash-badge--warning  { background: rgba(245, 158, 11, 0.12); border-color: rgba(245, 158, 11, 0.30); color: #fcd34d; }
+.dash-badge--danger   { background: rgba(239, 68, 68, 0.12);  border-color: rgba(239, 68, 68, 0.30);  color: #fca5a5; }
+.dash-badge--info     { background: rgba(129, 140, 248, 0.14); border-color: rgba(129, 140, 248, 0.35); color: #c7d2fe; }
+.dash-badge--super    {
+  background: linear-gradient(90deg, rgba(251, 191, 36, 0.18), rgba(251, 146, 60, 0.14));
+  border-color: rgba(251, 191, 36, 0.45);
+  color: #fcd34d;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.625rem;
+}
+
+/* Hide Lovable badge entirely (container + inner X). */
+#lovable-badge,
+#lovable-badge * {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* CMS rail: scrolls without a visible scrollbar */
+.site-rail-scroll { scrollbar-width: none; -ms-overflow-style: none; }
+.site-rail-scroll::-webkit-scrollbar { width: 0; height: 0; display: none; }
+
+/* ---------------------------------------------------------------------------
+   Blueprint band — the light "specification" surface on /for-schools.
+   Drafting paper: a fine millimetre grid, heavier 5-square major lines, and
+   a faint cool wash so it reads as a technical drawing, not a flat panel.
+--------------------------------------------------------------------------- */
+.blueprint-band {
+  --bp-paper: #f7fafd;
+  --bp-paper-2: #eaf1f8;
+  --bp-ink: #1b3a5c;
+  --bp-line: color-mix(in oklab, var(--bp-ink) 9%, transparent);
+  --bp-line-major: color-mix(in oklab, var(--bp-ink) 16%, transparent);
+  background-color: var(--bp-paper);
+  background-image:
+    linear-gradient(to right, var(--bp-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--bp-line) 1px, transparent 1px),
+    linear-gradient(to right, var(--bp-line-major) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--bp-line-major) 1px, transparent 1px),
+    /* soft paper wash */
+    radial-gradient(ellipse 80% 60% at 12% 0%, color-mix(in oklab, var(--bp-paper-2) 80%, transparent), transparent 70%),
+    radial-gradient(ellipse 70% 60% at 90% 100%, color-mix(in oklab, var(--bp-paper-2) 70%, transparent), transparent 70%);
+  background-size: 24px 24px, 24px 24px, 120px 120px, 120px 120px, auto, auto;
+  background-position: center top;
+}
+
+/* Soft fade so the grid never fights the copy in the centre of the band. */
+.blueprint-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    120% 70% at 50% 40%,
+    color-mix(in oklab, var(--bp-paper) 78%, transparent) 0%,
+    transparent 72%
+  );
+}
+
+/* Registration rules along the top and bottom edge of the sheet. */
+.blueprint-band::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-top: 1px solid color-mix(in oklab, var(--bp-ink) 20%, transparent);
+  border-bottom: 1px solid color-mix(in oklab, var(--bp-ink) 20%, transparent);
+}
+

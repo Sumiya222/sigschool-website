@@ -1,0 +1,1 @@
+ALTER TYPE public.registration_field_type ADD VALUE IF NOT EXISTS 'file';

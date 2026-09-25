@@ -1,0 +1,1 @@
+UPDATE public.programs SET badge_label = 'GENERAL PUBLIC' WHERE mod_code = 'MOD-01';

@@ -1,0 +1,149 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+env:
+  GITLEAKS_VERSION: "8.30.1"
+
+jobs:
+  quality:
+    name: Typecheck, lint, build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+          cache: npm
+
+      - run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      - name: Link-target scheme allowlist parity (SQL vs TS)
+        run: npm run test:link-target-parity
+
+  gitleaks:
+    name: Secret scan (gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Full history — this repo is small enough that a full scan every
+          # run is fast and simpler/more robust than hand-rolling diff-only
+          # ranges (which have edge cases on a repo's first push per branch).
+          fetch-depth: 0
+
+      - name: Install gitleaks
+        run: |
+          curl -sSL -o gitleaks.tar.gz \
+            "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          tar -xzf gitleaks.tar.gz gitleaks
+          sudo mv gitleaks /usr/local/bin/gitleaks
+          gitleaks version
+
+      - name: Scan full history
+        run: gitleaks git --redact --verbose
+
+  deploy:
+    name: Deploy to HostersPK
+    # Both gates required: a secret reaching production is worse than a
+    # failing typecheck, so a gitleaks failure must block deploy exactly
+    # like a quality failure does.
+    needs: [quality, gitleaks]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+          cache: npm
+
+      - run: npm ci
+
+      # Rebuilt here rather than reusing the quality job's build: artifacts
+      # aren't shared across jobs by default, and rebuilding is simpler and
+      # barely slower than wiring up upload/download-artifact for 19MB.
+      #
+      # VITE_* vars are inlined into the client bundle by Vite at build time,
+      # not read at request time — unlike every other env var here, setting
+      # these on the cPanel Node App later has no effect. They must be
+      # correct at THIS step or the deployed site ships a broken Supabase
+      # client config.
+      - name: Build
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
+        run: npm run build
+
+      # cPanel's Node.js App must run this wrapper, not .output/server/index.mjs
+      # directly — it checks HOST=127.0.0.1 is actually set before starting the
+      # real server (see scripts/hosterspk-entry.mjs for why this matters).
+      - name: Add HostersPK entry wrapper to build output
+        run: cp scripts/hosterspk-entry.mjs .output/server/hosterspk-entry.mjs
+
+      - name: Configure SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.HOSTERSPK_SSH_KEY }}
+          SSH_HOST: ${{ secrets.HOSTERSPK_SSH_HOST }}
+          SSH_PORT: ${{ secrets.HOSTERSPK_SSH_PORT }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts
+
+      # rsync isn't installed on the HostersPK server (confirmed live:
+      # "rsync: command not found" from the remote side on first deploy
+      # attempt) -- common on shared hosting, since it's a separate package
+      # many hosts don't bother installing. scp is part of the core OpenSSH
+      # server package instead, so it's virtually always present wherever
+      # sshd itself is. The rm -rf first replicates rsync --delete's "exact
+      # mirror" behavior (so stale chunks from removed routes/components
+      # don't accumulate) -- plain scp has no equivalent flag, so this
+      # two-step is the substitute. Only .output/ is touched -- env vars
+      # live outside it (cPanel Node App UI), so nothing this deletes can
+      # be an app secret.
+      - name: Upload build output
+        env:
+          SSH_HOST: ${{ secrets.HOSTERSPK_SSH_HOST }}
+          SSH_PORT: ${{ secrets.HOSTERSPK_SSH_PORT }}
+          SSH_USER: ${{ secrets.HOSTERSPK_SSH_USER }}
+          DEPLOY_PATH: ${{ secrets.HOSTERSPK_DEPLOY_PATH }}
+        run: |
+          ssh -i ~/.ssh/deploy_key -p "$SSH_PORT" -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
+            "$SSH_USER@$SSH_HOST" \
+            "rm -rf '$DEPLOY_PATH/.output'"
+          scp -r -i ~/.ssh/deploy_key -P "$SSH_PORT" -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
+            .output "$SSH_USER@$SSH_HOST:$DEPLOY_PATH/.output"
+
+      # Passenger reloads the app when this file's mtime changes — the
+      # standard restart signal cPanel's Node.js App feature relies on too.
+      - name: Restart Passenger
+        env:
+          SSH_HOST: ${{ secrets.HOSTERSPK_SSH_HOST }}
+          SSH_PORT: ${{ secrets.HOSTERSPK_SSH_PORT }}
+          SSH_USER: ${{ secrets.HOSTERSPK_SSH_USER }}
+          DEPLOY_PATH: ${{ secrets.HOSTERSPK_DEPLOY_PATH }}
+        run: |
+          ssh -i ~/.ssh/deploy_key -p "$SSH_PORT" -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
+            "$SSH_USER@$SSH_HOST" \
+            "mkdir -p '$DEPLOY_PATH/tmp' && touch '$DEPLOY_PATH/tmp/restart.txt'"
+
+      - name: Clean up SSH key
+        if: always()
+        run: rm -f ~/.ssh/deploy_key

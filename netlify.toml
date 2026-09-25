@@ -1,0 +1,10 @@
+# TEMPORARY deploy target while HostersPK is suspended — see vite.config.ts's
+# nitro.preset comment. Netlify sets NETLIFY=true automatically during its own
+# builds, which is what actually switches the Nitro preset; this file only
+# tells Netlify how to run that build and where the output lands.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"

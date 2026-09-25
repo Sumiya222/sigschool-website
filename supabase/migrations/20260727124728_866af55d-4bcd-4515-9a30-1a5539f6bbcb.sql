@@ -1,0 +1,2 @@
+ALTER TABLE public.sheet_sync_queue DROP CONSTRAINT IF EXISTS sheet_sync_queue_source_table_check;
+ALTER TABLE public.sheet_sync_queue ADD CONSTRAINT sheet_sync_queue_source_table_check CHECK (source_table IN ('inquiries','job_applications','registrations'));

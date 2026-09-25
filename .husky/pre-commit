@@ -1,0 +1,7 @@
+if ! command -v gitleaks >/dev/null 2>&1; then
+  echo "⚠️  gitleaks is not installed or not on PATH — skipping secret scan."
+  echo "   Install it (e.g. 'winget install Gitleaks.Gitleaks') so this check actually runs."
+  exit 0
+fi
+
+gitleaks protect --staged --redact --verbose
