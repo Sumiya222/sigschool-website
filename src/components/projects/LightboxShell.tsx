@@ -142,7 +142,7 @@ function ArrowBtn({
    gallery further up the page. A tiny event avoids threading state through
    the whole route for a single link. */
 
-export const OPEN_PROJECT_EVENT = "astrobot:open-project";
+export const OPEN_PROJECT_EVENT = "students:open-project";
 
 export function requestOpenProject(projectId: string) {
   window.dispatchEvent(new CustomEvent(OPEN_PROJECT_EVENT, { detail: projectId }));

@@ -113,7 +113,7 @@ export const getFeaturedStudents = createServerFn({ method: "GET" }).handler(
             achievement: row.achievement ?? "",
             quote: row.quote,
             projectId: row.project_id,
-            alt: m?.alt_text || `${row.full_name}, AstroBot Academy student`,
+            alt: m?.alt_text || `${row.full_name}, student`,
             src: urls[1] ?? urls[0],
             srcSet: srcSet || null,
             full: urls[2] ?? urls[1] ?? urls[0],

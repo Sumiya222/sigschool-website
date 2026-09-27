@@ -13,6 +13,7 @@ import {
 import { Band, fadeUp, stagger } from "@/components/for-schools/Band";
 import type { JobOpening } from "@/lib/careers.shared";
 import { list, str, useSection, useSiteContent } from "@/lib/site-content";
+import { BRAND } from "@/lib/brand";
 import { ApplicationForm } from "./ApplicationForm";
 
 const SLUG = "careers";
@@ -29,10 +30,10 @@ function themeOf(c: Record<string, any>, fallback: Theme): Theme {
 type Fact = { label: string; value: string };
 
 const HERO_FACTS: Fact[] = [
-  { label: "Based at", value: "NICAT-NASTP Alpha, Rawalpindi" },
-  { label: "Disciplines", value: "Robotics · AI · Space Science" },
-  { label: "Who we hire", value: "Engineers · Researchers · Educators" },
-  { label: "Engagement", value: "Full-time · Part-time · Camp season" },
+  { label: "Based at", value: BRAND.addressLine },
+  { label: "Divisions", value: "Lower · Middle · Upper School" },
+  { label: "Who we hire", value: "Teachers · Coordinators · Staff" },
+  { label: "Engagement", value: "Full-time · Part-time · Seasonal" },
 ];
 
 export function CrHero() {
@@ -41,7 +42,7 @@ export function CrHero() {
   const facts = list<Fact>(c, "facts", HERO_FACTS);
 
   return (
-    <Band theme={theme} label="Careers at AstroBot Academy" hero>
+    <Band theme={theme} label={`Careers at ${BRAND.name}`} hero>
       <motion.div
         variants={stagger}
         initial="hidden"
@@ -57,7 +58,7 @@ export function CrHero() {
               aria-hidden
               className="led size-1.5 rounded-full bg-cyan shadow-[0_0_8px_var(--cyan)]"
             />
-            {str(c, "doc_ref", "Careers · AB / CAR")}
+            {str(c, "doc_ref", "Careers · NB / CAR")}
           </span>
           <span>{str(c, "doc_rev", "Rev. 2026.1")}</span>
         </motion.div>
@@ -88,7 +89,7 @@ export function CrHero() {
               {str(
                 c,
                 "subhead",
-                "We're looking for engineers, researchers and educators who want to put real hardware in front of real students.",
+                "We're looking for teachers, coordinators and staff who want to do their best work in front of real students.",
               )}
             </motion.p>
             <motion.a
@@ -130,7 +131,7 @@ export function CrHero() {
   );
 }
 
-/* ── 2 · Why AstroBot — light ──────────────────────────────────────────── */
+/* ── 2 · Why Northbridge — light ───────────────────────────────────────── */
 
 const WHY_ICONS = [Users, Clock, Cpu, Building2];
 
@@ -155,7 +156,7 @@ export function CrWhy() {
     .filter((b) => b.title || b.body);
 
   return (
-    <Band theme={theme} label="What you would be joining" sheet="AB / CAR · 02" diagram="mesh">
+    <Band theme={theme} label="What you would be joining" sheet="NB / CAR · 02" diagram="mesh">
       <motion.div
         variants={stagger}
         initial="hidden"
@@ -331,7 +332,7 @@ export function CrRoles({ roles }: { roles: JobOpening[] }) {
               {str(
                 c,
                 "empty_body",
-                "We're always interested in hearing from good instructors. Send a general application and we'll keep you on file for the next intake.",
+                "We're always interested in hearing from good educators. Send a general application and we'll keep you on file for the next opening.",
               )}
             </p>
             <a
@@ -471,7 +472,7 @@ export function CrApply({ roles }: { roles: JobOpening[] }) {
       theme={theme}
       label="Application form"
       id="apply"
-      sheet="AB / CAR · 04"
+      sheet="NB / CAR · 04"
       diagram="rocket"
       diagramPosition="left"
     >
@@ -522,7 +523,7 @@ export function CrClosing() {
   const theme = themeOf(c, "dark");
   // HR-specific inbox for speculative applications — deliberately not the
   // site-wide contact_email setting, since job applications should go to HR.
-  const email = str(c, "hr_email", "hr@astrobotacademy.com");
+  const email = str(c, "hr_email", BRAND.careersEmail);
 
   return (
     <Band theme={theme} label="Speculative applications">
@@ -543,7 +544,7 @@ export function CrClosing() {
           {str(
             c,
             "body",
-            "If you build things and can explain them to a ten-year-old, write to us anyway. Speculative applications are read.",
+            "If you'd be a good fit for our classrooms and can't find the role, write to us anyway. Speculative applications are read.",
           )}
         </motion.p>
         <motion.a

@@ -14,10 +14,13 @@ import { useServerFn } from "@tanstack/react-start";
 import { fadeUp, stagger } from "@/components/for-schools/Band";
 import { submitInquiry, type InquiryType } from "@/lib/inquiries.functions";
 import { setting, str, useSiteContent } from "@/lib/site-content";
+import { BRAND } from "@/lib/brand";
 
 /* ── Track definitions ─────────────────────────────────────────────────────
-   Each track is its own short questionnaire. Parents are never asked school
-   procurement questions, and schools are never asked about a single child. */
+   Each track is its own short questionnaire, tuned to what that kind of
+   visitor actually needs to tell us. The underlying InquiryType values
+   ("parent" | "school" | "other") are fixed by the submission schema — only
+   the visible labels, taglines and fields below are ours to shape. */
 
 type FieldKind = "text" | "email" | "tel" | "select" | "textarea";
 
@@ -66,9 +69,9 @@ const PHONE: Field = {
 const TRACKS: Track[] = [
   {
     id: "parent",
-    title: "Parent",
-    tagline: "For a child",
-    intro: "Camps, workshops and how to hear about the next registration window.",
+    title: "Family",
+    tagline: "For a student",
+    intro: "Admissions, enrollment, and how to hear about the next application window.",
     submitLabel: "Send inquiry",
     fields: [
       NAME,
@@ -76,10 +79,16 @@ const TRACKS: Track[] = [
       PHONE,
       {
         key: "child_age",
-        label: "Child's age group",
+        label: "Student's grade or age",
         kind: "select",
         required: true,
-        options: ["5–7 years", "8–10 years", "11–13 years", "14–17 years", "More than one child"],
+        options: [
+          "Kindergarten – Grade 5",
+          "Grades 6 – 8",
+          "Grades 9 – 12",
+          "Not yet school-age",
+          "More than one child",
+        ],
       },
       {
         key: "interest",
@@ -87,82 +96,29 @@ const TRACKS: Track[] = [
         kind: "select",
         required: true,
         options: [
-          "Summer Boot Camp",
-          "Winter Boot Camp",
-          "Weekend Workshop",
-          "Year-round programme at my child's school",
+          "New admissions inquiry",
+          "Enrollment for the current year",
+          "Campus tour",
+          "Question about my current student",
           "Not sure yet — advise me",
         ],
       },
-      { key: "city", label: "City", kind: "text", placeholder: "Rawalpindi / Islamabad" },
+      { key: "city", label: "City", kind: "text", placeholder: "Springfield" },
       {
         key: "message",
         label: "What would you like to know?",
         kind: "textarea",
         required: true,
         full: true,
-        placeholder: "Tell us about your child's interests and what you'd like from the programme.",
+        placeholder: "Tell us about your student and what you'd like to know.",
       },
     ],
   },
   {
     id: "school",
-    title: "School",
-    tagline: "For a campus",
-    intro: "The timetabled year-round subject — curriculum, kits, instructors and reporting.",
-    submitLabel: "Request a briefing",
-    fields: [
-      NAME,
-      EMAIL,
-      PHONE,
-      { key: "school_name", label: "School name", kind: "text", required: true },
-      {
-        key: "role",
-        label: "Your role",
-        kind: "text",
-        placeholder: "Principal, Director, Coordinator…",
-      },
-      { key: "city", label: "City / campus location", kind: "text" },
-      {
-        key: "student_count",
-        label: "Approximate students",
-        kind: "select",
-        options: ["Under 200", "200–500", "500–1,000", "1,000–2,500", "More than 2,500"],
-      },
-      {
-        key: "grade_range",
-        label: "Grades under consideration",
-        kind: "select",
-        options: [
-          "ECE – Grade 2",
-          "Grade 3 – Grade 5",
-          "Grade 6 – Grade 8",
-          "Full ECE – Grade 8",
-          "Undecided",
-        ],
-      },
-      {
-        key: "timeline",
-        label: "Intended start",
-        kind: "select",
-        options: ["This term", "Next term", "Next academic year", "Exploring only"],
-      },
-      {
-        key: "message",
-        label: "What should we prepare for you?",
-        kind: "textarea",
-        required: true,
-        full: true,
-        placeholder:
-          "Timetable constraints, room availability, board requirements, anything we should know.",
-      },
-    ],
-  },
-  {
-    id: "other",
-    title: "Other",
+    title: "General / Media",
     tagline: "Everything else",
-    intro: "Careers, media, sponsorship, partnerships and general questions.",
+    intro: "Partnerships, media, sponsorship and general questions about the school.",
     submitLabel: "Send message",
     fields: [
       NAME,
@@ -170,15 +126,20 @@ const TRACKS: Track[] = [
       PHONE,
       { key: "organisation", label: "Organisation", kind: "text" },
       {
+        key: "role",
+        label: "Your role",
+        kind: "text",
+        placeholder: "Reporter, vendor, community partner…",
+      },
+      {
         key: "subject",
         label: "Subject",
         kind: "select",
         required: true,
         options: [
-          "Instructor / careers",
           "Media & press",
           "Partnership or sponsorship",
-          "Competitions & events",
+          "Community events",
           "Something else",
         ],
       },
@@ -189,6 +150,33 @@ const TRACKS: Track[] = [
         required: true,
         full: true,
         placeholder: "Tell us what you're after and we'll route it to the right person.",
+      },
+    ],
+  },
+  {
+    id: "other",
+    title: "Careers",
+    tagline: "Join us",
+    intro: "Interested in teaching or working here? Tell us a little and we'll follow up.",
+    submitLabel: "Send inquiry",
+    fields: [
+      NAME,
+      EMAIL,
+      PHONE,
+      {
+        key: "subject",
+        label: "Area of interest",
+        kind: "select",
+        required: true,
+        options: ["Teaching", "Administration & staff", "Coaching & extracurricular", "Other role"],
+      },
+      {
+        key: "message",
+        label: "Your message",
+        kind: "textarea",
+        required: true,
+        full: true,
+        placeholder: "Tell us about your background and the kind of role you're after.",
       },
     ],
   },
@@ -229,7 +217,7 @@ export function InquiryForm({ content }: { content: Record<string, any> }) {
 
   const waUrl = setting(site.settings, "whatsapp_url", "https://wa.me/923145978068");
   const waNumber = setting(site.settings, "whatsapp", "+92 314 5978068");
-  const email = setting(site.settings, "contact_email", "contact@astrobotacademy.com");
+  const email = setting(site.settings, "contact_email", BRAND.contactEmail);
   const responseNote = setting(
     site.settings,
     "response_time_note",
@@ -357,7 +345,7 @@ export function InquiryForm({ content }: { content: Record<string, any> }) {
 
   const assurances = [
     str(content, "assurance_1", responseNote),
-    str(content, "assurance_2", "Your details stay with AstroBot — never shared"),
+    str(content, "assurance_2", `Your details stay with ${BRAND.shortName} — never shared`),
     str(content, "assurance_3", "No obligation — just a clear next step"),
   ].filter(Boolean);
 
@@ -500,7 +488,7 @@ export function InquiryForm({ content }: { content: Record<string, any> }) {
             {str(
               content,
               "form_note",
-              "Your inquiry goes straight to the AstroBot inbox — no email app needed.",
+              `Your inquiry goes straight to the ${BRAND.shortName} inbox — no email app needed.`,
             )}
           </p>
           <button
@@ -620,12 +608,8 @@ export function ChannelCards({ content }: { content: Record<string, any> }) {
   const site = useSiteContent();
   const waUrl = setting(site.settings, "whatsapp_url", "https://wa.me/923145978068");
   const waNumber = setting(site.settings, "whatsapp", "+92 314 5978068");
-  const email = setting(site.settings, "contact_email", "contact@astrobotacademy.com");
-  const address = setting(
-    site.settings,
-    "address",
-    "NICAT-NASTP Alpha, Old Airport Road, Rawalpindi",
-  );
+  const email = setting(site.settings, "contact_email", BRAND.contactEmail);
+  const address = setting(site.settings, "address", BRAND.addressLine);
 
   const cards = [
     {
@@ -707,12 +691,8 @@ export function ChannelRail({ content }: { content: Record<string, any> }) {
   const site = useSiteContent();
   const waUrl = setting(site.settings, "whatsapp_url", "https://wa.me/923145978068");
   const waNumber = setting(site.settings, "whatsapp", "+92 314 5978068");
-  const email = setting(site.settings, "contact_email", "contact@astrobotacademy.com");
-  const address = setting(
-    site.settings,
-    "address",
-    "NICAT-NASTP Alpha, Old Airport Road, Rawalpindi",
-  );
+  const email = setting(site.settings, "contact_email", BRAND.contactEmail);
+  const address = setting(site.settings, "address", BRAND.addressLine);
 
   const rows = [
     {

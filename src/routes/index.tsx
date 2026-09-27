@@ -7,24 +7,21 @@ import { Programs } from "@/components/home/Programs";
 import { InstructorCredibility } from "@/components/home/InstructorCredibility";
 import { LiveActivity } from "@/components/home/LiveActivity";
 import { ForSchools } from "@/components/home/ForSchools";
-import { InstitutionalPartners } from "@/components/home/InstitutionalPartners";
 import { FinalCTA } from "@/components/home/FinalCTA";
-import { MissionRail } from "@/components/immersive/MissionRail";
+import { BRAND } from "@/lib/brand";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "AstroBot Academy — Robotics, AI & Space Science for Kids" },
+      { title: `${BRAND.name} — ${BRAND.tagline}` },
       {
         name: "description",
-        content:
-          "An immersive Mission Control experience. Hands-on Robotics, AI and Space Science programs for pre-school to Grade 8 students across Pakistan.",
+        content: `${BRAND.name} is a K-12 private school offering a full Lower, Middle and Upper School program built around academic rigor, character and community.`,
       },
-      { property: "og:title", content: "AstroBot Academy — Robotics, AI & Space Science for Kids" },
+      { property: "og:title", content: `${BRAND.name} — ${BRAND.tagline}` },
       {
         property: "og:description",
-        content:
-          "An immersive Mission Control experience. Hands-on Robotics, AI and Space Science programs for pre-school to Grade 8 students across Pakistan.",
+        content: `A K-12 private school offering a full Lower, Middle and Upper School program built around academic rigor, character and community.`,
       },
     ],
   }),
@@ -33,26 +30,15 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   return (
-    <>
-      {/* Site-wide immersive space scene + telemetry live in the root layout.
-          Only the local mission storyline is rendered here. */}
-
-      {/* Bottom telemetry console — persistent, live scroll progress; fades at footer */}
-      <MissionRail />
-
-      {/* Mission storyline — Hero → Who We Are → Core Domains → Programs →
-          Faculty → System Status → For Schools → Partners → Final CTA */}
-      <div className="relative z-10 isolate transform-gpu">
-        <Hero />
-        <WhoWeAre />
-        <CoreDomains />
-        <Programs />
-        <InstructorCredibility />
-        <LiveActivity />
-        <ForSchools />
-        <InstitutionalPartners />
-        <FinalCTA />
-      </div>
-    </>
+    <div className="relative z-10 isolate transform-gpu">
+      <Hero />
+      <WhoWeAre />
+      <CoreDomains />
+      <Programs />
+      <InstructorCredibility />
+      <LiveActivity />
+      <ForSchools />
+      <FinalCTA />
+    </div>
   );
 }

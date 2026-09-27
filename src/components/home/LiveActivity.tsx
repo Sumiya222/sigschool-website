@@ -1,16 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
+import {
+  BookOpen,
+  Music,
+  Trophy,
+  Users,
+  HeartHandshake,
+  GraduationCap,
+  Palette,
+  Handshake,
+  type LucideIcon,
+} from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { mediaById, mediaUrl, str, useSection, useSiteContent } from "@/lib/site-content";
-import lineFollower from "@/assets/classroom/line-follower.webp";
-import spriteGame from "@/assets/classroom/sprite-game.webp";
-import waterRocket from "@/assets/classroom/water-rocket.webp";
-import obstacleBot from "@/assets/classroom/obstacle-bot.webp";
-import chatbot from "@/assets/classroom/chatbot.webp";
-import orbitSim from "@/assets/classroom/orbit-sim.webp";
-import smartLight from "@/assets/classroom/smart-light.webp";
-import faceFilter from "@/assets/classroom/face-filter.webp";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -26,10 +29,10 @@ type Stat = {
 };
 
 const STATS: Stat[] = [
-  { label: "STUDENTS ENGAGED", value: 23000, display: "23,000+", suffix: "+" },
-  { label: "LEARNING TRACKS", value: 3, display: "3" },
-  { label: "GRADE COVERAGE", value: null, display: "ECE–8" },
-  { label: "INSTITUTIONAL PARTNERS", value: 3, display: "3" },
+  { label: "STUDENTS ENROLLED", value: 1200, display: "1,200+", suffix: "+" },
+  { label: "SCHOOL DIVISIONS", value: 3, display: "3" },
+  { label: "GRADE COVERAGE", value: null, display: "K–12" },
+  { label: "STUDENT-TEACHER RATIO", value: null, display: "8:1" },
 ];
 
 function StatChip({ stat, index }: { stat: Stat; index: number }) {
@@ -111,6 +114,7 @@ type ProjectCard = {
   title: string;
   tag: string;
   image: string;
+  icon?: LucideIcon;
   accent: Accent;
   description?: string | null;
   descriptionConfirmed?: boolean;
@@ -129,43 +133,89 @@ const DOMAIN_ACCENT: Record<string, Accent> = {
   space: "indigo",
 };
 
-// Fallbacks only; live cards come from the `projects` table.
+// Fallbacks only; live cards come from the `projects` table. No stock
+// photography for the placeholder brand — each card shows an icon tile.
 const CARDS: ProjectCard[] = [
   {
-    title: "Line-Follower Rover",
-    tag: "ROBOTICS · AGES 8–12",
-    image: lineFollower,
+    title: "Science Fair Winners",
+    tag: "LOWER SCHOOL · SCIENCE",
+    image: "",
+    icon: BookOpen,
     accent: "amber",
   },
-  { title: "Sprite Chase Game", tag: "AI · AGES 6–10", image: spriteGame, accent: "cyan" },
-  { title: "Water-Bottle Rocket", tag: "SPACE · AGES 9–13", image: waterRocket, accent: "indigo" },
   {
-    title: "Obstacle-Avoid Bot",
-    tag: "ROBOTICS · AGES 10–14",
-    image: obstacleBot,
+    title: "Fall Musical Rehearsals",
+    tag: "MIDDLE SCHOOL · ARTS",
+    image: "",
+    icon: Music,
+    accent: "cyan",
+  },
+  {
+    title: "Varsity Soccer Kickoff",
+    tag: "UPPER SCHOOL · ATHLETICS",
+    image: "",
+    icon: Trophy,
+    accent: "indigo",
+  },
+  {
+    title: "Model UN Delegation",
+    tag: "UPPER SCHOOL · CLUBS",
+    image: "",
+    icon: Users,
     accent: "amber",
   },
-  { title: "Chatbot Companion", tag: "AI · AGES 11–15", image: chatbot, accent: "cyan" },
-  { title: "Orbit Simulator", tag: "SPACE · AGES 12–17", image: orbitSim, accent: "indigo" },
-  { title: "Smart-Light Circuit", tag: "ROBOTICS · AGES 8–12", image: smartLight, accent: "amber" },
-  { title: "Face-Filter Studio", tag: "AI · AGES 9–13", image: faceFilter, accent: "cyan" },
+  {
+    title: "Reading Buddies Program",
+    tag: "LOWER SCHOOL · COMMUNITY",
+    image: "",
+    icon: HeartHandshake,
+    accent: "cyan",
+  },
+  {
+    title: "AP Exam Prep Sessions",
+    tag: "UPPER SCHOOL · ACADEMICS",
+    image: "",
+    icon: GraduationCap,
+    accent: "indigo",
+  },
+  {
+    title: "Art Show Opening Night",
+    tag: "MIDDLE SCHOOL · ARTS",
+    image: "",
+    icon: Palette,
+    accent: "amber",
+  },
+  {
+    title: "Community Service Day",
+    tag: "ALL SCHOOL · COMMUNITY",
+    image: "",
+    icon: Handshake,
+    accent: "cyan",
+  },
 ];
 
 function ClassroomCard({ card, unconfirmedNote }: { card: ProjectCard; unconfirmedNote: string }) {
   const a = ACCENTS[card.accent];
+  const Icon = card.icon ?? BookOpen;
   return (
     <article
       className={cn("w-56 shrink-0 rounded-xl border bg-black/30 p-2.5 backdrop-blur-md", a.border)}
     >
       <div className="relative h-28 overflow-hidden rounded-lg">
-        <img
-          src={card.image}
-          alt={card.title}
-          loading="lazy"
-          width={1024}
-          height={576}
-          className="h-full w-full object-cover"
-        />
+        {card.image ? (
+          <img
+            src={card.image}
+            alt={card.title}
+            loading="lazy"
+            width={1024}
+            height={576}
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-white/[0.06] to-transparent">
+            <Icon className="size-9 text-offwhite/40" strokeWidth={1.5} aria-hidden />
+          </div>
+        )}
         <div className="scanlines pointer-events-none absolute inset-0 opacity-25" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
       </div>
@@ -241,13 +291,13 @@ export function LiveActivity() {
   const unconfirmedNote = str(classroomsSection, "unconfirmed_note", "Description to be confirmed");
 
   return (
-    <section aria-label="System status and classroom activity" className="relative py-16 sm:py-20">
+    <section aria-label="School news and activity" className="relative py-16 sm:py-20">
       <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-10">
         {/* PART A */}
         <div className="flex items-center gap-3">
           <span className="led size-1.5 rounded-full bg-cyan shadow-[0_0_8px_var(--cyan)]" />
           <span className="telemetry text-cyan">
-            {str(statusSection, "eyebrow", "SYSTEM STATUS")}
+            {str(statusSection, "eyebrow", "SCHOOL AT A GLANCE")}
           </span>
           <span aria-hidden className="h-px flex-1 bg-cyan/15" />
         </div>
@@ -275,7 +325,7 @@ export function LiveActivity() {
           <div className="flex items-center gap-2">
             <span className="led size-1.5 rounded-full bg-cyan shadow-[0_0_8px_var(--cyan)]" />
             <span className="telemetry text-cyan/80">
-              {str(classroomsSection, "panel_label", "A GLIMPSE INTO OUR CLASSROOMS")}
+              {str(classroomsSection, "panel_label", "A GLIMPSE INTO SCHOOL LIFE")}
             </span>
           </div>
 

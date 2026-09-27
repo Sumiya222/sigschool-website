@@ -237,12 +237,12 @@ export const FIELD_META: Record<string, FieldMeta> = {
   contact_line: {
     label: "Footer — contact line",
     kind: "textarea",
-    help: 'Shown in every email\'s footer. Keep the word "WhatsApp" and the reply email address (set under Site-wide › Contact Details) in the sentence — both automatically become clickable links. Clear it to remove the line entirely.',
+    help: "Shown in every email's footer. Keep the reply email address (set under Site-wide › Contact Details) in the sentence — it automatically becomes a clickable link. Clear it to remove the line entirely.",
   },
   address_line: {
     label: "Footer — address line",
     kind: "textarea",
-    help: 'Shown in every email\'s footer. Keep "astrobotacademy.com" in the sentence to keep it clickable. Clear it to remove the line entirely.',
+    help: "Shown in every email's footer. Keep the school's domain in the sentence to keep it clickable. Clear it to remove the line entirely.",
   },
   legal_line: {
     label: "Footer — legal line",
@@ -403,7 +403,7 @@ export const FIELD_META: Record<string, FieldMeta> = {
   ladder_label: { label: "Ladder caption", help: "The caption above the progression ladder." },
   ladder_range: {
     label: "Ladder range",
-    help: "The grade span shown next to the ladder caption, e.g. ECE → Grade 8.",
+    help: "The grade span shown next to the ladder caption, e.g. Kindergarten → Grade 12.",
   },
   public_label: {
     label: "Public programme badge",
@@ -509,16 +509,16 @@ export const FIELD_META: Record<string, FieldMeta> = {
   media_id: { label: "Image", kind: "image" },
   filter_all_label: { label: "“All” filter label", help: "The wording on the first filter chip." },
   robotics_label: {
-    label: "Robotics filter label",
-    help: "The wording on the Robotics filter chip.",
+    label: "Filter label 1",
+    help: "The wording on the first subject filter chip.",
   },
   ai_label: {
-    label: "AI filter label",
-    help: "The wording on the Artificial Intelligence filter chip.",
+    label: "Filter label 2",
+    help: "The wording on the second subject filter chip.",
   },
   space_label: {
-    label: "Space filter label",
-    help: "The wording on the Space Science filter chip.",
+    label: "Filter label 3",
+    help: "The wording on the third subject filter chip.",
   },
   photo_pending_label: {
     label: "Missing photo caption",

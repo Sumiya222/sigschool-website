@@ -4,6 +4,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { AlertTriangle, CheckCircle2, FileText, Loader2, Paperclip, X } from "lucide-react";
 import { fadeUp } from "@/components/for-schools/Band";
 import { setting, str, useSiteContent } from "@/lib/site-content";
+import { BRAND } from "@/lib/brand";
 import { submitApplication } from "@/lib/careers.functions";
 import {
   ACCEPTED_CV_EXTENSIONS,
@@ -33,7 +34,7 @@ export function ApplicationForm({
   const site = useSiteContent();
   const waUrl = setting(site.settings, "whatsapp_url", "https://wa.me/923145978068");
   const waNumber = setting(site.settings, "whatsapp", "+92 314 5978068");
-  const contactEmail = setting(site.settings, "contact_email", "contact@astrobotacademy.com");
+  const contactEmail = setting(site.settings, "contact_email", BRAND.contactEmail);
 
   const [roleId, setRoleId] = useState<string>("");
   const [fullName, setFullName] = useState("");
@@ -426,7 +427,7 @@ export function ApplicationForm({
           {str(
             content,
             "form_note",
-            "Your CV is stored privately and is only ever seen by the AstroBot hiring team.",
+            `Your CV is stored privately and is only ever seen by the ${BRAND.shortName} hiring team.`,
           )}
         </p>
       </div>

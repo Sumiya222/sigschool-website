@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { BookOpen, Users, FileText, GraduationCap, type LucideIcon } from "lucide-react";
 import { GoldButtonSheen, goldButtonClassName } from "@/components/GoldButton";
 import { list, str, useSection } from "@/lib/site-content";
+import { BRAND } from "@/lib/brand";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -18,10 +19,10 @@ const stagger = {
 
 type Feature = { label: string; icon: LucideIcon; accent: string };
 const FEATURES: Feature[] = [
-  { label: "Curriculum provided by AstroBot", icon: BookOpen, accent: "#67e8f9" },
-  { label: "Instructors deployed by level", icon: Users, accent: "#5cbdb9" },
-  { label: "Term-wise reporting", icon: FileText, accent: "#818cf8" },
-  { label: "Optional teacher training", icon: GraduationCap, accent: "#e879a8" },
+  { label: "Clubs & activities every day", icon: BookOpen, accent: "#67e8f9" },
+  { label: "Athletics for every division", icon: Users, accent: "#5cbdb9" },
+  { label: "Arts, music, and theater", icon: FileText, accent: "#818cf8" },
+  { label: "Traditions students remember", icon: GraduationCap, accent: "#e879a8" },
 ];
 
 type Stage = {
@@ -35,26 +36,26 @@ type Stage = {
 const STAGES: Stage[] = [
   {
     code: "01",
-    stageLabel: "STAGE 01",
-    phase: "FOUNDATION",
-    grades: "ECE–Grade 2",
-    outcome: "Conceptual awareness & curiosity.",
+    stageLabel: "DIVISION 01",
+    phase: "LOWER SCHOOL",
+    grades: BRAND.divisions[0].range,
+    outcome: "Discovery, curiosity, and the joy of learning.",
     accent: "#67e8f9",
   },
   {
     code: "02",
-    stageLabel: "STAGE 02",
-    phase: "APPLICATION",
-    grades: "Grade 3–5",
-    outcome: "Systems thinking & structured building.",
+    stageLabel: "DIVISION 02",
+    phase: "MIDDLE SCHOOL",
+    grades: BRAND.divisions[1].range,
+    outcome: "Independence, deeper coursework, first clubs and teams.",
     accent: "#818cf8",
   },
   {
     code: "03",
-    stageLabel: "STAGE 03",
-    phase: "ENGINEERING",
-    grades: "Grade 6–8",
-    outcome: "Design, integration, independent problem-solving.",
+    stageLabel: "DIVISION 03",
+    phase: "UPPER SCHOOL",
+    grades: BRAND.divisions[2].range,
+    outcome: "College-preparatory rigor and real leadership.",
     accent: "#e879a8",
   },
 ];
@@ -87,7 +88,7 @@ export function ForSchools() {
   }));
 
   return (
-    <section aria-label="For schools" className="relative w-full py-20 lg:py-28">
+    <section aria-label="Campus life" className="relative w-full py-20 lg:py-28">
       <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-10">
         {/* ── Header row ───────────────────────────── */}
         <motion.div
@@ -103,16 +104,16 @@ export function ForSchools() {
               className="inline-flex items-center gap-2.5 rounded-full border border-cyan/25 bg-cyan/5 px-3 py-1 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-cyan"
             >
               <span className="led size-1.5 rounded-full bg-cyan shadow-[0_0_8px_var(--cyan)]" />
-              {str(c, "eyebrow", "For Schools")}
+              {str(c, "eyebrow", "Campus Life")}
             </motion.p>
 
             <motion.h2
               variants={fadeUp}
               className="mt-6 font-display text-[2.25rem] font-bold leading-[1.02] tracking-tight text-foreground sm:text-5xl lg:text-[4rem]"
             >
-              {str(c, "headline", "A Formal Subject.")}{" "}
+              {str(c, "headline", "Life Beyond the Classroom.")}{" "}
               <span className="bg-gradient-to-r from-gold-bright to-cyan-bright bg-clip-text text-transparent">
-                {str(c, "headline_gradient", "Not an Add-On.")}
+                {str(c, "headline_gradient", "Built Into Every Day.")}
               </span>
             </motion.h2>
           </div>
@@ -124,7 +125,7 @@ export function ForSchools() {
             {str(
               c,
               "hook",
-              "40-minute weekly sessions, built into your timetable — curriculum, kits, and reporting fully supplied.",
+              "Clubs, arts, athletics, and traditions woven into every division — not an afterthought, but part of the day.",
             )}
           </motion.p>
         </motion.div>
@@ -164,14 +165,14 @@ export function ForSchools() {
         <div className="mt-16 lg:mt-20">
           <div className="flex items-center gap-4">
             <span className="font-mono text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-gray-mid">
-              {str(c, "ladder_label", "Progression Ladder")}
+              {str(c, "ladder_label", "Three Divisions")}
             </span>
             <span
               aria-hidden
               className="h-px flex-1 bg-gradient-to-r from-white/15 via-white/8 to-transparent"
             />
             <span className="font-mono text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-gray-mid">
-              {str(c, "ladder_range", "ECE → Grade 8")}
+              {str(c, "ladder_range", "Kindergarten → Grade 12")}
             </span>
           </div>
 
@@ -250,7 +251,7 @@ export function ForSchools() {
           <Link to={str(c, "cta_target", "/schools")} className={goldButtonClassName}>
             {GoldButtonSheen}
             <span className="relative inline-flex items-center gap-2">
-              {str(c, "cta_label", "Partner With Us")}
+              {str(c, "cta_label", "Explore Campus Life")}
             </span>
           </Link>
         </div>

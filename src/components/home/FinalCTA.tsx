@@ -30,7 +30,7 @@ export function FinalCTA() {
 
   return (
     <section
-      aria-label="Enrol or partner with AstroBot Academy"
+      aria-label="Visit or apply to Northbridge Preparatory School"
       className="relative w-full py-24 sm:py-28"
     >
       <div className="mx-auto w-full max-w-3xl px-4 sm:px-6">
@@ -59,8 +59,8 @@ export function FinalCTA() {
             variants={fadeUp}
             className="mx-auto mt-6 max-w-2xl font-display text-[2.1rem] font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-[3.25rem]"
           >
-            {str(c, "headline", "Give Them Something ")}
-            <span className="text-cosmic">{str(c, "headline_gradient", "Real to Build.")}</span>
+            {str(c, "headline", "Your Child's Next Chapter ")}
+            <span className="text-cosmic">{str(c, "headline_gradient", "Starts Here.")}</span>
           </motion.h2>
 
           <motion.p
@@ -70,7 +70,7 @@ export function FinalCTA() {
             {str(
               c,
               "subhead",
-              "Pricing shared after a short inquiry — tailored to age and program, no numbers hidden behind a form maze.",
+              "Schedule a tour, meet our faculty, and see our classrooms in action — admissions details shared without the runaround.",
             )}
           </motion.p>
 
@@ -79,19 +79,19 @@ export function FinalCTA() {
             className="mt-9 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center"
           >
             <Link
-              to={str(c, "primary_cta_target", "/contact")}
+              to={str(c, "primary_cta_target", "/admissions")}
               className={cn(goldButtonClassName, "w-full sm:w-auto")}
             >
               {GoldButtonSheen}
               <span className="relative inline-flex items-center gap-2">
-                {str(c, "primary_cta_label", "Enroll Now")}
+                {str(c, "primary_cta_label", "Apply Now")}
               </span>
             </Link>
             <Link
-              to={str(c, "secondary_cta_target", "/schools")}
+              to={str(c, "secondary_cta_target", "/contact")}
               className={cn(ghostButtonClassName, "w-full sm:w-auto")}
             >
-              {str(c, "secondary_cta_label", "Partner With Us")}
+              {str(c, "secondary_cta_label", "Schedule a Visit")}
             </Link>
           </motion.div>
 

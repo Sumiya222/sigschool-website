@@ -12,6 +12,7 @@ import fs from "node:fs";
 import path from "node:path";
 import type React from "react";
 import { EMAIL_FOOTER_BADGE_PNG_BASE64, EMAIL_HEADER_PNG_BASE64 } from "@/lib/email-images.server";
+import { BRAND } from "@/lib/brand";
 
 function ensureEnvLoaded(): void {
   if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
@@ -88,7 +89,7 @@ export type BrandedEmailOptions = {
   steps?: EmailStep[];
   ctaLabel?: string;
   ctaUrl?: string;
-  /** Human sign-off shown before the footer, e.g. "The AstroBot Academy Team". */
+  /** Human sign-off shown before the footer, e.g. "The Northbridge Prep Team". */
   signOff?: string;
   footerNote?: string;
   /** Unique reference ID, e.g. "INQ-2026-0184". */
@@ -99,7 +100,7 @@ export type BrandedEmailOptions = {
 
 const DEFAULT_STATUS_COLOR = "#4f46e5";
 const DEFAULT_STATUS_BG = "#eef0fd";
-const DEFAULT_FOOTER = "AstroBot Academy · NICAT–NASTP Alpha, Rawalpindi";
+const DEFAULT_FOOTER = `${BRAND.name} · ${BRAND.addressLine}`;
 
 // A healthy SMTP handshake+send or Resend API call normally completes in a
 // couple of seconds at most. 10s is a generous multiple of that — enough to
@@ -273,7 +274,7 @@ function buildHtml(opts: BrandedEmailOptions): string {
               <td style="line-height:0;font-size:0;background-color:#08081a;">
                 <img
                   src="cid:astrobot-header"
-                  alt="AstroBot Academy"
+                  alt="${BRAND.name}"
                   width="560"
                   style="display:block;width:100%;max-width:560px;height:auto;border:0;"
                 />
@@ -296,17 +297,17 @@ function buildHtml(opts: BrandedEmailOptions): string {
               <td class="footer-bg" style="background-color:#f8f9fd;border-top:1px solid #eceef5;margin-top:16px;">
                 <img
                   src="cid:astrobot-footer-badge"
-                  alt="AstroBot Academy"
+                  alt="${BRAND.name}"
                   width="560"
                   style="display:block;width:100%;max-width:560px;height:auto;border:0;"
                 />
                 <div style="padding:0 32px 22px 32px;">
                   <p class="footer-note" style="margin:0 0 6px 0;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:12px;line-height:1.5;color:#8a8fa8;">${footerNote}</p>
                   <p style="margin:0 0 4px 0;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:12px;color:#8a8fa8;">
-                    AstroBot Academy · NICAT–NASTP Alpha, Rawalpindi · <a href="https://astrobotacademy.com" class="footer-link" style="color:#4f46e5;text-decoration:none;">astrobotacademy.com</a>
+                    ${BRAND.name} · ${BRAND.addressLine} · <a href="https://${BRAND.domain}" class="footer-link" style="color:#4f46e5;text-decoration:none;">${BRAND.domain}</a>
                   </p>
                   <p style="margin:0;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:11px;color:#a3a7bd;">
-                    Stellar Scholar Space Education Initiative · Stelalliance (SMC-Private) Ltd
+                    ${BRAND.legalName}
                   </p>
                   ${refHtml}
                 </div>
@@ -434,7 +435,7 @@ export async function sendReactEmail(opts: {
     return;
   }
   const from =
-    opts.from || process.env.NOTIFY_EMAIL_FROM || "AstroBot Academy <noreply@astrobotacademy.com>";
+    opts.from || process.env.NOTIFY_EMAIL_FROM || `${BRAND.name} <noreply@${BRAND.domain}>`;
 
   try {
     const [{ render }, { Resend }] = await Promise.all([

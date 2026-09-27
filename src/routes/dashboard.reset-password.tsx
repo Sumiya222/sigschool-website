@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import astrobotLogo from "@/assets/astrobot-logo-light.webp";
+import { Logo } from "@/components/Logo";
 
 export const Route = createFileRoute("/dashboard/reset-password")({
   head: () => ({
@@ -65,12 +65,7 @@ function ResetPasswordPage() {
       <div className="w-full max-w-md">
         <div className="mb-6 flex flex-col items-center text-center">
           <Link to="/" aria-label="Back to homepage">
-            <img
-              src={astrobotLogo}
-              alt="AstroBot Academy"
-              className="h-11 w-auto"
-              draggable={false}
-            />
+            <Logo variant="light" className="h-11" />
           </Link>
           <h1 className="mt-4 font-display text-2xl font-semibold text-[color:var(--bp-ink)]">
             Set a new password

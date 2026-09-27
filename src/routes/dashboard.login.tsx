@@ -5,7 +5,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { toSafeErrorMessage } from "@/lib/db-error-message";
 import { roleHome, type AppRole, ACCESS_MESSAGE_KEY } from "@/lib/dashboard-auth";
 import { isHardcodedSuperAdmin } from "@/lib/super-admin";
-import astrobotLogo from "@/assets/astrobot-logo-light.webp";
+import { Logo } from "@/components/Logo";
+import { BRAND } from "@/lib/brand";
 
 export const Route = createFileRoute("/dashboard/login")({
   head: () => ({
@@ -242,12 +243,12 @@ function LoginPage() {
                 className="text-4xl font-bold tracking-tighter text-white drop-shadow-[0_2px_12px_rgba(10,10,26,0.9)]"
                 style={display}
               >
-                ASTROBOT
+                {BRAND.shortName.split(" ")[0].toUpperCase()}
                 <br />
-                ACADEMY
+                {BRAND.shortName.split(" ").slice(1).join(" ").toUpperCase()}
               </h1>
               <p className="mt-2 font-mono text-xs uppercase tracking-[0.3em] text-indigo-300/70 drop-shadow-[0_1px_6px_rgba(10,10,26,0.9)]">
-                Mission Control // v2.0
+                {BRAND.portalLabel}
               </p>
             </div>
           </div>
@@ -275,14 +276,9 @@ function LoginPage() {
         <div className="relative flex w-full flex-col justify-center border-l border-white/10 bg-white/[0.04] p-8 backdrop-blur-2xl sm:p-12 md:w-[460px] lg:p-16">
           {/* Mobile brand strip */}
           <div className="mb-8 flex items-center gap-3 md:hidden">
-            <img
-              src={astrobotLogo}
-              alt="AstroBot Academy"
-              className="h-8 w-auto"
-              draggable={false}
-            />
+            <Logo variant="light" className="h-8" withWordmark={false} />
             <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-indigo-400">
-              Mission Control
+              {BRAND.portalLabel}
             </span>
           </div>
 

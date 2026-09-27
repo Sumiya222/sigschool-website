@@ -16,6 +16,7 @@ import {
 import { submitRegistration } from "@/lib/registrations.functions";
 import { toWebP } from "@/lib/image-webp";
 import { readAsBase64 } from "@/lib/read-as-base64";
+import { BRAND } from "@/lib/brand";
 
 /* ── Shared control styling ───────────────────────────────────────────── */
 
@@ -198,8 +199,8 @@ export function RegistrationModal({ onClose, preview, fieldsOverride, campNameOv
     .sort((a, b) => a.order - b.order);
 
   const campName = campNameOverride ?? camp?.camp_name ?? "the camp";
-  const whatsapp = setting(content.settings, "whatsapp_number", "+92 300 0000000");
-  const email = setting(content.settings, "contact_email", "hello@astrobotacademy.com");
+  const whatsapp = setting(content.settings, "whatsapp_number", BRAND.phone);
+  const email = setting(content.settings, "contact_email", BRAND.contactEmail);
   const waUrl = `https://wa.me/${whatsapp.replace(/\D/g, "")}`;
 
   const [core, setCore] = useState<CoreForm>(EMPTY_CORE);

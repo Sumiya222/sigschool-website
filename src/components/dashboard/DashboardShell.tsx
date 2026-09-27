@@ -2,7 +2,8 @@ import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { type ComponentType, type ReactNode } from "react";
 import { LogOut, ExternalLink, UserCircle2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import astrobotLogo from "@/assets/astrobot-logo-light.webp";
+import { Logo } from "@/components/Logo";
+import { BRAND } from "@/lib/brand";
 
 interface NavItem {
   to: string;
@@ -76,17 +77,8 @@ export function DashboardShell({
       <header className="sticky top-0 z-40 border-b border-[color:var(--bp-line-strong)] bg-[color:var(--bp-paper)]/85 backdrop-blur">
         <div className="mx-auto flex h-16 w-full max-w-[1600px] items-center justify-between px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-4">
-            <a
-              href="/"
-              aria-label="Back to AstroBot Academy homepage"
-              className="flex items-center"
-            >
-              <img
-                src={astrobotLogo}
-                alt="AstroBot Academy"
-                className="h-9 w-auto sm:h-10"
-                draggable={false}
-              />
+            <a href="/" aria-label={`Back to ${BRAND.name} homepage`} className="flex items-center">
+              <Logo variant="light" className="h-9 sm:h-10" />
             </a>
             <span
               className="hidden rounded-full border border-[color:var(--bp-indigo)]/50 bg-[color:var(--bp-indigo)]/10 px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-[color:var(--bp-indigo)] sm:inline-flex"
@@ -176,7 +168,7 @@ export function DashboardShell({
               })}
             </nav>
             <div className="mt-6 border-t border-[color:var(--bp-line)] pt-4 font-mono text-[10px] uppercase tracking-widest text-[color:var(--bp-muted)]">
-              AstroBot Mission Control
+              {BRAND.shortName} {BRAND.portalLabel}
             </div>
           </aside>
         )}

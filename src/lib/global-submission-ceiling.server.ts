@@ -12,6 +12,7 @@
  * carries the most headroom — not everyday traffic. Tripping this means
  * genuine abuse, not a good day.
  */
+import { BRAND } from "@/lib/brand";
 
 const WINDOW_MINUTES = 60;
 
@@ -25,7 +26,7 @@ export type CeilingedTable = keyof typeof GLOBAL_CEILINGS;
 
 export const GLOBAL_CEILING_MESSAGE =
   "We're seeing unusually high demand right now and can't accept new submissions this moment. " +
-  "Please email us at info@astrobotacademy.com or message us on WhatsApp at +92 314 5978068 — " +
+  `Please email us at ${BRAND.contactEmail} or call ${BRAND.phone} — ` +
   "our team will take it from there.";
 
 /**

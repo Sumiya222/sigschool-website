@@ -11,6 +11,7 @@ import {
   WHATSAPP_URL,
   type EmailStep,
 } from "./theme";
+import { BRAND } from "@/lib/brand";
 
 interface Props {
   name?: string;
@@ -33,18 +34,18 @@ interface Props {
 const DEFAULT_STEPS: EmailStep[] = [
   {
     n: "01",
-    title: "See what your child would actually build",
-    body: "Our students design, wire and program real hardware — rovers, satellites and sensor rigs. The Students page is the honest build log, not a brochure.",
+    title: "See a day in the life",
+    body: "The Campus Life page walks through a typical day across Lower, Middle and Upper School — classes, clubs and the daily schedule.",
   },
   {
     n: "02",
-    title: "Check the age track",
-    body: "Junior Tinkers (5–7), Young Innovators (8–12) and Future Engineers (13–17). Each track has its own pace, tools and safety rules.",
+    title: "Check the right division",
+    body: "Lower School (K–5), Middle School (6–8) and Upper School (9–12). Each division has its own building, schedule and faculty team.",
   },
   {
     n: "03",
-    title: "Watch for the next intake",
-    body: "Camp and workshop windows open a few times a year with limited seats. We will tell you directly when the next one opens.",
+    title: "Watch for the next open house",
+    body: "Campus tours and information sessions run a few times a year with limited spots. We'll let you know directly when the next one opens.",
   },
 ];
 
@@ -54,8 +55,8 @@ const Email = ({
   submissionId,
   stepsHeading = "While you wait",
   steps = DEFAULT_STEPS,
-  ctaLabel = "Explore the programs",
-  whatsappLine = "Prefer to talk it through instead? You're welcome to reach our team directly on WhatsApp.",
+  ctaLabel = "Explore admissions",
+  whatsappLine = "Prefer to talk it through instead? You're welcome to call our admissions team.",
   whatsappUrl = WHATSAPP_URL,
   contactEmail,
   footerNotice,
@@ -65,8 +66,8 @@ const Email = ({
   footerNote = "You are receiving this because you sent an inquiry through our Contact page.",
 }: Props) => (
   <Shell
-    preview={`Thanks ${name || "for reaching out"} — your question about our programs is with the academy team.`}
-    docRef="Inquiry Desk · AB / CNT · Parent"
+    preview={`Thanks ${name || "for reaching out"} — your question is with our admissions team.`}
+    docRef="Inquiry Desk · NB / CNT · Parent"
     footerNote={footerNote}
     reference={submissionId ? `Reference ${submissionId}` : undefined}
     whatsappUrl={whatsappUrl}
@@ -79,7 +80,7 @@ const Email = ({
     <Pill label="Message received" />
     <Text style={s.h1}>{name ? `Thank you, ${name}.` : "Thank you for writing in."}</Text>
     <Text style={s.p}>
-      Your message reached the academy desk. A member of our team reads every parent inquiry
+      Your message reached our admissions team. A member of our team reads every parent inquiry
       personally — we do not send you into a queue and we will not pass your details to anyone else.
       You can expect to hear from us within one working day.
     </Text>
@@ -97,7 +98,7 @@ const Email = ({
     ))}
 
     <Section style={{ paddingTop: "8px", paddingBottom: "6px" }}>
-      <Link href={`${SITE}/programs`} style={s.cta}>
+      <Link href={`${SITE}/admissions`} style={s.cta}>
         {ctaLabel}
       </Link>
     </Section>
@@ -109,11 +110,11 @@ const Email = ({
 
 export const template = {
   component: Email,
-  subject: "We've got your question — AstroBot Academy",
+  subject: `We've got your question — ${BRAND.name}`,
   displayName: "Parent inquiry confirmation",
   previewData: {
     name: "Ayesha",
-    message: "My son is 9 and loves taking things apart. Which track would suit him best?",
+    message: "My son is 9 and starting 4th grade next fall. Which division would suit him?",
     submissionId: "INQ-2026-0184",
   },
 };

@@ -6,11 +6,12 @@
  * in `registration_fields` — the CMS can add questions around them but can
  * never remove, reorder out or soften them.
  */
+import { BRAND } from "@/lib/brand";
 
 export const AGE_TRACKS = [
-  { id: "junior", label: "Junior Tinkers", min: 5, max: 7 },
-  { id: "young", label: "Young Innovators", min: 8, max: 12 },
-  { id: "future", label: "Future Engineers", min: 13, max: 17 },
+  { id: "junior", label: "Lower School", min: 5, max: 10 },
+  { id: "young", label: "Middle School", min: 11, max: 13 },
+  { id: "future", label: "Upper School", min: 14, max: 18 },
 ] as const;
 
 export type AgeTrack = (typeof AGE_TRACKS)[number];
@@ -78,8 +79,7 @@ export const LOCKED_CORE_FIELDS: { label: string; type: string; required: boolea
   { label: "Photography consent", type: "Tick box", required: false },
 ];
 
-export const MEDIA_CONSENT_LABEL =
-  "I consent to AstroBot Academy photographing my child during the camp for use in its materials.";
+export const MEDIA_CONSENT_LABEL = `I consent to ${BRAND.name} photographing my child during the program for use in its materials.`;
 
 export const REGISTRATION_STATUSES = ["new", "confirmed", "waitlisted", "cancelled"] as const;
 export type RegistrationStatus = (typeof REGISTRATION_STATUSES)[number];

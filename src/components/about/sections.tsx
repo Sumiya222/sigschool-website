@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowDownRight, ArrowUpRight, Check } from "lucide-react";
 import { GoldButtonSheen, goldButtonClassName } from "@/components/GoldButton";
 import { Band, BandHeader, fadeUp, stagger } from "@/components/for-schools/Band";
+import { BRAND } from "@/lib/brand";
 import type { TeamMember } from "@/lib/site-content";
 import {
   focalPosition,
@@ -28,21 +29,21 @@ function themeOf(c: Record<string, any>, fallback: Theme): Theme {
 type Fact = { label: string; value: string };
 
 const HERO_FACTS: Fact[] = [
-  { label: "Founded", value: "Islamabad, Pakistan" },
-  { label: "Model", value: "In-school weekly subject" },
-  { label: "Domains", value: "Robotics · AI · Space" },
-  { label: "Reach", value: "Pakistan & MENA" },
+  { label: "Founded", value: BRAND.addressLine.split(",").slice(-1)[0].trim() },
+  { label: "Structure", value: "Lower, Middle & Upper School" },
+  { label: "Grades Served", value: "Kindergarten – Grade 12" },
+  { label: "Focus", value: "Academics · Character · Community" },
 ];
 
 export function AbHero() {
   const c = useSection("hero", SLUG);
   const theme = themeOf(c, "dark");
   const facts = list<Fact>(c, "facts", HERO_FACTS);
-  const headline = str(c, "headline", "A System-Level");
-  const accent = str(c, "headline_gradient", "Education Provider.");
+  const headline = str(c, "headline", "A K-12 School Built");
+  const accent = str(c, "headline_gradient", "Around Every Student.");
 
   return (
-    <Band theme={theme} label="About AstroBot Academy" hero>
+    <Band theme={theme} label={`About ${BRAND.name}`} hero>
       <motion.div
         variants={stagger}
         initial="hidden"
@@ -58,7 +59,7 @@ export function AbHero() {
               aria-hidden
               className="led size-1.5 rounded-full bg-cyan shadow-[0_0_8px_var(--cyan)]"
             />
-            {str(c, "doc_ref", "Institutional Profile · AB / ABT")}
+            {str(c, "doc_ref", "School Profile · Admissions")}
           </span>
           <span>{str(c, "doc_rev", "Rev. 2026.1")}</span>
         </motion.div>
@@ -95,17 +96,17 @@ export function AbHero() {
             </motion.p>
 
             <motion.div variants={fadeUp} className="mt-10 flex flex-wrap items-center gap-4">
-              <a href={str(c, "cta_target", "/schools")} className={goldButtonClassName}>
+              <a href={str(c, "cta_target", "/admissions")} className={goldButtonClassName}>
                 {GoldButtonSheen}
                 <span className="relative inline-flex items-center gap-2">
-                  {str(c, "cta_label", "Partner With Us")}
+                  {str(c, "cta_label", "Apply Now")}
                 </span>
               </a>
               <a
                 href={str(c, "secondary_cta_target", "/programs")}
                 className="inline-flex items-center gap-2 rounded-full border border-foreground/18 px-5 py-2.5 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-foreground/80 transition-colors hover:border-cyan/50 hover:text-cyan"
               >
-                {str(c, "secondary_cta_label", "See the programs")}
+                {str(c, "secondary_cta_label", "See our academics")}
                 <ArrowDownRight className="size-3.5" aria-hidden />
               </a>
             </motion.div>
@@ -154,7 +155,7 @@ export function AbPositioning() {
       <BandHeader
         theme={theme}
         eyebrow={str(c, "eyebrow", "Positioning")}
-        headline={str(c, "headline", "Who We Are.")}
+        headline={str(c, "headline", `Who We Are.`)}
       />
       <motion.div
         variants={stagger}
@@ -282,22 +283,22 @@ export function AbEcosystem() {
   const international = affiliations.filter((a) => a.scope === "international");
 
   const columns = [
-    { label: str(c, "national_label", "National"), rows: national },
-    { label: str(c, "international_label", "International"), rows: international },
+    { label: str(c, "national_label", "Accreditation"), rows: national },
+    { label: str(c, "international_label", "Memberships"), rows: international },
   ];
 
   return (
     <Band
       theme={theme}
-      label="Ecosystem and affiliations"
-      sheet="Sheet 02 · Ecosystem"
+      label="Accreditation and standards"
+      sheet="Sheet 02 · Standards"
       diagram="circuit"
       diagramSecondary="comet"
     >
       <BandHeader
         theme={theme}
-        eyebrow={str(c, "eyebrow", "Ecosystem & Affiliations")}
-        headline={str(c, "headline", "Where We Sit.")}
+        eyebrow={str(c, "eyebrow", "Accreditation & Standards")}
+        headline={str(c, "headline", "Held to a Higher Standard.")}
         subhead={c.subhead ? String(c.subhead) : undefined}
       />
       <motion.div
@@ -383,7 +384,7 @@ export function AbHowWeTeach() {
       <BandHeader
         theme={theme}
         eyebrow={str(c, "eyebrow", "How We Teach")}
-        headline={str(c, "headline", "Eight Methods. One Session Structure.")}
+        headline={str(c, "headline", "Our Method. One Learning Journey.")}
       />
 
       <motion.div
@@ -511,7 +512,7 @@ export function AbLeadership() {
       <BandHeader
         theme={theme}
         eyebrow={str(c, "eyebrow", "People")}
-        headline={str(c, "headline", "The People Behind AstroBot.")}
+        headline={str(c, "headline", "Our Faculty Leadership.")}
         subhead={c.subhead ? String(c.subhead) : undefined}
       />
 
@@ -568,7 +569,7 @@ function PersonCard({
   );
 }
 
-/* ── 7 · Regional reach — light ───────────────────────────────────────── */
+/* ── 7 · Campus & community — light ───────────────────────────────────── */
 
 export function AbRegionalReach() {
   const c = useSection("regional_reach", SLUG);
@@ -578,15 +579,15 @@ export function AbRegionalReach() {
   return (
     <Band
       theme={theme}
-      label="Regional reach"
-      sheet="Sheet 04 · Reach"
+      label="Campus and community"
+      sheet="Sheet 04 · Campus"
       diagram="rocket"
       diagramPosition="left"
     >
       <BandHeader
         theme={theme}
-        eyebrow={str(c, "eyebrow", "Regional Reach")}
-        headline={str(c, "headline", "Beyond Pakistan.")}
+        eyebrow={str(c, "eyebrow", "Campus & Community")}
+        headline={str(c, "headline", "One Campus. One Community.")}
       />
       <motion.div
         variants={stagger}
@@ -607,10 +608,10 @@ export function AbRegionalReach() {
           className="rounded-xl border border-navy-950/15 bg-white/55 p-6"
         >
           <p className="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.26em] text-navy-900/60">
-            {str(c, "partner_label", "Delivery partner")}
+            {str(c, "partner_label", "Location")}
           </p>
           <p className="mt-2 font-display text-xl font-bold text-navy-950">
-            {str(c, "partner_name", "Prime Edge")}
+            {str(c, "partner_name", BRAND.addressLine)}
           </p>
           <dl className="mt-5 space-y-3">
             {facts.map((f) => (
@@ -639,7 +640,7 @@ export function AbClosingCta() {
       <BandHeader
         theme={theme}
         eyebrow={str(c, "eyebrow", "Next Step")}
-        headline={str(c, "headline", "Bring It to Your Students.")}
+        headline={str(c, "headline", "Come See Us for Yourself.")}
       />
       <motion.div
         variants={stagger}
@@ -653,17 +654,17 @@ export function AbClosingCta() {
           className="flex flex-col rounded-xl border border-cyan/25 bg-cyan/12 backdrop-blur-md p-7"
         >
           <p className="font-mono text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-cyan">
-            {str(c, "school_title", "For schools")}
+            {str(c, "school_title", "Schedule a visit")}
           </p>
           <p className="mt-4 flex-1 text-[0.98rem] leading-relaxed text-offwhite/80">
             {str(c, "school_copy", "")}
           </p>
           <div className="mt-7">
             <a
-              href={str(c, "school_cta_target", "/schools")}
+              href={str(c, "school_cta_target", "/contact")}
               className="inline-flex items-center gap-2 rounded-full border border-cyan/40 px-5 py-2.5 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-cyan transition-colors hover:bg-cyan/10"
             >
-              {str(c, "school_cta_label", "Partner With Us")}
+              {str(c, "school_cta_label", "Schedule a Visit")}
               <ArrowUpRight className="size-3.5" aria-hidden />
             </a>
           </div>
@@ -674,17 +675,17 @@ export function AbClosingCta() {
           className="flex flex-col rounded-xl border border-gold/25 bg-gold/12 backdrop-blur-md p-7"
         >
           <p className="font-mono text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-gold">
-            {str(c, "parent_title", "For parents")}
+            {str(c, "parent_title", "For prospective families")}
           </p>
           <p className="mt-4 flex-1 text-[0.98rem] leading-relaxed text-offwhite/80">
             {str(c, "parent_copy", "")}
           </p>
           <div className="mt-7">
             <a
-              href={str(c, "parent_cta_target", "/contact")}
+              href={str(c, "parent_cta_target", "/admissions")}
               className="inline-flex items-center gap-2 rounded-full border border-gold/40 px-5 py-2.5 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-gold transition-colors hover:bg-gold/10"
             >
-              {str(c, "parent_cta_label", "Inquire")}
+              {str(c, "parent_cta_label", "Apply Now")}
               <ArrowUpRight className="size-3.5" aria-hidden />
             </a>
           </div>

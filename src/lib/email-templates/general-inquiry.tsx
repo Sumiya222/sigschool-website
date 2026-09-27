@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, Section, Text } from "@react-email/components";
 import { Pill, Row, s, Shell, SITE } from "./theme";
+import { BRAND } from "@/lib/brand";
 
 interface Props {
   name?: string;
@@ -23,9 +24,9 @@ const Email = ({
   name,
   message,
   submissionId,
-  hintText = "In the meantime, the clearest picture of what we do is the student build log — real projects, documented as they were made.",
-  primaryCtaLabel = "See student work",
-  secondaryCtaLabel = "About the academy →",
+  hintText = "In the meantime, the clearest picture of what we do is our Academics and Campus Life pages.",
+  primaryCtaLabel = "See academics",
+  secondaryCtaLabel = "About the school →",
   whatsappUrl,
   contactEmail,
   footerNotice,
@@ -35,8 +36,8 @@ const Email = ({
   footerNote = "You are receiving this because you sent a message through our Contact page.",
 }: Props) => (
   <Shell
-    preview="Your message reached the AstroBot Academy desk."
-    docRef="Inquiry Desk · AB / CNT · General"
+    preview={`Your message reached the ${BRAND.shortName} front office.`}
+    docRef="Inquiry Desk · NB / CNT · General"
     footerNote={footerNote}
     reference={submissionId ? `Reference ${submissionId}` : undefined}
     whatsappUrl={whatsappUrl}
@@ -49,8 +50,8 @@ const Email = ({
     <Pill label="Message received" />
     <Text style={s.h1}>{name ? `Thanks, ${name}.` : "Thanks for getting in touch."}</Text>
     <Text style={s.p}>
-      Your message is with the academy desk. General inquiries — media, collaboration, mentorship,
-      sponsorship or something we have not thought of yet — are routed to the right person by hand,
+      Your message is with our front office. General inquiries — media, community partnerships,
+      volunteering or something we have not thought of yet — are routed to the right person by hand,
       which usually takes a working day.
     </Text>
 
@@ -76,11 +77,11 @@ const Email = ({
 
 export const template = {
   component: Email,
-  subject: "Your message to AstroBot Academy",
+  subject: `Your message to ${BRAND.name}`,
   displayName: "General inquiry confirmation",
   previewData: {
     name: "Hassan",
-    message: "I write for a science magazine and would like to feature your student rover project.",
+    message: "I write for a local paper and would like to feature your school's community day.",
     submissionId: "INQ-2026-0186",
   },
 };

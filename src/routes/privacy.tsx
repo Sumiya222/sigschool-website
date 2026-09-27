@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type { ReactNode } from "react";
+import { BRAND } from "@/lib/brand";
 
-const TITLE = "Privacy Policy — AstroBot Academy";
-const DESCRIPTION =
-  "How AstroBot Academy collects, uses, and protects the information submitted through this website.";
+const TITLE = `Privacy Policy | ${BRAND.name}`;
+const DESCRIPTION = `How ${BRAND.name} collects, uses, and protects the information submitted through this website.`;
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({
@@ -44,28 +44,26 @@ function PrivacyPage() {
 
         <Section title="Who this covers">
           <p>
-            AstroBot Academy is operated under the Stellar Scholar Space Education Initiative,
-            backed by Stelalliance (SMC-Private) Ltd. This policy covers the information collected
-            through this website — the contact form, camp/program registration, and the careers
-            page.
+            This policy covers the information {BRAND.legalName} collects through this website — the
+            contact form, enrollment/registration, and the careers page.
           </p>
         </Section>
 
         <Section title="What we collect, form by form">
           <p>
             <strong>Contact form.</strong> Your name, email, and phone number, plus whatever else is
-            relevant to why you're getting in touch — for a parent, your child's age group and what
-            you're interested in; for a school, the school's name, your role, student numbers, and
-            grade levels; for anything else, your organisation and message.
+            relevant to why you're getting in touch — for a family, your child's grade or age and
+            what you're interested in; for a general or media inquiry, your organisation, role, and
+            message.
           </p>
           <p>
-            <strong>Camp / program registration.</strong> Filled out by a parent or guardian, not by
+            <strong>Enrollment / registration.</strong> Filled out by a parent or guardian, not by
             the child. It asks for the child's first and last name, age, and (optionally) their
-            school; the parent's own name, email, and phone/WhatsApp number; and any medical or
-            accessibility notes the parent wants us to know for the child's safety and comfort.
-            Individual camps or programs sometimes ask a few extra questions specific to that
-            program (for example, uploading a payment receipt) — you'll always see exactly what's
-            being asked before you submit anything.
+            current school; the parent's own name, email, and phone/WhatsApp number; and any medical
+            or accessibility notes the parent wants us to know for the child's safety and comfort.
+            Individual enrollment steps sometimes ask a few extra questions specific to that step
+            (for example, uploading a payment receipt) — you'll always see exactly what's being
+            asked before you submit anything.
           </p>
           <p>
             <strong>Careers / job applications.</strong> Your name, email, phone number, optional
@@ -88,7 +86,7 @@ function PrivacyPage() {
 
         <Section title="Photographs">
           <p>
-            During camps and programs, we may take photographs or video of students for use in our
+            During school activities, we may take photographs or video of students for use in our
             own materials — our website, social media, and similar — but only where the parent or
             guardian ticked the photography consent option on the registration form. If you didn't
             consent, we won't use images of your child that way. If you change your mind after
@@ -100,9 +98,9 @@ function PrivacyPage() {
           <p>
             We don't currently run an automatic deletion schedule. We keep the information above for
             as long as we reasonably need it for the purpose it was given to us — running the
-            program you registered for, considering a job application, or answering your inquiry —
-            and afterward, for as long as we need it for our own records, such as invoicing a
-            partner school. If you'd like something deleted sooner, ask us (below) and we will.
+            enrollment you registered for, considering a job application, or answering your inquiry
+            — and afterward, for as long as we need it for our own records. If you'd like something
+            deleted sooner, ask us (below) and we will.
           </p>
         </Section>
 
@@ -132,8 +130,8 @@ function PrivacyPage() {
           <p>
             To ask what information we hold about you or your child, correct it, or have it deleted,
             email us at{" "}
-            <a href="mailto:contact@astrobotacademy.com" className="text-cyan hover:underline">
-              contact@astrobotacademy.com
+            <a href={`mailto:${BRAND.contactEmail}`} className="text-cyan hover:underline">
+              {BRAND.contactEmail}
             </a>
             . We'll get back to you and let you know once it's done.
           </p>

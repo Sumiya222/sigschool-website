@@ -1,13 +1,8 @@
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-// `?inline` forces Vite to embed this as a base64 data URI at build time
-// instead of emitting a separate file the browser has to fetch at PDF-
-// generation time. That fetch was the failure mode worth removing: any
-// network hiccup or extension interfering with it silently degraded the
-// invoice to a text fallback with no trace of why.
-import astrobotLogo from "@/assets/astrobot-logo-dark.png?inline";
 import { INSTITUTIONAL_ATTRIBUTION } from "@/lib/institutional";
 import { sanitizeForPdf } from "@/lib/sanitize-pdf-text";
+import { BRAND } from "@/lib/brand";
 
 export interface InvoicePdfData {
   invoice_number: string;
@@ -36,14 +31,13 @@ export interface InvoicePdfData {
   };
 }
 
-const NOTES_TEXT =
-  "This invoice is based on the service agreement terms. Payments are due as per the schedule, exclusive of applicable taxes. For any queries or payment details, please contact +92-314-5978068.";
+const NOTES_TEXT = `This invoice is based on the service agreement terms. Payments are due as per the schedule, exclusive of applicable taxes. For any queries or payment details, please contact ${BRAND.phone}.`;
 
 export const CONTACT = {
-  website: "astrobotacademy.com",
-  phone: "+92-314-5978068",
-  email: "contact@astrobotacademy.com",
-  address: "AstroBot Academy, Pakistan",
+  website: BRAND.domain,
+  phone: BRAND.phone,
+  email: BRAND.contactEmail,
+  address: BRAND.addressLine,
 };
 
 // Brand palette
@@ -91,37 +85,6 @@ export function formatBillingMonth(ym: string): string {
   const [y, m] = ym.split("-").map((v) => parseInt(v, 10));
   if (!y || !m) return ym;
   return `${_MONTHS_SHORT[m - 1]} ${y}`;
-}
-
-async function loadImageAsDataUrl(
-  src: string,
-): Promise<{ data: string; w: number; h: number } | null> {
-  try {
-    // `?inline` imports already arrive as a data: URI — no network fetch
-    // needed. The fetch/blob path stays as a fallback for a plain URL, but
-    // the logo import above should never take it anymore.
-    let dataUrl = src;
-    if (!src.startsWith("data:")) {
-      const res = await fetch(src);
-      const blob = await res.blob();
-      dataUrl = await new Promise((resolve, reject) => {
-        const fr = new FileReader();
-        fr.onload = () => resolve(fr.result as string);
-        fr.onerror = reject;
-        fr.readAsDataURL(blob);
-      });
-    }
-    const img = await new Promise<HTMLImageElement>((resolve, reject) => {
-      const i = new Image();
-      i.onload = () => resolve(i);
-      i.onerror = reject;
-      i.src = dataUrl;
-    });
-    return { data: dataUrl, w: img.width, h: img.height };
-  } catch (err) {
-    console.error("Invoice PDF: logo image failed to load, falling back to text.", err);
-    return null;
-  }
 }
 
 function setFill(doc: jsPDF, c: [number, number, number]) {
@@ -172,20 +135,12 @@ export async function generateInvoicePdf(rawInv: InvoicePdfData): Promise<void> 
   setFill(doc, ACCENT);
   doc.rect(0, headerH, pageW, 3, "F");
 
-  // Logo (left)
-  const logo = await loadImageAsDataUrl(astrobotLogo);
+  // Wordmark (left) — text-only, no raster logo asset for the placeholder brand.
   const logoY = 22;
-  if (logo) {
-    const targetH = 38;
-    const ratio = logo.w / logo.h;
-    const targetW = targetH * ratio;
-    doc.addImage(logo.data, "PNG", M, logoY, targetW, targetH, undefined, "FAST");
-  } else {
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(18);
-    setText(doc, INK);
-    doc.text("ASTROBOT ACADEMY", M, logoY + 30);
-  }
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(16);
+  setText(doc, INK);
+  doc.text(BRAND.name.toUpperCase(), M, logoY + 30);
 
   // "INVOICE" (right)
   doc.setFont("helvetica", "bold");
@@ -398,7 +353,7 @@ export async function generateInvoicePdf(rawInv: InvoicePdfData): Promise<void> 
   doc.setFont("helvetica", "bold");
   doc.setFontSize(11);
   setText(doc, INK);
-  doc.text("Thank you for partnering with AstroBot Academy.", M, thanksY);
+  doc.text(`Thank you for partnering with ${BRAND.name}.`, M, thanksY);
 
   // ============ FOOTER ============
   const footerY = pageH - 48;

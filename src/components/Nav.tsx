@@ -5,15 +5,30 @@ import { AnimatePresence, motion } from "framer-motion";
 import { GoldButtonSheen, goldButtonClassName } from "@/components/GoldButton";
 import { cn } from "@/lib/utils";
 import { useSiteContent } from "@/lib/site-content";
-import astrobotLogo from "@/assets/astrobot-logo-light.webp";
+import { Logo } from "@/components/Logo";
+import { BRAND } from "@/lib/brand";
+
+// Fallback only — nav_items is the source of truth once the CMS has rows
+// for the "nav" location. Without this, an empty/unseeded table renders no
+// navbar at all instead of degrading gracefully (see Footer.tsx's
+// EXPLORE_LINKS for the same pattern).
+const FALLBACK_LINKS = [
+  { to: "/about", label: "About" },
+  { to: "/programs", label: "Academics" },
+  { to: "/admissions", label: "Admissions" },
+  { to: "/schools", label: "Campus Life" },
+  { to: "/students", label: "Student Life" },
+  { to: "/careers", label: "Careers" },
+  { to: "/contact", label: "Contact" },
+] as const;
 
 export function Nav() {
   const { navItems } = useSiteContent();
-  // nav_items is the single source of truth for navigation.
-  const links: { to: string; label: string }[] = navItems
+  const cmsLinks: { to: string; label: string }[] = navItems
     .filter((n) => n.location === "nav" && n.visible)
     .sort((a, b) => a.order - b.order)
     .map((n) => ({ to: n.target, label: n.label }));
+  const links = cmsLinks.length > 0 ? cmsLinks : FALLBACK_LINKS;
 
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -49,14 +64,9 @@ export function Nav() {
           to="/"
           className="flex items-center"
           onClick={() => setOpen(false)}
-          aria-label="AstroBot Academy home"
+          aria-label={`${BRAND.name} home`}
         >
-          <img
-            src={astrobotLogo}
-            alt="AstroBot Academy"
-            className="h-9 w-auto sm:h-10 lg:h-11"
-            draggable={false}
-          />
+          <Logo variant="light" className="h-9 sm:h-10 lg:h-11" />
         </Link>
 
         {/* Desktop links */}

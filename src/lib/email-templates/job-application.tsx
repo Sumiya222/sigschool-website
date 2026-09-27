@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, Section, Text } from "@react-email/components";
 import { Pill, Row, s, Shell, SITE, Step, type EmailStep } from "./theme";
+import { BRAND } from "@/lib/brand";
 
 interface Props {
   fullName?: string;
@@ -25,17 +26,17 @@ const DEFAULT_STEPS: EmailStep[] = [
   {
     n: "01",
     title: "Review — within one week",
-    body: "We look for evidence you have built and taught real things, not only studied them.",
+    body: "We look for evidence you have taught and led real classrooms, not only studied education.",
   },
   {
     n: "02",
     title: "Conversation",
-    body: "A relaxed call about your background, the age group you would teach and how you explain hard ideas simply.",
+    body: "A relaxed call about your background, the age group you would teach and your approach to the classroom.",
   },
   {
     n: "03",
     title: "Teaching demo",
-    body: "Shortlisted candidates run a short session with a real group. We pay for your time on the day.",
+    body: "Shortlisted candidates teach a short lesson with a real class. We pay for your time on the day.",
   },
 ];
 
@@ -54,11 +55,11 @@ const Email = ({
   contactLine,
   addressLine,
   legalLine,
-  footerNote = "You are receiving this because you applied through the AstroBot Academy careers page.",
+  footerNote = `You are receiving this because you applied through the ${BRAND.name} careers page.`,
 }: Props) => (
   <Shell
     preview={`Application received${position ? ` — ${position}` : ""}. Here is what happens next.`}
-    docRef="Recruitment · AB / CAR"
+    docRef="Recruitment · NB / CAR"
     footerNote={footerNote}
     reference={submissionId ? `Application ${submissionId}` : undefined}
     whatsappUrl={whatsappUrl}
@@ -102,11 +103,11 @@ const Email = ({
 
 export const template = {
   component: Email,
-  subject: "Your application to AstroBot Academy",
+  subject: `Your application to ${BRAND.name}`,
   displayName: "Job application received",
   previewData: {
     fullName: "Sara Iqbal",
-    position: "Robotics Instructor",
+    position: "Middle School Science Teacher",
     cvFilename: "sara-iqbal-cv.pdf",
     submissionId: "APP-2026-0042",
   },

@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, GraduationCap, Users } from "lucide-react";
+import { ArrowUpRight, Briefcase, MessageSquare, Users } from "lucide-react";
 import { Band, fadeUp, stagger } from "@/components/for-schools/Band";
 import { ChannelRail, InquiryForm } from "./InquiryForm";
 import { setting, str, useSection, useSiteContent } from "@/lib/site-content";
+import { BRAND } from "@/lib/brand";
 
 const SLUG = "contact";
 
@@ -21,7 +22,7 @@ export function CtHero() {
   const theme = themeOf(c, "dark");
 
   return (
-    <Band theme={theme} label="Contact AstroBot Academy" hero>
+    <Band theme={theme} label={`Contact ${BRAND.name}`} hero>
       <motion.div
         variants={stagger}
         initial="hidden"
@@ -37,7 +38,7 @@ export function CtHero() {
               aria-hidden
               className="led size-1.5 rounded-full bg-cyan shadow-[0_0_8px_var(--cyan)]"
             />
-            {str(c, "doc_ref", "Inquiry Desk · AB / CNT")}
+            {str(c, "doc_ref", "Inquiry Desk · NB / CNT")}
           </span>
           <span>{str(c, "doc_rev", "Rev. 2026.1")}</span>
         </motion.div>
@@ -89,26 +90,38 @@ export function CtPaths() {
     {
       index: "01",
       icon: Users,
-      title: str(c, "parent_title", "I'm a parent"),
+      title: str(c, "parent_title", "I'm a prospective family"),
       body: str(
         c,
         "parent_body",
-        "Camps, workshops and how to hear about the next registration window.",
+        "Admissions requirements, tours, and how to hear about the next application window.",
       ),
-      label: str(c, "parent_cta_label", "See the programs"),
-      target: str(c, "parent_cta_target", "/programs"),
+      label: str(c, "parent_cta_label", "See admissions"),
+      target: str(c, "parent_cta_target", "/admissions"),
     },
     {
       index: "02",
-      icon: GraduationCap,
-      title: str(c, "school_title", "I'm a school"),
+      icon: MessageSquare,
+      title: str(c, "school_title", "I'm a current family"),
       body: str(
         c,
         "school_body",
-        "The year-round curriculum, what we supply and what your campus provides.",
+        "Questions about your student's day-to-day — the front office and division staff can help.",
       ),
-      label: str(c, "school_cta_label", "See the delivery spec"),
-      target: str(c, "school_cta_target", "/schools"),
+      label: str(c, "school_cta_label", "Start an inquiry"),
+      target: str(c, "school_cta_target", "#inquiry"),
+    },
+    {
+      index: "03",
+      icon: Briefcase,
+      title: str(c, "other_title", "Careers or general"),
+      body: str(
+        c,
+        "other_body",
+        "Open roles, media requests, and anything else that doesn't fit the boxes above.",
+      ),
+      label: str(c, "other_cta_label", "See open roles"),
+      target: str(c, "other_cta_target", "/careers"),
     },
   ];
 
@@ -116,7 +129,7 @@ export function CtPaths() {
     <Band
       theme={theme}
       label="Where to start"
-      sheet="AB / CNT · 02"
+      sheet="NB / CNT · 02"
       diagram="comet"
       diagramPosition="left"
     >
@@ -153,12 +166,12 @@ export function CtPaths() {
             {str(
               c,
               "subhead",
-              "Pick the route that matches you — the two funnels are handled separately.",
+              "Pick the route that matches you — each one gets to the right person faster.",
             )}
           </p>
         </motion.div>
 
-        <motion.div variants={stagger} className="grid gap-4 sm:grid-cols-2">
+        <motion.div variants={stagger} className="grid gap-4 sm:grid-cols-3">
           {paths.map((p) => (
             <motion.a
               key={p.title}

@@ -12,12 +12,13 @@
  * every inquiry goes through the digest with no immediate path at all.
  */
 import { sendBrandedEmail } from "@/lib/email.server";
+import { BRAND } from "@/lib/brand";
 
 const NEAR_CAPACITY_FRACTION = 0.9;
 const CLOSING_SOON_DAYS = 1; // "imminently" = closes today or tomorrow
 
 function adminTo(): string {
-  return process.env.NOTIFY_EMAIL_TO || "contact@astrobotacademy.com";
+  return process.env.NOTIFY_EMAIL_TO || BRAND.contactEmail;
 }
 
 /**
@@ -69,7 +70,7 @@ export async function maybeSendCapacityAlert(params: {
     heading: `${params.campName} is ${params.waitlisted ? "full" : "nearly full"}`,
     intro: summary,
     ctaLabel: "Open in Dashboard",
-    ctaUrl: "https://astrobotacademy.com/dashboard/admin/submissions?tab=registrations",
+    ctaUrl: `https://${BRAND.domain}/dashboard/admin/submissions?tab=registrations`,
     footerNote: "Automated capacity alert — no reply needed.",
     text: summary,
   });
@@ -104,7 +105,7 @@ export async function maybeSendClosingSoonAlert(params: {
     heading: `${params.roleTitle} closes ${when}`,
     intro: summary,
     ctaLabel: "Open in Dashboard",
-    ctaUrl: "https://astrobotacademy.com/dashboard/admin/submissions?tab=applications",
+    ctaUrl: `https://${BRAND.domain}/dashboard/admin/submissions?tab=applications`,
     footerNote: "Automated closing-soon alert — no reply needed.",
     text: summary,
   });

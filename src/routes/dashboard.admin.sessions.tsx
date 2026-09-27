@@ -6,6 +6,7 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import * as XLSX from "xlsx";
 import { supabase } from "@/integrations/supabase/client";
+import { BRAND } from "@/lib/brand";
 import { toSafeErrorMessage } from "@/lib/db-error-message";
 import { verifyRowsAffected } from "@/lib/db-write-verify";
 import { formatDate } from "@/lib/format-date";
@@ -391,7 +392,7 @@ function SessionCalendarPage() {
       filterInstructorId ? instructorLabel(filterInstructorId) : null,
     ].filter(Boolean);
     return {
-      title: "AstroBot — Session Calendar",
+      title: `${BRAND.shortName} — Session Calendar`,
       subtitle: `${formatDate(selectedDate)}${activeFilters.length ? ` · ${activeFilters.join(" · ")}` : ""}`,
       filename: `sessions-${selectedDate}`,
       columns: [

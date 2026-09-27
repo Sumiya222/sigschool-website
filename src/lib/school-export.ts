@@ -4,51 +4,23 @@ import * as XLSX from "xlsx";
 import { INSTITUTIONAL_ATTRIBUTION } from "@/lib/institutional";
 import { sanitizeCell } from "@/lib/sanitize-cell";
 import { sanitizeForPdf } from "@/lib/sanitize-pdf-text";
-import astrobotLogo from "@/assets/astrobot-logo-dark.png";
-
-type LoadedLogo = { data: string; w: number; h: number };
-let logoPromise: Promise<LoadedLogo | null> | undefined;
-function loadLogo(): Promise<LoadedLogo | null> {
-  if (logoPromise) return logoPromise;
-  logoPromise = (async () => {
-    try {
-      const res = await fetch(astrobotLogo);
-      const blob = await res.blob();
-      const data: string = await new Promise((resolve, reject) => {
-        const fr = new FileReader();
-        fr.onload = () => resolve(fr.result as string);
-        fr.onerror = reject;
-        fr.readAsDataURL(blob);
-      });
-      const img = await new Promise<HTMLImageElement>((resolve, reject) => {
-        const i = new Image();
-        i.onload = () => resolve(i);
-        i.onerror = reject;
-        i.src = data;
-      });
-      return { data, w: img.width, h: img.height };
-    } catch {
-      return null;
-    }
-  })();
-  return logoPromise;
-}
+import { BRAND } from "@/lib/brand";
 
 /**
- * Draws the AstroBot logo in the top-right corner of the current page.
- * Unit-agnostic (works with pt or mm jsPDF documents). Target height ~32pt.
+ * Draws the brand wordmark in the top-right corner of the current page.
+ * Unit-agnostic (works with pt or mm jsPDF documents). Text-only — no raster
+ * logo asset for the placeholder brand.
  */
 export async function drawLogoHeader(doc: jsPDF, marginPt = 40) {
-  const logo = await loadLogo();
-  if (!logo) return;
   const sf = doc.internal.scaleFactor; // points per unit
-  const targetH = 32 / sf;
-  const targetW = targetH * (logo.w / logo.h);
   const pageW = doc.internal.pageSize.getWidth();
   const marginRight = marginPt / sf;
-  const top = 16 / sf;
-  const x = pageW - marginRight - targetW;
-  doc.addImage(logo.data, "PNG", x, top, targetW, targetH, undefined, "FAST");
+  const top = 24 / sf;
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(11);
+  doc.setTextColor(30, 41, 59);
+  doc.text(BRAND.name, pageW - marginRight, top, { align: "right" });
+  doc.setTextColor(0, 0, 0);
 }
 
 export interface ExportColumn {
@@ -58,7 +30,7 @@ export interface ExportColumn {
 }
 
 export interface ExportPayload {
-  title: string; // e.g. "AstroBot — Section Result Card"
+  title: string; // e.g. "Section Result Card"
   subtitle?: string; // e.g. "School X · Grade 3 · Section A · Fall 2026"
   filename: string; // no extension
   columns: ExportColumn[];

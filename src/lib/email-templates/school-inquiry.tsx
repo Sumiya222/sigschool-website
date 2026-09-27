@@ -11,6 +11,7 @@ import {
   WHATSAPP_URL,
   type EmailStep,
 } from "./theme";
+import { BRAND } from "@/lib/brand";
 
 interface Props {
   name?: string;
@@ -114,7 +115,7 @@ const Email = ({
 
 export const template = {
   component: Email,
-  subject: "Your school partnership inquiry — AstroBot Academy",
+  subject: `Your inquiry — ${BRAND.name}`,
   displayName: "School inquiry confirmation",
   previewData: {
     name: "Mr. Kamran Ali",

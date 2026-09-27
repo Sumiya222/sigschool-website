@@ -5,11 +5,12 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * AstroBot Academy Design System
- * Deep Space Indigo: near-black navy surfaces, electric indigo primary, cyan accent.
- * Fonts: Space Grotesk (display) + DM Sans (body) — loaded via <link> in __root.tsx.
- * NOTE: the --gold* tokens now carry the electric-indigo brand color (name kept
- * for compatibility with existing bg-gold / text-gold utilities across the app).
+ * Northbridge Prep Design System
+ * Classic navy & brass: deep academic navy surfaces, warm brass primary, ivory accent.
+ * Fonts: Fraunces (display) + DM Sans (body) — loaded via <link> in __root.tsx.
+ * NOTE: variable/utility names (--gold*, --cyan*, text-cosmic, etc.) are kept as-is
+ * for compatibility with existing utility classes across the app — only the
+ * underlying color values changed.
  */
 
 @theme inline {
@@ -54,7 +55,7 @@
   --color-panel-light: var(--panel-light);
 
   /* Fonts */
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
   --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
 
   /* Type scale (6 types) */
@@ -82,19 +83,19 @@
 :root {
   --radius: 0.625rem;
 
-  /* Brand values — Deep Space Indigo */
-  --navy-950: #08081a;
-  --navy-900: #10102a;
-  --navy-800: #1a1a44;
-  --brand-navy: #2a2570;
-  --gold: #4f46e5;
-  --gold-bright: #818cf8;
-  --cyan: #22d3ee;
-  --cyan-bright: #67e8f9;
-  --offwhite: #f4f5ff;
-  --gray-mid: #9ea0cc;
-  --gray-body: #9092c2;
-  --panel-light: #e9e9fb;
+  /* Brand values — Classic Navy & Brass */
+  --navy-950: #0a1024;
+  --navy-900: #121b36;
+  --navy-800: #1b2a4a;
+  --brand-navy: #1b2a4a;
+  --gold: #b08d57;
+  --gold-bright: #d4b483;
+  --cyan: #cdbfa0;
+  --cyan-bright: #f7f5f0;
+  --offwhite: #f7f5f0;
+  --gray-mid: #b7bccc;
+  --gray-body: #a9aec2;
+  --panel-light: #efe9db;
 
   /* Semantic tokens — dark navy site theme */
   --background: var(--navy-950);

@@ -20,31 +20,31 @@ const leftStagger = {
 // Fallbacks only; live copy comes from page_sections('home','who_we_are').
 const DIFFERENTIATORS = [
   {
-    label: "EMBEDDED, NOT OCCASIONAL",
-    body: "Weekly sessions built into the school timetable — not a one-off weekend workshop.",
+    label: "SMALL BY DESIGN",
+    body: "Class sizes kept low so every student is known, challenged, and supported by name.",
   },
   {
-    label: "BUILT TO SCALE",
-    body: "From a single-classroom pilot to multi-campus national rollouts, without diluting the curriculum.",
+    label: "ONE CONTINUOUS JOURNEY",
+    body: "Lower, Middle, and Upper School are built to connect — not three separate schools sharing an address.",
   },
   {
-    label: "REAL KITS, REAL BUILDS",
-    body: "Every student takes home what they engineered — not a worksheet.",
+    label: "TEACHERS WHO STAY",
+    body: "Faculty who teach here for years, not semesters — mentors students remember long after graduation.",
   },
 ];
 
 export function WhoWeAre() {
   const c = useSection("who_we_are");
   const eyebrow = str(c, "eyebrow", "Who We Are");
-  const headline = str(c, "headline", "Not a Camp.");
-  const headlineGradient = str(c, "headline_gradient", "A System.");
+  const headline = str(c, "headline", "More Than a School.");
+  const headlineGradient = str(c, "headline_gradient", "A Second Home.");
   const hook = str(
     c,
     "hook",
-    "Three disciplines that usually live in separate classrooms, taught as one connected system — by instructors who show up every week, not for a weekend.",
+    "Academics, character, and community woven into one continuous experience from Kindergarten through Grade 12 — by teachers who know every student by name.",
   );
   const items = list<{ label: string; body: string }>(c, "items", DIFFERENTIATORS);
-  const linkLabel = str(c, "link_label", "See how the system works");
+  const linkLabel = str(c, "link_label", "See how we teach");
   const linkTarget = str(c, "link_target", "/about");
 
   return (

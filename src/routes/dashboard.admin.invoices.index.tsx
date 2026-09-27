@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { BRAND } from "@/lib/brand";
 import { toSafeErrorMessage } from "@/lib/db-error-message";
 import { verifyRowsAffected } from "@/lib/db-write-verify";
 import { formatPKR } from "@/lib/invoice-pdf";
@@ -291,7 +292,7 @@ function InvoicesPage() {
 
       {companyOpen && (
         <section className="mb-6 rounded-xl border border-slate-800 bg-slate-900/60 p-6">
-          <h2 className="text-sm font-semibold text-slate-200">AstroBot bank details</h2>
+          <h2 className="text-sm font-semibold text-slate-200">{BRAND.name} bank details</h2>
           <p className="mt-1 text-xs text-slate-400">
             Shown on every generated invoice PDF. Editable — no code change required.
           </p>

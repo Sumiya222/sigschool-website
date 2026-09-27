@@ -46,7 +46,7 @@ export function PjFeaturedStudents({ students }: { students: FeaturedStudent[] }
         theme={theme}
         eyebrow={str(c, "eyebrow", "Featured students")}
         headline={str(c, "headline", "The Ones Who Ran With It.")}
-        subhead={str(c, "subhead", "Students whose builds went further than the brief.")}
+        subhead={str(c, "subhead", "Students whose achievements went further than expected.")}
       />
 
       <motion.ul
@@ -135,7 +135,7 @@ export function PjFeaturedStudents({ students }: { students: FeaturedStudent[] }
         index={openAt}
         onIndex={setOpenAt}
         onClose={() => setOpenAt(null)}
-        buildLinkLabel={str(c, "build_link_label", "See the build")}
+        buildLinkLabel={str(c, "build_link_label", "See the story")}
       />
     </Band>
   );

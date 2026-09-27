@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { ChevronDown, ChevronUp, Mail, MessageCircle, RotateCcw, Trash2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { BRAND } from "@/lib/brand";
 import { toSafeErrorMessage } from "@/lib/db-error-message";
 import { verifyRowsAffected } from "@/lib/db-write-verify";
 import {
@@ -286,7 +287,7 @@ export function InquiriesPanel() {
 
                   <div className="flex flex-wrap items-center gap-2">
                     <a
-                      href={`mailto:${r.email}?subject=${encodeURIComponent("Re: your inquiry to AstroBot Academy")}`}
+                      href={`mailto:${r.email}?subject=${encodeURIComponent(`Re: your inquiry to ${BRAND.name}`)}`}
                       className="inline-flex items-center gap-1.5 rounded-md border border-[color:var(--bp-line-strong)] px-2.5 py-1.5 text-xs text-[color:var(--bp-ink-2)] transition hover:border-[color:var(--bp-indigo)] hover:text-[color:var(--bp-indigo)]"
                     >
                       <Mail className="size-3.5" aria-hidden />

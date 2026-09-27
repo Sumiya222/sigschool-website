@@ -36,19 +36,19 @@ const ROWS: Row[] = [
   {
     code: "01",
     kicker: "WHO TEACHES",
-    title: "Vetted STEM Educators",
-    copy: "Engineers, researchers, and classroom-tested mentors — every instructor is interviewed, background-checked, and matched to age group.",
+    title: "Certified Classroom Teachers",
+    copy: "Every teacher holds a state teaching credential and is interviewed, background-checked, and matched to the age group and subject they know best.",
     stat: "40+",
-    chip: "ACTIVE INSTRUCTORS",
+    chip: "FACULTY MEMBERS",
     accent: "#22d3ee", // cyan-bright
     icon: UserCheck,
   },
   {
     code: "02",
     kicker: "EXPERIENCE",
-    title: "Industry + Classroom",
-    copy: "Real-world experience from robotics labs, aerospace teams, and AI startups — paired with years of hands-on teaching for K–8 learners.",
-    stat: "6+ yrs",
+    title: "Classroom-Tested",
+    copy: "Years of experience across public and independent schools — paired with ongoing coaching so instruction keeps improving year over year.",
+    stat: "10+ yrs",
     chip: "AVG. TEACHING",
     accent: "#f5c451", // gold-bright
     icon: Briefcase,
@@ -56,8 +56,8 @@ const ROWS: Row[] = [
   {
     code: "03",
     kicker: "QUALIFICATIONS",
-    title: "Engineering Degrees",
-    copy: "Bachelor's and Master's degrees in Computer Science, Mechatronics, Aerospace, and Electrical Engineering from accredited institutions.",
+    title: "Advanced Degrees",
+    copy: "Bachelor's and Master's degrees in Education and their subject areas — English, Mathematics, Science, History, and the Arts — from accredited colleges and universities.",
     stat: "100%",
     chip: "DEGREE-QUALIFIED",
     accent: "#a78bfa", // indigo / purple
@@ -67,9 +67,9 @@ const ROWS: Row[] = [
     code: "04",
     kicker: "TRAINING",
     title: "Continuous Development",
-    copy: "Every instructor completes our AstroBot Pedagogy Program — child-safe teaching, curriculum delivery, kit safety, and term-wise assessment.",
+    copy: "Every teacher completes our onboarding program — classroom safety, curriculum delivery, and ongoing professional development throughout the year.",
     stat: "80 hrs",
-    chip: "ONBOARDING + CPD",
+    chip: "ONBOARDING + PD",
     accent: "#22d3ee", // cyan-bright (reused — palette-locked)
     icon: BookOpenCheck,
   },
@@ -79,7 +79,7 @@ const BADGES: { label: string; icon: LucideIcon }[] = [
   { label: "Background Verified", icon: ShieldCheck },
   { label: "Certified Educators", icon: GraduationCap },
   { label: "Curriculum Trained", icon: BookOpenCheck },
-  { label: "STEM Degrees", icon: Award },
+  { label: "Advanced Degrees", icon: Award },
 ];
 
 // Orbital dots — cardinal positions matching brand palette
@@ -144,7 +144,7 @@ export function InstructorCredibility() {
   const radialMatch = radialValue.match(/^(.*?)([^0-9A-Za-z]*)$/);
   const radialHead = radialMatch?.[1] || radialValue;
   const radialTail = radialMatch?.[2] || "";
-  const radialLabel = radial?.label ?? "Flight Crew";
+  const radialLabel = radial?.label ?? "Faculty";
 
   const badgeLabels = list<string>(
     c,
@@ -174,7 +174,7 @@ export function InstructorCredibility() {
             className="inline-flex items-center gap-2.5 rounded-full border border-indigo-400/25 bg-indigo-400/5 px-3 py-1 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-indigo-300"
           >
             <span className="led size-1.5 rounded-full bg-indigo-400 shadow-[0_0_8px_#818cf8]" />
-            {str(c, "eyebrow", "Faculty Flight Crew")}
+            {str(c, "eyebrow", "Our Faculty")}
           </motion.p>
 
           <motion.h2
@@ -183,9 +183,9 @@ export function InstructorCredibility() {
           >
             {str(c, "headline_before", "Meet the")}{" "}
             <span className="bg-gradient-to-r from-gold-bright to-cyan-bright bg-clip-text text-transparent">
-              {str(c, "headline_gradient", "Engineers Teaching")}
+              {str(c, "headline_gradient", "Educators Behind")}
             </span>{" "}
-            {str(c, "headline_after", "Your Students")}
+            {str(c, "headline_after", "Every Lesson")}
           </motion.h2>
 
           <motion.p
@@ -195,7 +195,7 @@ export function InstructorCredibility() {
             {str(
               c,
               "subhead",
-              "Schools want to know who's in the classroom. Here's exactly who teaches, what they've built, and how they're trained — the credibility behind every session.",
+              "Families want to know who's in the classroom. Here's exactly who teaches, what they bring, and how they're trained — the people behind every lesson.",
             )}
           </motion.p>
 
@@ -395,7 +395,7 @@ export function InstructorCredibility() {
             {/* Faculty Dossier — horizontal strip */}
             <div className="w-full rounded-2xl border border-white/10 bg-black/35 px-5 py-4 backdrop-blur-md">
               <div className="mb-3 font-mono text-[0.6rem] font-semibold uppercase tracking-[0.28em] text-gray-mid">
-                {str(c, "dossier_label", "Faculty Dossier · Live")}
+                {str(c, "dossier_label", "Faculty at a Glance")}
               </div>
               <dl className="flex items-baseline justify-between gap-4">
                 {dossierRows.map((s) => (
