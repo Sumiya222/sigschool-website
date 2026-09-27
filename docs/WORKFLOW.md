@@ -56,3 +56,5 @@ feature/y ──PR──▶ develop
 
 For now: whoever has been designated to own production merges (the repo
 admin). Revisit this once the team has a rhythm going.
+
+<!-- workflow verified end-to-end 2026-09-27 -->
