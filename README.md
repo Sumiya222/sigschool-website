@@ -22,6 +22,10 @@ before starting LMS schema work.** It documents exactly what's solid, what
 isn't, and the recommended direction — written so the two aren't designed in
 separate, conflicting passes.
 
+**Branch off `develop`, not `main`, for every change.** See
+[`docs/WORKFLOW.md`](docs/WORKFLOW.md) — `main` auto-deploys on merge, so
+`develop` is the shared branch everything lands on first.
+
 ---
 
 ## 🚀 Key Features
