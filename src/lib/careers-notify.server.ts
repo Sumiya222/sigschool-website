@@ -15,6 +15,7 @@ import React from "react";
 import { sendReactEmail } from "@/lib/email.server";
 import { getEmailContent } from "@/lib/email-content.server";
 import JobApplicationEmail from "@/lib/email-templates/job-application";
+import { BRAND } from "@/lib/brand";
 
 export type ApplicationNotice = {
   fullName: string;
@@ -28,7 +29,7 @@ export async function sendApplicationConfirmation(notice: ApplicationNotice): Pr
   const content = await getEmailContent();
   await sendReactEmail({
     to: notice.email,
-    from: `AstroBot Academy <${content.fromAddress}>`,
+    from: `${BRAND.name} <${content.fromAddress}>`,
     subject: notice.position
       ? `Application received: ${notice.position}`
       : content.jobApplication.subject,

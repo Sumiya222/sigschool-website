@@ -3,6 +3,7 @@ import { ArrowDownRight, Check, Quote } from "lucide-react";
 import { GoldButtonSheen, goldButtonClassName } from "@/components/GoldButton";
 import { Band, BandHeader, fadeUp, stagger } from "./Band";
 import { list, str, useSection, useSiteContent } from "@/lib/site-content";
+import { BRAND } from "@/lib/brand";
 
 const SLUG = "schools";
 
@@ -18,27 +19,27 @@ function themeOf(c: Record<string, any>, fallback: Theme): Theme {
 type Fact = { label: string; value: string };
 
 const HERO_FACTS: Fact[] = [
-  { label: "Format", value: "Timetabled weekly subject" },
-  { label: "Session", value: "40 minutes" },
-  { label: "Grades", value: "4 – 10" },
-  { label: "Supplied", value: "Curriculum · Kits · Reporting" },
+  { label: "Divisions", value: "Lower · Middle · Upper School" },
+  { label: "Day", value: "8:00 AM – 3:15 PM" },
+  { label: "Activities", value: "40+ clubs, arts & athletics" },
+  { label: "Reporting", value: "Progress reports every term" },
 ];
 
 export function FsHero() {
   const c = useSection("hero", SLUG);
   const theme = themeOf(c, "dark");
-  const ctaLabel = str(c, "cta_label", "Partner With Us");
-  const ctaTarget = str(c, "cta_target", "#partner-inquiry");
-  const secondaryLabel = str(c, "secondary_cta_label", "Read the delivery spec");
-  const secondaryTarget = str(c, "secondary_cta_target", "#delivery-spec");
-  const docRef = str(c, "doc_ref", "Institutional Program Brief · AB / SCH");
-  const docRev = str(c, "doc_rev", "Rev. 2026.1");
+  const ctaLabel = str(c, "cta_label", "Schedule a Tour");
+  const ctaTarget = str(c, "cta_target", "/admissions");
+  const secondaryLabel = str(c, "secondary_cta_label", "See the daily schedule");
+  const secondaryTarget = str(c, "secondary_cta_target", "#daily-schedule");
+  const docRef = str(c, "doc_ref", `Campus Life Overview · ${BRAND.shortName}`);
+  const docRev = str(c, "doc_rev", "2026 – 2027");
   const facts = list<Fact>(c, "facts", HERO_FACTS);
-  const headline = str(c, "headline", "A Formal Subject.");
-  const accent = str(c, "headline_gradient", "Not an Add-On.");
+  const headline = str(c, "headline", "A Day at");
+  const accent = str(c, "headline_gradient", BRAND.shortName + ".");
 
   return (
-    <Band theme={theme} label="For schools introduction" hero>
+    <Band theme={theme} label="Campus life introduction" hero>
       <motion.div
         variants={stagger}
         initial="hidden"
@@ -69,7 +70,7 @@ export function FsHero() {
               variants={fadeUp}
               className="font-mono text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-cyan"
             >
-              {str(c, "eyebrow", "For Schools")}
+              {str(c, "eyebrow", "Campus Life")}
             </motion.p>
 
             <motion.h1
@@ -91,7 +92,9 @@ export function FsHero() {
               {str(
                 c,
                 "subhead",
-                "40-minute weekly sessions, built into your timetable — curriculum, kits, and reporting fully supplied.",
+                "From first bell to last practice, a day at " +
+                  BRAND.shortName +
+                  " blends rigorous academics with the clubs, arts, and athletics that make school feel like home.",
               )}
             </motion.p>
 
@@ -142,25 +145,37 @@ export function FsHero() {
 
 type Spec = { label: string; value: string };
 
+const DAILY_SPECS: Spec[] = [
+  {
+    label: "Arrival & Homeroom",
+    value: "8:00 – 8:20 AM — advisory, announcements, a slow start to the day.",
+  },
+  { label: "Class Periods", value: "Six 50-minute periods across core subjects and electives." },
+  {
+    label: "Lunch & Recess",
+    value: "A shared block for every division, staggered by grade level.",
+  },
+  {
+    label: "Activity Period",
+    value: "A daily window built into the timetable for clubs and enrichment.",
+  },
+  {
+    label: "After School",
+    value: "Athletics, rehearsals, and study hall run until early evening.",
+  },
+];
+
 export function FsDeliverySpec() {
   const c = useSection("delivery_spec", SLUG);
   const theme = themeOf(c, "light");
-  const specs = list<Spec>(c, "specs", []);
+  const specs = list<Spec>(c, "specs", DAILY_SPECS);
 
   return (
-    <Band
-      theme={theme}
-      id="delivery-spec"
-      label="Delivery specification"
-      sheet="Sheet 02 · Delivery"
-      diagram="arm"
-      diagramPosition="right"
-      diagramSecondary="robot"
-    >
+    <Band theme={theme} id="daily-schedule" label="Daily schedule" sheet="Sheet 02 · Schedule">
       <BandHeader
         theme={theme}
-        eyebrow={str(c, "eyebrow", "Delivery Specification")}
-        headline={str(c, "headline", "How the Program Runs.")}
+        eyebrow={str(c, "eyebrow", "Daily Schedule")}
+        headline={str(c, "headline", "How the Day Unfolds.")}
         subhead={c.subhead ? String(c.subhead) : undefined}
       />
       <motion.dl
@@ -209,7 +224,7 @@ export function FsFramework() {
     <Band theme={theme} label="Three-stage framework">
       <BandHeader
         theme={theme}
-        eyebrow={str(c, "eyebrow", "Three-Stage Framework")}
+        eyebrow={str(c, "eyebrow", "Three Divisions")}
         headline={str(c, "headline", "Built to Progress, Grade by Grade.")}
         subhead={c.subhead ? String(c.subhead) : undefined}
       />
@@ -261,26 +276,41 @@ export function FsFramework() {
 
 type Card = { title?: string; copy?: string };
 
+const ACTIVITY_DOMAINS: Card[] = [
+  {
+    title: "Clubs & Interest Groups",
+    copy: "From debate to chess to student council — a new club for nearly every interest, every semester.",
+  },
+  {
+    title: "Arts & Performance",
+    copy: "Band, choir, theater, and studio art, with a fall and spring showcase for every division.",
+  },
+  {
+    title: "Athletics",
+    copy: "Interscholastic and intramural teams across the year, from tryouts through championship season.",
+  },
+];
+
+const ACTIVITY_FACTS: Spec[] = [
+  { label: "Clubs Offered", value: "40+ each year" },
+  { label: "Sports Seasons", value: "3 per year" },
+  { label: "Arts Showcases", value: "2 per year" },
+  { label: "Participation", value: "Open to every student" },
+];
+
 export function FsCurriculumScale() {
   const c = useSection("curriculum_scale", SLUG);
   const theme = themeOf(c, "light");
-  const domains = list<Card>(c, "domains", []);
-  const facts = list<Spec>(c, "facts", []);
+  const domains = list<Card>(c, "domains", ACTIVITY_DOMAINS);
+  const facts = list<Spec>(c, "facts", ACTIVITY_FACTS);
   const note = str(c, "note", "");
 
   return (
-    <Band
-      theme={theme}
-      label="Curriculum scale"
-      sheet="Sheet 04 · Curriculum"
-      diagram="mesh"
-      diagramPosition="left"
-      diagramSecondary="rocket"
-    >
+    <Band theme={theme} label="Clubs and activities" sheet="Sheet 04 · Activities">
       <BandHeader
         theme={theme}
-        eyebrow={str(c, "eyebrow", "Curriculum Scale")}
-        headline={str(c, "headline", "36 Modules a Year. None Repeated.")}
+        eyebrow={str(c, "eyebrow", "Clubs & Activities")}
+        headline={str(c, "headline", "Dozens of Ways to Get Involved.")}
         subhead={c.subhead ? String(c.subhead) : undefined}
       />
 
@@ -388,19 +418,46 @@ function BandNote({ theme, children }: { theme: Theme; children: string }) {
 
 /* ── 5 · Kits & materials — dark ──────────────────────────────────────── */
 
+const FACILITIES_ITEMS: Card[] = [
+  {
+    title: "Library & Learning Commons",
+    copy: "A quiet research floor and an open collaboration space, open before and after school.",
+  },
+  {
+    title: "Science & Innovation Labs",
+    copy: "Dedicated wet labs and a maker space for Lower, Middle, and Upper School courses.",
+  },
+  {
+    title: "Arts Studio & Theater",
+    copy: "A black-box theater, music rooms, and a full studio for visual arts.",
+  },
+  {
+    title: "Athletic Center",
+    copy: "A gymnasium, weight room, and outdoor fields shared across every sports season.",
+  },
+  {
+    title: "Dining Commons",
+    copy: "A full-service dining hall with daily menus for every dietary need.",
+  },
+  {
+    title: "Health & Wellness Suite",
+    copy: "An on-campus nurse and counseling office, staffed throughout the school day.",
+  },
+];
+
 export function FsKits() {
   const c = useSection("kits", SLUG);
   const theme = themeOf(c, "dark");
   const note = str(c, "note", "");
   return (
-    <Band theme={theme} label="Kits and materials">
+    <Band theme={theme} label="Facilities">
       <BandHeader
         theme={theme}
-        eyebrow={str(c, "eyebrow", "Kits & Materials")}
-        headline={str(c, "headline", "Every Student Builds Something Real.")}
+        eyebrow={str(c, "eyebrow", "Facilities")}
+        headline={str(c, "headline", "A Campus Built for Every Interest.")}
         subhead={c.subhead ? String(c.subhead) : undefined}
       />
-      <CardList theme={theme} items={list<Card>(c, "items", [])} />
+      <CardList theme={theme} items={list<Card>(c, "items", FACILITIES_ITEMS)} />
       {note ? <BandNote theme={theme}>{note}</BandNote> : null}
     </Band>
   );
@@ -408,26 +465,34 @@ export function FsKits() {
 
 /* ── 6 · Assessment & reporting — light ───────────────────────────────── */
 
+const ASSESSMENT_ITEMS: Card[] = [
+  {
+    title: "Progress Reports",
+    copy: "Sent home each term, covering academics, growth areas, and teacher notes.",
+  },
+  {
+    title: "Parent-Teacher Conferences",
+    copy: "Scheduled twice a year, with additional check-ins available anytime.",
+  },
+  {
+    title: "Family Portal",
+    copy: "Grades, attendance, and assignment feedback available online in real time.",
+  },
+];
+
 export function FsAssessment() {
   const c = useSection("assessment", SLUG);
   const theme = themeOf(c, "light");
   const note = str(c, "note", "");
   return (
-    <Band
-      theme={theme}
-      label="Assessment and reporting"
-      sheet="Sheet 06 · Assessment"
-      diagram="sensor"
-      diagramPosition="right"
-      diagramSecondary="comet"
-    >
+    <Band theme={theme} label="Progress reporting" sheet="Sheet 06 · Reporting">
       <BandHeader
         theme={theme}
-        eyebrow={str(c, "eyebrow", "Assessment & Reporting")}
-        headline={str(c, "headline", "Measurable Academic Outcomes.")}
+        eyebrow={str(c, "eyebrow", "Progress Reporting")}
+        headline={str(c, "headline", "Reporting You Can Rely On.")}
         subhead={c.subhead ? String(c.subhead) : undefined}
       />
-      <CardList theme={theme} items={list<Card>(c, "items", [])} />
+      <CardList theme={theme} items={list<Card>(c, "items", ASSESSMENT_ITEMS)} />
       {note ? <BandNote theme={theme}>{note}</BandNote> : null}
     </Band>
   );
@@ -560,38 +625,17 @@ export function FsExclusions() {
 export function FsProofCta() {
   const c = useSection("proof_cta", SLUG);
   const theme = themeOf(c, "dark");
-  const { partners, testimonials } = useSiteContent();
-  const schools = partners.filter((p) => p.visible);
+  const { testimonials } = useSiteContent();
   const testimonial = testimonials.filter((t) => t.visible)[0];
 
   return (
-    <Band theme={theme} label="Partner schools and enquiry" id="partner-inquiry">
+    <Band theme={theme} label="Campus visit and enquiry" id="campus-visit">
       <BandHeader
         theme={theme}
-        eyebrow={str(c, "eyebrow", "Proof")}
-        headline={str(c, "headline", "Schools Already Running the System.")}
+        eyebrow={str(c, "eyebrow", "Visit Us")}
+        headline={str(c, "headline", `Come See ${BRAND.shortName}.`)}
         subhead={c.subhead ? String(c.subhead) : undefined}
       />
-
-      <motion.ul
-        variants={stagger}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.2 }}
-        className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3"
-      >
-        {schools.map((s) => (
-          <motion.li
-            key={s.id}
-            variants={fadeUp}
-            className="flex min-h-[104px] items-center justify-center rounded-xl border border-cyan/15 bg-white/[0.03] p-4 text-center backdrop-blur-md"
-          >
-            <span className="font-display text-sm font-semibold uppercase leading-snug tracking-wide text-gray-mid/80 sm:text-base">
-              {s.name}
-            </span>
-          </motion.li>
-        ))}
-      </motion.ul>
 
       {testimonial ? (
         <motion.figure
@@ -637,18 +681,26 @@ export function FsProofCta() {
           {str(
             c,
             "closing_line",
-            "Commercials are shared in a written proposal after a short conversation about your campus and grade levels.",
+            "The best way to understand a day at " +
+              BRAND.shortName +
+              " is to spend one on campus. Schedule a tour, meet our faculty, and see the classrooms for yourself.",
           )}
         </motion.p>
-        <motion.div variants={fadeUp} className="mt-8">
-          <a
-            href={str(c, "cta_target", "mailto:contact@astrobotacademy.com")}
-            className={goldButtonClassName}
-          >
+        <motion.div
+          variants={fadeUp}
+          className="mt-8 flex flex-wrap items-center justify-center gap-4"
+        >
+          <a href={str(c, "cta_target", "/admissions")} className={goldButtonClassName}>
             {GoldButtonSheen}
             <span className="relative inline-flex items-center gap-2">
-              {str(c, "cta_label", "Partner With Us")}
+              {str(c, "cta_label", "Schedule a Tour")}
             </span>
+          </a>
+          <a
+            href={str(c, "secondary_cta_target", "/contact")}
+            className="inline-flex items-center gap-2 rounded-full border border-foreground/18 px-5 py-2.5 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-foreground/80 transition-colors hover:border-cyan/50 hover:text-cyan"
+          >
+            {str(c, "secondary_cta_label", "Contact Us")}
           </a>
         </motion.div>
       </motion.div>

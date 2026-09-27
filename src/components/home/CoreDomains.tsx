@@ -16,18 +16,18 @@ const stagger = {
 
 export function CoreDomains() {
   const c = useSection("core_domains");
-  const eyebrow = str(c, "eyebrow", "Core Domains");
-  const headline = str(c, "headline", "Three Disciplines.");
-  const headlineGradient = str(c, "headline_gradient", "One Interconnected System.");
+  const eyebrow = str(c, "eyebrow", "Our Divisions");
+  const headline = str(c, "headline", "Three Divisions.");
+  const headlineGradient = str(c, "headline_gradient", "One Continuous Journey.");
   const subhead = str(
     c,
     "subhead",
-    "Every session moves through Concept → Exploration → Project Execution.",
+    "From first steps in Kindergarten to a diploma in Grade 12 — one connected path built for every stage.",
   );
 
   return (
     <section
-      aria-label="Core learning domains"
+      aria-label="Our school divisions"
       className="relative w-full bg-transparent pt-20 lg:pt-28"
     >
       <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-10">

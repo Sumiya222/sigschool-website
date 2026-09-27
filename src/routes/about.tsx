@@ -6,13 +6,12 @@ import {
   AbHowWeTeach,
   AbLeadership,
   AbPositioning,
-  AbRegionalReach,
   AbVisionMission,
 } from "@/components/about/sections";
+import { BRAND } from "@/lib/brand";
 
-const TITLE = "About — AstroBot Academy";
-const DESCRIPTION =
-  "AstroBot Academy operates under the Stellar Scholar Space Education Initiative, backed by Stelalliance (SMC-Private) Ltd — an academic delivery platform for Robotics, AI and Space Science.";
+const TITLE = `About — ${BRAND.name}`;
+const DESCRIPTION = `${BRAND.name} is a mission-driven K-12 private school serving students from ${BRAND.divisions[0].range} through ${BRAND.divisions[2].range}, built on rigorous academics, character, and a close-knit school community.`;
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -39,7 +38,6 @@ function AboutPage() {
       <AbEcosystem />
       <AbHowWeTeach />
       <AbLeadership />
-      <AbRegionalReach />
       <AbClosingCta />
     </>
   );

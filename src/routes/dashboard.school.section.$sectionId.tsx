@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { BRAND } from "@/lib/brand";
 import { ExportButtons } from "@/components/dashboard/ExportButtons";
 import type { ExportPayload } from "@/lib/school-export";
 
@@ -142,7 +143,7 @@ function SectionResultView() {
       .filter(Boolean)
       .join(" · ");
     return {
-      title: "AstroBot — Section Result Card",
+      title: `${BRAND.shortName} — Section Result Card`,
       subtitle,
       filename:
         `result-card_${section?.schools?.name ?? "school"}_G${section?.grade ?? ""}${section?.section_name ?? ""}_${

@@ -18,6 +18,7 @@ import React from "react";
 import { sendReactEmail } from "@/lib/email.server";
 import { getEmailContent } from "@/lib/email-content.server";
 import CampRegistrationEmail from "@/lib/email-templates/camp-registration";
+import { BRAND } from "@/lib/brand";
 
 export type RegistrationNotice = {
   id: string;
@@ -41,7 +42,7 @@ export async function sendRegistrationConfirmation(notice: RegistrationNotice): 
 
   await sendReactEmail({
     to: notice.parentEmail,
-    from: `AstroBot Academy <${content.fromAddress}>`,
+    from: `${BRAND.name} <${content.fromAddress}>`,
     subject,
     react: React.createElement(CampRegistrationEmail, {
       parentName: notice.parentName,

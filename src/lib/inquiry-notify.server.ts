@@ -19,6 +19,7 @@ import ParentInquiryEmail from "@/lib/email-templates/parent-inquiry";
 import SchoolInquiryEmail from "@/lib/email-templates/school-inquiry";
 import GeneralInquiryEmail from "@/lib/email-templates/general-inquiry";
 import type { InquiryType } from "@/lib/inquiries.functions";
+import { BRAND } from "@/lib/brand";
 
 export type InquiryNotice = {
   fullName: string;
@@ -34,7 +35,7 @@ export async function sendInquiryConfirmation(notice: InquiryNotice): Promise<vo
   const firstName = notice.fullName.split(" ")[0];
   const excerpt = notice.message.length > 400 ? notice.message.slice(0, 397) + "…" : notice.message;
   const content = await getEmailContent();
-  const from = `AstroBot Academy <${content.fromAddress}>`;
+  const from = `${BRAND.name} <${content.fromAddress}>`;
   const footer = {
     whatsappUrl: content.whatsappUrl,
     contactEmail: content.contactAddress,

@@ -1,17 +1,9 @@
 import { motion } from "framer-motion";
 import { ArrowDownRight, ArrowUpRight, Check, MessageCircle } from "lucide-react";
-import { GoldButton, GoldButtonSheen, goldButtonClassName } from "@/components/GoldButton";
+import { GoldButtonSheen, goldButtonClassName } from "@/components/GoldButton";
 import { Band, BandHeader, fadeUp, stagger } from "@/components/for-schools/Band";
-import {
-  list,
-  mediaById,
-  mediaUrl,
-  setting,
-  str,
-  useSection,
-  useSiteContent,
-} from "@/lib/site-content";
-import { useCampRegistration } from "@/components/camp/CampRegistrationProvider";
+import { BRAND } from "@/lib/brand";
+import { list, setting, str, useSection, useSiteContent } from "@/lib/site-content";
 
 const SLUG = "programs";
 
@@ -22,25 +14,25 @@ function themeOf(c: Record<string, any>, fallback: Theme): Theme {
   return c.theme === "light" ? "light" : c.theme === "dark" ? "dark" : fallback;
 }
 
-const DOMAIN_ACCENT: Record<string, string> = {
-  robotics: "#67e8f9",
-  ai: "#818cf8",
-  space: "#e879a8",
-};
-
 /* ── 1 · Hero — dark masthead ─────────────────────────────────────────── */
 
 type Fact = { label: string; value: string };
 
+const HERO_FACTS: Fact[] = [
+  { label: "Structure", value: "Lower, Middle & Upper School" },
+  { label: "Grades Served", value: "Kindergarten – Grade 12" },
+  { label: "Focus", value: "Core Academics · Arts · Athletics" },
+];
+
 export function PrHero() {
   const c = useSection("hero", SLUG);
   const theme = themeOf(c, "dark");
-  const facts = list<Fact>(c, "facts", []);
-  const headline = str(c, "headline", "Four Programs.");
-  const accent = str(c, "headline_gradient", "One Launchpad.");
+  const facts = list<Fact>(c, "facts", HERO_FACTS);
+  const headline = str(c, "headline", "Academics.");
+  const accent = str(c, "headline_gradient", "Built Around Every Student.");
 
   return (
-    <Band theme={theme} label="Programs introduction" hero>
+    <Band theme={theme} label="Academics introduction" hero>
       <motion.div
         variants={stagger}
         initial="hidden"
@@ -56,7 +48,7 @@ export function PrHero() {
               aria-hidden
               className="led size-1.5 rounded-full bg-cyan shadow-[0_0_8px_var(--cyan)]"
             />
-            {str(c, "doc_ref", "Program Catalogue · AB / PRG")}
+            {str(c, "doc_ref", `Academic Catalogue · ${BRAND.shortName}`)}
           </span>
           <span>{str(c, "doc_rev", "Rev. 2026.1")}</span>
         </motion.div>
@@ -70,7 +62,7 @@ export function PrHero() {
               variants={fadeUp}
               className="font-mono text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-cyan"
             >
-              {str(c, "eyebrow", "Programs")}
+              {str(c, "eyebrow", "Academics")}
             </motion.p>
 
             <motion.h1
@@ -89,21 +81,25 @@ export function PrHero() {
               variants={fadeUp}
               className="mt-7 max-w-2xl text-[1.05rem] leading-relaxed text-gray-mid"
             >
-              {str(c, "subhead", "")}
+              {str(
+                c,
+                "subhead",
+                `From Kindergarten through Grade 12, ${BRAND.name} builds one continuous academic path across Lower, Middle and Upper School — every class, project and milestone designed for where a student is, and where they're headed next.`,
+              )}
             </motion.p>
 
             <motion.div variants={fadeUp} className="mt-10 flex flex-wrap items-center gap-4">
-              <a href={str(c, "cta_target", "/contact")} className={goldButtonClassName}>
+              <a href={str(c, "cta_target", "/admissions")} className={goldButtonClassName}>
                 {GoldButtonSheen}
                 <span className="relative inline-flex items-center gap-2">
-                  {str(c, "cta_label", "Inquire")}
+                  {str(c, "cta_label", "Apply for Admission")}
                 </span>
               </a>
               <a
-                href={str(c, "secondary_cta_target", "/schools")}
+                href={str(c, "secondary_cta_target", "/contact")}
                 className="inline-flex items-center gap-2 rounded-full border border-foreground/18 px-5 py-2.5 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-foreground/80 transition-colors hover:border-cyan/50 hover:text-cyan"
               >
-                {str(c, "secondary_cta_label", "Schools: see the delivery spec")}
+                {str(c, "secondary_cta_label", "Ask a Question")}
                 <ArrowDownRight className="size-3.5" aria-hidden />
               </a>
             </motion.div>
@@ -138,127 +134,35 @@ export function PrHero() {
   );
 }
 
-/* ── 2 · Camp registration banner — CMS toggled ───────────────────────── */
-
-export function PrCampBanner() {
-  const camp = useSiteContent().campWindow;
-  const { open: openRegistration } = useCampRegistration();
-  if (!camp) return null;
-
-  if (!camp.is_open) {
-    if (!camp.show_closed_strip) return null;
-    return (
-      <section aria-label="Camp registration status" className="relative w-full pb-10">
-        <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-10">
-          <a
-            href={camp.closed_target || "/contact"}
-            className="flex flex-wrap items-center justify-center gap-3 rounded-lg border border-foreground/12 bg-foreground/[0.03] px-5 py-3 text-center font-mono text-[0.68rem] uppercase tracking-[0.2em] text-gray-mid transition-colors hover:border-cyan/40 hover:text-cyan"
-          >
-            <span aria-hidden className="size-1.5 rounded-full bg-gold/70" />
-            {camp.closed_message}
-          </a>
-        </div>
-      </section>
-    );
-  }
-
-  const details = [
-    { label: "Dates", value: camp.dates_label },
-    { label: "Venue", value: camp.venue },
-    { label: "Age tracks", value: camp.age_tracks },
-  ].filter((d) => d.value);
-
-  return (
-    <section aria-label="Camp registration" className="relative w-full pb-12 pt-2">
-      <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-10">
-        <div className="overflow-hidden rounded-2xl border border-gold/30 bg-gradient-to-br from-gold/[0.12] to-cyan/[0.06] p-6 sm:p-8">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-            <div>
-              <p className="inline-flex items-center gap-2 font-mono text-[0.62rem] font-semibold uppercase tracking-[0.28em] text-gold">
-                <span
-                  aria-hidden
-                  className="led size-1.5 rounded-full bg-gold shadow-[0_0_8px_var(--gold)]"
-                />
-                {camp.is_full ? "Waitlist open" : "Registration open"}
-              </p>
-              <h2 className="mt-3 font-display text-[1.6rem] font-bold leading-tight text-foreground sm:text-[2rem]">
-                {camp.camp_name}
-              </h2>
-              {details.length > 0 && (
-                <dl className="mt-5 flex flex-wrap gap-x-10 gap-y-3">
-                  {details.map((d) => (
-                    <div key={d.label}>
-                      <dt className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-gray-mid">
-                        {d.label}
-                      </dt>
-                      <dd className="mt-1 text-[0.95rem] font-medium text-foreground">{d.value}</dd>
-                    </div>
-                  ))}
-                </dl>
-              )}
-              {camp.note ? (
-                <p className="mt-4 max-w-xl text-sm leading-relaxed text-gray-mid">{camp.note}</p>
-              ) : null}
-            </div>
-            <div className="shrink-0">
-              {camp.registration_mode === "built_in" ? (
-                <GoldButton type="button" onClick={openRegistration}>
-                  {camp.is_full ? "Join the waitlist" : camp.register_label || "Register Now"}
-                </GoldButton>
-              ) : camp.registration_mode === "external" && camp.register_url ? (
-                <a
-                  href={camp.register_url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={goldButtonClassName}
-                >
-                  {GoldButtonSheen}
-                  <span className="relative inline-flex items-center gap-2">
-                    {camp.register_label || "Register Now"}
-                  </span>
-                </a>
-              ) : (
-                <a href="/contact" className={goldButtonClassName}>
-                  {GoldButtonSheen}
-                  <span className="relative inline-flex items-center gap-2">Details soon</span>
-                </a>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ── 3 · The four programs — light ────────────────────────────────────── */
+/* ── 2 · Core curriculum pillars — light ──────────────────────────────── */
 
 export function PrFourPrograms() {
   const c = useSection("four_programs", SLUG);
   const theme = themeOf(c, "light");
   const { programs } = useSiteContent();
 
-  const publicLabel = str(c, "public_label", "Open to the public");
-  const schoolLabel = str(c, "school_label", "For schools");
-  const publicCtaLabel = str(c, "public_cta_label", "Inquire");
-  const publicCtaTarget = str(c, "public_cta_target", "/contact");
-  const schoolCtaLabel = str(c, "school_cta_label", "Partner With Us");
-  const schoolCtaTarget = str(c, "school_cta_target", "/schools");
+  const pillarLabel = str(c, "public_label", "Core Curriculum");
+  const ctaLabel = str(c, "public_cta_label", "Learn More");
+  const ctaTarget = str(c, "public_cta_target", "/academics");
 
   return (
     <Band
       theme={theme}
-      label="The four programs"
-      sheet="Sheet 01 · Programs"
+      label="Core curriculum pillars"
+      sheet="Sheet 01 · Curriculum"
       diagram="robot"
       diagramPosition="right"
       diagramSecondary="drone"
     >
       <BandHeader
         theme={theme}
-        eyebrow={str(c, "eyebrow", "The Four Programs")}
-        headline={str(c, "headline", "Choose Your Entry Point.")}
-        subhead={c.subhead ? String(c.subhead) : undefined}
+        eyebrow={str(c, "eyebrow", "Core Curriculum")}
+        headline={str(c, "headline", "Four Pillars.")}
+        subhead={
+          c.subhead
+            ? String(c.subhead)
+            : `Every ${BRAND.shortName} student builds on the same foundation — academics, the arts, athletics, and clubs & activities — from Kindergarten through Grade 12.`
+        }
       />
 
       <motion.div
@@ -268,82 +172,47 @@ export function PrFourPrograms() {
         viewport={{ once: true, amount: 0.12 }}
         className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
       >
-        {programs.map((p) => {
-          const isSchool = /school/i.test(p.badge_label) || /school/i.test(p.name);
-          return (
-            <motion.article
-              key={p.id}
-              variants={fadeUp}
-              className={
-                "flex flex-col rounded-xl border p-6 sm:p-7 " +
-                (isSchool
-                  ? "border-navy-950/25 bg-navy-950 text-white sm:col-span-2 lg:col-span-3"
-                  : "border-navy-950/12 bg-white/70")
-              }
-            >
-              <div className="flex items-center justify-between gap-4">
+        {programs.map((p) => (
+          <motion.article
+            key={p.id}
+            variants={fadeUp}
+            className="flex flex-col rounded-xl border border-navy-950/12 bg-white/70 p-6 sm:p-7"
+          >
+            <div className="flex items-center justify-between gap-4">
+              <span className="inline-flex items-center gap-2 rounded-full border border-navy-950/15 bg-navy-950/[0.04] px-3 py-1 font-mono text-[0.6rem] font-semibold uppercase tracking-[0.22em] text-navy-900">
+                {pillarLabel}
+              </span>
+            </div>
+
+            <h3 className="mt-5 font-display text-[1.4rem] font-bold leading-tight text-navy-950">
+              {p.name}
+            </h3>
+            <p className="mt-3 max-w-2xl text-[0.97rem] leading-relaxed text-navy-900/70">
+              {p.description}
+            </p>
+
+            <div className="mt-5 flex flex-wrap gap-2">
+              {(p.tags ?? []).map((t) => (
                 <span
-                  className={
-                    "inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-[0.6rem] font-semibold uppercase tracking-[0.22em] " +
-                    (isSchool
-                      ? "border-white/25 bg-white/10 text-cyan-bright"
-                      : "border-navy-950/15 bg-navy-950/[0.04] text-navy-900")
-                  }
+                  key={t}
+                  className="rounded-full border border-navy-950/12 px-2.5 py-1 font-mono text-[0.6rem] uppercase tracking-[0.16em] text-navy-900/60"
                 >
-                  {isSchool ? schoolLabel : publicLabel}
+                  {t}
                 </span>
-              </div>
+              ))}
+            </div>
 
-              <h3
-                className={
-                  "mt-5 font-display text-[1.4rem] font-bold leading-tight " +
-                  (isSchool ? "text-white" : "text-navy-950")
-                }
+            <div className="mt-7 pt-1">
+              <a
+                href={ctaTarget}
+                className="inline-flex items-center gap-2 rounded-full border border-navy-950/20 px-5 py-2.5 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-navy-950 transition-colors hover:border-gold hover:text-gold"
               >
-                {p.name}
-              </h3>
-              <p
-                className={
-                  "mt-3 max-w-2xl text-[0.97rem] leading-relaxed " +
-                  (isSchool ? "text-white/70" : "text-navy-900/70")
-                }
-              >
-                {p.description}
-              </p>
-
-              <div className="mt-5 flex flex-wrap gap-2">
-                {(p.tags ?? []).map((t) => (
-                  <span
-                    key={t}
-                    className={
-                      "rounded-full border px-2.5 py-1 font-mono text-[0.6rem] uppercase tracking-[0.16em] " +
-                      (isSchool
-                        ? "border-white/18 text-white/65"
-                        : "border-navy-950/12 text-navy-900/60")
-                    }
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-
-              <div className="mt-7 pt-1">
-                <a
-                  href={isSchool ? schoolCtaTarget : publicCtaTarget}
-                  className={
-                    "inline-flex items-center gap-2 rounded-full border px-5 py-2.5 font-mono text-[0.68rem] uppercase tracking-[0.2em] transition-colors " +
-                    (isSchool
-                      ? "border-white/25 text-white hover:border-cyan/60 hover:text-cyan-bright"
-                      : "border-navy-950/20 text-navy-950 hover:border-gold hover:text-gold")
-                  }
-                >
-                  {isSchool ? schoolCtaLabel : publicCtaLabel}
-                  <ArrowUpRight className="size-3.5" aria-hidden />
-                </a>
-              </div>
-            </motion.article>
-          );
-        })}
+                {ctaLabel}
+                <ArrowUpRight className="size-3.5" aria-hidden />
+              </a>
+            </div>
+          </motion.article>
+        ))}
       </motion.div>
 
       {c.note ? (
@@ -353,24 +222,62 @@ export function PrFourPrograms() {
   );
 }
 
-/* ── 4 · Age tracks — dark ────────────────────────────────────────────── */
+/* ── 3 · Grade-level divisions — dark ─────────────────────────────────── */
 
 type Track = { title?: string; grades?: string; desc?: string; bullets?: string[] };
 
 const TRACK_ACCENTS = ["#67e8f9", "#818cf8", "#e879a8"];
 
+const DIVISION_DESCRIPTIONS: Record<string, string> = {
+  "Lower School":
+    "Foundational literacy, numeracy and curiosity — where every academic habit begins.",
+  "Middle School":
+    "Broader subject depth and growing independence, as students move between specialist teachers.",
+  "Upper School":
+    "College-preparatory rigor, electives and leadership, building toward graduation.",
+};
+
+const DIVISION_BULLETS: Record<string, string[]> = {
+  "Lower School": [
+    "Homeroom-based classes",
+    "Reading, writing & math foundations",
+    "Introductory arts & PE",
+  ],
+  "Middle School": [
+    "Departmentalized subject teachers",
+    "Elective & club choices open up",
+    "Study skills & organization",
+  ],
+  "Upper School": [
+    "Full subject specialization",
+    "Advanced & elective coursework",
+    "College and career advising",
+  ],
+};
+
+const TRACK_FALLBACK: Track[] = BRAND.divisions.map((d) => ({
+  title: d.label,
+  grades: d.range,
+  desc: DIVISION_DESCRIPTIONS[d.label] ?? "",
+  bullets: DIVISION_BULLETS[d.label] ?? [],
+}));
+
 export function PrAgeTracks() {
   const c = useSection("tracks", SLUG);
   const theme = themeOf(c, "dark");
-  const items = list<Track>(c, "items", []);
+  const items = list<Track>(c, "items", TRACK_FALLBACK);
 
   return (
-    <Band theme={theme} label="Age tracks">
+    <Band theme={theme} label="Grade-level divisions">
       <BandHeader
         theme={theme}
-        eyebrow={str(c, "eyebrow", "Age Tracks")}
-        headline={str(c, "headline", "Three Tracks. Built by Age, Not Grade.")}
-        subhead={c.subhead ? String(c.subhead) : undefined}
+        eyebrow={str(c, "eyebrow", "Grade-Level Divisions")}
+        headline={str(c, "headline", "Three Divisions. Organized by Grade.")}
+        subhead={
+          c.subhead
+            ? String(c.subhead)
+            : `${BRAND.name} groups students by grade, not age — Lower, Middle and Upper School, each with its own pace, teachers and expectations.`
+        }
       />
       <motion.div
         variants={stagger}
@@ -418,31 +325,50 @@ export function PrAgeTracks() {
   );
 }
 
-/* ── 5 · What a session looks like — light ────────────────────────────── */
+/* ── 4 · What a class looks like — light ──────────────────────────────── */
 
 type Phase = { title?: string; copy?: string };
 type Tool = { title?: string; copy?: string };
 
+const PHASE_FALLBACK: Phase[] = [
+  {
+    title: "Introduction",
+    copy: "Teachers open each unit by framing the concept and connecting it to what students already know.",
+  },
+  {
+    title: "Practice",
+    copy: "Students work through guided exercises, discussion and hands-on activities to build real understanding.",
+  },
+  {
+    title: "Application",
+    copy: "Learning is applied to projects, assessments or presentations that show mastery, not just memorization.",
+  },
+];
+
 export function PrSessionShape() {
   const c = useSection("session_shape", SLUG);
   const theme = themeOf(c, "light");
-  const phases = list<Phase>(c, "phases", []);
+  const phases = list<Phase>(c, "phases", PHASE_FALLBACK);
   const tools = list<Tool>(c, "tools", []);
 
   return (
     <Band
       theme={theme}
-      label="What a session looks like"
-      sheet="Sheet 02 · Session"
+      label="Inside a typical class"
+      sheet="Sheet 02 · Classroom"
       diagram="circuit"
       diagramPosition="left"
       diagramSecondary="rocket"
     >
       <BandHeader
         theme={theme}
-        eyebrow={str(c, "eyebrow", "Inside a Session")}
-        headline={str(c, "headline", "Concept. Exploration. Execution.")}
-        subhead={c.subhead ? String(c.subhead) : undefined}
+        eyebrow={str(c, "eyebrow", "Inside a Class")}
+        headline={str(c, "headline", "Introduction. Practice. Application.")}
+        subhead={
+          c.subhead
+            ? String(c.subhead)
+            : "Every class period follows the same rhythm, at a pace suited to the division — from a first read-aloud in Lower School to an independent seminar in Upper School."
+        }
       />
 
       <motion.ol
@@ -470,7 +396,7 @@ export function PrSessionShape() {
       {tools.length > 0 && (
         <div className="mt-14">
           <p className="font-mono text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-navy-900/55">
-            {str(c, "tools_label", "Tools students actually use")}
+            {str(c, "tools_label", "What students use in class")}
           </p>
           <motion.dl
             variants={stagger}
@@ -502,98 +428,41 @@ export function PrSessionShape() {
   );
 }
 
-/* ── 6 · What students build — dark ───────────────────────────────────── */
-
-export function PrStudentBuilds() {
-  const c = useSection("student_builds", SLUG);
-  const theme = themeOf(c, "dark");
-  const content = useSiteContent();
-  const projects = content.projects;
-  const unconfirmed = str(c, "unconfirmed_note", "Description pending confirmation");
-
-  return (
-    <Band theme={theme} label="What students build">
-      <BandHeader
-        theme={theme}
-        eyebrow={str(c, "eyebrow", "What Students Build")}
-        headline={str(c, "headline", "They Take It Home.")}
-        subhead={c.subhead ? String(c.subhead) : undefined}
-      />
-      <motion.div
-        variants={stagger}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.1 }}
-        className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
-      >
-        {projects.map((p) => {
-          const img = mediaUrl(mediaById(content, p.media_id));
-          const accent = DOMAIN_ACCENT[p.domain] ?? "#67e8f9";
-          return (
-            <motion.article
-              key={p.id}
-              variants={fadeUp}
-              className="overflow-hidden rounded-xl border border-foreground/12 bg-foreground/[0.03]"
-            >
-              {img ? (
-                <img
-                  src={img}
-                  alt={mediaById(content, p.media_id)?.alt_text ?? p.title}
-                  loading="lazy"
-                  className="h-36 w-full object-cover"
-                />
-              ) : null}
-              <div className="p-5">
-                <p
-                  className="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.22em]"
-                  style={{ color: accent }}
-                >
-                  {p.age_range}
-                </p>
-                <h3 className="mt-2 font-display text-[1.05rem] font-semibold text-foreground">
-                  {p.title}
-                </h3>
-                {p.description ? (
-                  <p className="mt-2 text-sm leading-relaxed text-gray-mid">{p.description}</p>
-                ) : null}
-                {!p.description_confirmed ? (
-                  <p className="mt-3 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-2.5 py-1 font-mono text-[0.55rem] uppercase tracking-[0.18em] text-gold">
-                    {unconfirmed}
-                  </p>
-                ) : null}
-              </div>
-            </motion.article>
-          );
-        })}
-      </motion.div>
-
-      <div className="mt-10">
-        <a
-          href={str(c, "cta_target", "/students")}
-          className="inline-flex items-center gap-2 rounded-full border border-foreground/18 px-5 py-2.5 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-foreground/80 transition-colors hover:border-cyan/50 hover:text-cyan"
-        >
-          {str(c, "cta_label", "See the full gallery")}
-          <ArrowUpRight className="size-3.5" aria-hidden />
-        </a>
-      </div>
-    </Band>
-  );
-}
-
-/* ── 7 · Curriculum scale — light ─────────────────────────────────────── */
+/* ── 5 · Curriculum depth — light ─────────────────────────────────────── */
 
 type Domain = { title?: string; copy?: string };
+
+const DOMAIN_FALLBACK: Domain[] = [
+  {
+    title: "Core Subjects",
+    copy: "English, mathematics, science and social studies, taught to grade-appropriate depth in every division.",
+  },
+  {
+    title: "Arts & Electives",
+    copy: "Visual and performing arts, world languages and electives that widen as students move into Upper School.",
+  },
+  {
+    title: "Athletics & Activities",
+    copy: "Physical education, team sports and clubs that build character alongside academics.",
+  },
+];
+
+const FACTS_FALLBACK: Fact[] = [
+  { label: "Divisions", value: "3" },
+  { label: "Grades Served", value: "K – 12" },
+  { label: "Core Subjects", value: "Every Year" },
+];
 
 export function PrCurriculumScale() {
   const c = useSection("curriculum_scale", SLUG);
   const theme = themeOf(c, "light");
-  const domains = list<Domain>(c, "domains", []);
-  const facts = list<Fact>(c, "facts", []);
+  const domains = list<Domain>(c, "domains", DOMAIN_FALLBACK);
+  const facts = list<Fact>(c, "facts", FACTS_FALLBACK);
 
   return (
     <Band
       theme={theme}
-      label="Curriculum scale"
+      label="Curriculum depth"
       sheet="Sheet 03 · Curriculum"
       diagram="mesh"
       diagramPosition="right"
@@ -601,9 +470,13 @@ export function PrCurriculumScale() {
     >
       <BandHeader
         theme={theme}
-        eyebrow={str(c, "eyebrow", "Curriculum Scale")}
-        headline={str(c, "headline", "36 Modules a Year. None Repeated.")}
-        subhead={c.subhead ? String(c.subhead) : undefined}
+        eyebrow={str(c, "eyebrow", "Curriculum Depth")}
+        headline={str(c, "headline", "A Full Academic Year. Every Core Subject.")}
+        subhead={
+          c.subhead
+            ? String(c.subhead)
+            : "Coursework builds year over year across every division, so each grade deepens what came before instead of repeating it."
+        }
       />
 
       <motion.div
@@ -654,7 +527,7 @@ export function PrCurriculumScale() {
   );
 }
 
-/* ── 8 · Closing CTA — dark ───────────────────────────────────────────── */
+/* ── 6 · Closing CTA — dark ───────────────────────────────────────────── */
 
 export function PrClosingCta() {
   const c = useSection("closing_cta", SLUG);
@@ -668,7 +541,11 @@ export function PrClosingCta() {
         theme={theme}
         eyebrow={str(c, "eyebrow", "Get Started")}
         headline={str(c, "headline", "Two Ways In.")}
-        subhead={c.subhead ? String(c.subhead) : undefined}
+        subhead={
+          c.subhead
+            ? String(c.subhead)
+            : `Ready to see ${BRAND.shortName} for yourself? Apply for admission or visit campus and meet the team.`
+        }
       />
       <motion.div
         variants={stagger}
@@ -682,16 +559,20 @@ export function PrClosingCta() {
           className="flex flex-col rounded-xl border border-gold/25 bg-gold/12 backdrop-blur-md p-7"
         >
           <p className="font-mono text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-gold">
-            {str(c, "parent_title", "For parents")}
+            {str(c, "parent_title", "Explore Admissions")}
           </p>
           <p className="mt-4 flex-1 text-[0.98rem] leading-relaxed text-offwhite/80">
-            {str(c, "parent_copy", "")}
+            {str(
+              c,
+              "parent_copy",
+              `Start your family's application to ${BRAND.name} — Lower, Middle or Upper School.`,
+            )}
           </p>
           <div className="mt-7 flex flex-wrap items-center gap-3">
-            <a href={str(c, "primary_cta_target", "/contact")} className={goldButtonClassName}>
+            <a href={str(c, "primary_cta_target", "/admissions")} className={goldButtonClassName}>
               {GoldButtonSheen}
               <span className="relative inline-flex items-center gap-2">
-                {str(c, "primary_cta_label", "Inquire")}
+                {str(c, "primary_cta_label", "Apply Now")}
               </span>
             </a>
             {whatsapp ? (
@@ -713,17 +594,21 @@ export function PrClosingCta() {
           className="flex flex-col rounded-xl border border-cyan/25 bg-cyan/12 backdrop-blur-md p-7"
         >
           <p className="font-mono text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-cyan">
-            {str(c, "school_title", "For schools")}
+            {str(c, "school_title", "Visit Campus")}
           </p>
           <p className="mt-4 flex-1 text-[0.98rem] leading-relaxed text-offwhite/80">
-            {str(c, "school_copy", "")}
+            {str(
+              c,
+              "school_copy",
+              `Tour ${BRAND.addressLine.split(",").slice(-1)[0].trim()} and see classrooms, faculty and student work in person.`,
+            )}
           </p>
           <div className="mt-7">
             <a
-              href={str(c, "secondary_cta_target", "/schools")}
+              href={str(c, "secondary_cta_target", "/contact")}
               className="inline-flex items-center gap-2 rounded-full border border-cyan/40 px-5 py-2.5 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-cyan transition-colors hover:bg-cyan/10"
             >
-              {str(c, "secondary_cta_label", "Partner With Us")}
+              {str(c, "secondary_cta_label", "Schedule a Visit")}
               <ArrowUpRight className="size-3.5" aria-hidden />
             </a>
           </div>

@@ -1,53 +1,53 @@
-import { GraduationCap, Snowflake, Sun, Wrench, ArrowUpRight } from "lucide-react";
+import { GraduationCap, BookOpen, Users, Trophy, ArrowUpRight } from "lucide-react";
 import { Phase } from "@/components/immersive/Phase";
 import { BentoTile } from "@/components/home/BentoTile";
 import { cn } from "@/lib/utils";
 import { useSiteContent, useSection, str } from "@/lib/site-content";
 
 // Icons stay in code (they're chrome, not content) and are matched by mod code.
-const ICONS: Record<string, typeof Sun> = {
-  "MOD-01": Sun,
-  "MOD-02": Snowflake,
-  "MOD-03": Wrench,
+const ICONS: Record<string, typeof BookOpen> = {
+  "MOD-01": BookOpen,
+  "MOD-02": Users,
+  "MOD-03": Trophy,
   "MOD-04": GraduationCap,
 };
 
-// Three ways the general public joins — parallel offerings, shown as equals.
+// Three pillars that round out the academic day — parallel offerings, shown as equals.
 // Fallbacks only; live copy lives in the `programs` table.
 const FALLBACK_PUBLIC = [
   {
     mod_code: "MOD-01",
-    name: "Summer Boot Camp",
-    badge_label: "GENERAL PUBLIC",
+    name: "Core Academics",
+    badge_label: "OUR PROGRAMS",
     description:
-      "Our flagship multi-week intensive — hands-on Robotics, AI, and Space Science, grouped into age-based tracks that build real projects end to end.",
-    tags: ["Robotics", "AI Coding", "Rocketry", "Project Builds"],
+      "Rigorous coursework across literacy, mathematics, science, and the humanities — sequenced from Kindergarten through Grade 12 to build real mastery, not just test scores.",
+    tags: ["Reading & Writing", "Math & Science", "Humanities", "Research Skills"],
   },
   {
     mod_code: "MOD-02",
-    name: "Winter Boot Camp",
-    badge_label: "GENERAL PUBLIC",
+    name: "Clubs & Enrichment",
+    badge_label: "OUR PROGRAMS",
     description:
-      "A focused seasonal sprint over the winter break — the same track structure, condensed into an intensive short course.",
-    tags: ["Circuits", "Scratch", "Space Science"],
+      "From coding club to debate to the student newspaper — dozens of ways for students to follow their curiosity outside the regular class day.",
+    tags: ["Coding Club", "Debate", "Student Newspaper", "Community Service"],
   },
   {
     mod_code: "MOD-03",
-    name: "Workshops",
-    badge_label: "GENERAL PUBLIC",
+    name: "Athletics & Arts",
+    badge_label: "OUR PROGRAMS",
     description:
-      "Single-session, hands-on deep dives on one build or theme — the perfect first taste of engineering.",
-    tags: ["Hands-On", "Single Session", "All Ages"],
+      "Team sports, visual and performing arts, and physical education woven into every division — building confidence on the field and on stage.",
+    tags: ["Team Sports", "Visual Arts", "Music & Theater", "Wellness"],
   },
 ];
 
 const FALLBACK_ACADEMY = {
   mod_code: "MOD-04",
-  name: "Annual School Curriculum",
-  badge_label: "FOR SCHOOLS",
+  name: "College & Career Counseling",
+  badge_label: "SIGNATURE",
   description:
-    "A year-round STEM subject delivered inside partner schools — 40-minute weekly sessions built into the timetable, with curriculum, kits, and term-wise reporting fully supplied.",
-  tags: ["Weekly Sessions", "Curriculum Provided", "ECE–Grade 8"],
+    "Dedicated counselors guide every Upper School student through course planning, college applications, and career exploration — support that starts well before senior year.",
+  tags: ["1:1 Counseling", "College Planning", "Career Exploration", "Test Prep"],
 };
 
 function Chip({ label }: { label: string }) {
@@ -63,8 +63,8 @@ export function Programs() {
   const c = useSection("four_programs");
 
   const rows = programs.filter((p) => p.visible);
-  const academy = rows.find((p) => p.badge_label === "FOR SCHOOLS") ?? FALLBACK_ACADEMY;
-  const publicPrograms = rows.filter((p) => p.badge_label !== "FOR SCHOOLS");
+  const academy = rows.find((p) => p.badge_label === "SIGNATURE") ?? FALLBACK_ACADEMY;
+  const publicPrograms = rows.filter((p) => p.badge_label !== "SIGNATURE");
   const cards = publicPrograms.length > 0 ? publicPrograms : FALLBACK_PUBLIC;
   const AcademyIcon = ICONS[academy.mod_code] ?? GraduationCap;
 
@@ -72,24 +72,24 @@ export function Programs() {
     <Phase
       id="programs"
       code={str(c, "code", "01")}
-      label={str(c, "eyebrow", "MISSION MODULES")}
+      label={str(c, "eyebrow", "OUR PROGRAMS")}
       title={
         <>
-          {str(c, "headline", "Four Programs.")}{" "}
-          <span className="text-cosmic">{str(c, "headline_gradient", "One Launchpad")}</span>
+          {str(c, "headline", "A Full Day,")}{" "}
+          <span className="text-cosmic">{str(c, "headline_gradient", "Well Spent.")}</span>
         </>
       }
       lead={str(
         c,
         "subhead",
-        "Three ways to join from the general public — our Summer and Winter Boot Camps and standalone Workshops — plus a year-round Academy delivered inside partner schools.",
+        "Academics anchor every day, with clubs, arts, and athletics rounding out the experience — the pillars that make up life at Northbridge Prep.",
       )}
     >
       {/* Three parallel public programs — equal-weight cards, no dead space */}
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
         {cards.map((p, i) => {
           const flagship = p.badge_label === "FLAGSHIP";
-          const Icon = ICONS[p.mod_code] ?? Sun;
+          const Icon = ICONS[p.mod_code] ?? BookOpen;
           return (
             <BentoTile
               key={p.name}
@@ -138,7 +138,7 @@ export function Programs() {
         })}
       </div>
 
-      {/* Distinct schools offering — full-width horizontal card */}
+      {/* Signature support offering — full-width horizontal card */}
       <div className="mt-5">
         <BentoTile
           index={3}
@@ -151,11 +151,11 @@ export function Programs() {
               <span className="flex items-center gap-2 lg:hidden">
                 <span className="flex items-center gap-1.5 rounded-full border border-cyan/30 bg-cyan/5 px-2.5 py-1">
                   <span className="led size-1 rounded-full bg-cyan" />
-                  <span className="telemetry text-cyan">FLAGSHIP</span>
+                  <span className="telemetry text-cyan">FEATURED</span>
                 </span>
                 <span className="flex items-center gap-1.5 rounded-full border border-gold/30 bg-gold/5 px-2.5 py-1">
                   <span className="led size-1 rounded-full bg-gold-bright" />
-                  <span className="telemetry text-gold-bright">FOR SCHOOLS</span>
+                  <span className="telemetry text-gold-bright">SIGNATURE</span>
                 </span>
               </span>
             </div>
@@ -179,11 +179,11 @@ export function Programs() {
             <span className="hidden items-center gap-2 lg:flex">
               <span className="flex items-center gap-1.5 rounded-full border border-cyan/30 bg-cyan/5 px-2.5 py-1">
                 <span className="led size-1 rounded-full bg-cyan" />
-                <span className="telemetry text-cyan">FLAGSHIP</span>
+                <span className="telemetry text-cyan">FEATURED</span>
               </span>
               <span className="flex items-center gap-1.5 rounded-full border border-gold/30 bg-gold/5 px-2.5 py-1">
                 <span className="led size-1 rounded-full bg-gold-bright" />
-                <span className="telemetry text-gold-bright">FOR SCHOOLS</span>
+                <span className="telemetry text-gold-bright">SIGNATURE</span>
               </span>
             </span>
 
@@ -193,7 +193,7 @@ export function Programs() {
               ))}
             </div>
             <span className="mt-1 inline-flex items-center gap-1.5 font-mono text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-gold-bright">
-              {str(c, "academy_footer_label", "Partner Program")}
+              {str(c, "academy_footer_label", "Learn More")}
               <ArrowUpRight className="size-3.5" />
             </span>
           </div>

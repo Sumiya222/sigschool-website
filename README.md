@@ -1,15 +1,35 @@
-# The Signature School
+# Northbridge Preparatory School
 
-**The Signature School** is a modern, full-stack educational management platform and public portal designed for STEM and Robotics programs. It seamlessly connects public-facing course offerings, admissions, and career applications with role-based administrative dashboards for managing students, instructors, partner schools, invoices, and site content.
+**Northbridge Preparatory School** is a modern, full-stack school management platform and public portal for a K-12 private school. It connects a public-facing admissions and academics site with role-based administrative dashboards for managing students, instructors, sections, invoices, and site content.
+
+> Placeholder brand: "Northbridge Preparatory School" is a placeholder identity — see `src/lib/brand.ts` to swap in a real name, colors, and contact details.
+
+---
+
+## 📐 Current state & what's next
+
+The public-facing site (this README's Key Features below) is real and
+working. The database underneath it, however, still models the *previous*
+product — a vendor that sold a subject into other schools, billed per
+institution, with no parent/guardian entity and no student/parent login.
+That's not yet re-architected for "we are one K-12 school," and the planned
+Learning Management System work needs related schema changes in the same
+area.
+
+**Read [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) before touching
+`schools`, `invoices`, `camp_window`, `registrations`, or the role model, and
+before starting LMS schema work.** It documents exactly what's solid, what
+isn't, and the recommended direction — written so the two aren't designed in
+separate, conflicting passes.
 
 ---
 
 ## 🚀 Key Features
 
 ### 🌐 Public Portal
-- **Interactive STEM & Robotics Programs**: Explore offered robotics, coding, and STEM curricula with rich 3D elements and interactive UI components.
-- **Online Admissions & Applications**: Student enrollment portal and career application submissions with CV uploads.
-- **Partner School Network**: Showcase of partner institutions, programs for schools, and collaboration details.
+- **Academics**: Explore the Lower, Middle, and Upper School curriculum with rich interactive UI components.
+- **Admissions**: Enrollment process, key dates, and inquiry forms for prospective families.
+- **Campus Life & Student Life**: Facilities, daily schedule, clubs, athletics, and a student showcase.
 - **Contact & Inquiries**: Integrated communication forms with automated email notifications.
 
 ### 🛡️ Role-Based Dashboards
@@ -138,4 +158,4 @@ For detailed instructions on applying database migrations, configuring private S
 
 ## 📄 License
 
-Private repository — All rights reserved by **The Signature School**.
+Private repository — All rights reserved by **Northbridge Preparatory School**.

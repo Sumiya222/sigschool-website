@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CrApply, CrClosing, CrHero, CrRoles, CrWhy } from "@/components/careers/sections";
 import { getJobOpenings } from "@/lib/careers.functions";
+import { BRAND } from "@/lib/brand";
 
-const TITLE = "Careers — AstroBot Academy";
-const DESCRIPTION =
-  "Open roles at AstroBot Academy for engineers, researchers and educators delivering robotics, AI and space science inside partner schools.";
+const TITLE = `Careers | ${BRAND.name}`;
+const DESCRIPTION = `Open teaching and staff roles at ${BRAND.name}, a K-12 private school across our Lower, Middle, and Upper Schools.`;
 
 export const Route = createFileRoute("/careers")({
   loader: async () => ({ roles: await getJobOpenings() }),

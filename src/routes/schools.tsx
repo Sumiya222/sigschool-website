@@ -3,34 +3,34 @@ import {
   FsAssessment,
   FsCurriculumScale,
   FsDeliverySpec,
-  FsExclusions,
   FsFramework,
   FsHero,
   FsKits,
   FsProofCta,
-  FsRequirements,
-  FsTraining,
 } from "@/components/for-schools/sections";
+import { BRAND } from "@/lib/brand";
 
 export const Route = createFileRoute("/schools")({
   head: () => ({
     meta: [
       {
-        title: "For Schools — A Timetabled Robotics, AI & Space Subject | AstroBot Academy",
+        title: `Campus Life | ${BRAND.name}`,
       },
       {
         name: "description",
         content:
-          "A formal weekly subject for ECE through Grade 8: 40 weeks, 36 non-repeating modules, kits, certified instructors and term-wise academic reporting, fully supplied.",
+          "What daily life is like at " +
+          BRAND.name +
+          ": the daily schedule, facilities, clubs and activities, and how we keep families in the loop on their student's progress.",
       },
       {
         property: "og:title",
-        content: "For Schools — A Timetabled Robotics, AI & Space Subject | AstroBot Academy",
+        content: `Campus Life | ${BRAND.name}`,
       },
       {
         property: "og:description",
         content:
-          "40-minute weekly sessions built into your timetable — curriculum, kits, instructors and reporting supplied by AstroBot Academy.",
+          "A look at a day on campus — schedule, facilities, activities, and how we report on student progress.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -48,9 +48,6 @@ function ForSchoolsPage() {
       <FsCurriculumScale />
       <FsKits />
       <FsAssessment />
-      <FsRequirements />
-      <FsTraining />
-      <FsExclusions />
       <FsProofCta />
     </div>
   );

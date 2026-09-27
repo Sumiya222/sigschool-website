@@ -3,16 +3,11 @@ import { useSiteContent, useSection, str, list, mediaById, mediaUrl } from "@/li
 
 import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ChevronLeft, ChevronRight, Cpu, Radio, Rocket } from "lucide-react";
+import { ChevronLeft, ChevronRight, BookOpen, Users, GraduationCap } from "lucide-react";
 import { GoldButtonSheen, goldButtonClassName } from "@/components/GoldButton";
 import { ghostButtonClassName } from "@/components/GhostButton";
 import { cn } from "@/lib/utils";
-import galleryRobotics from "@/assets/hero-gallery-robotics.webp";
-import galleryAI from "@/assets/hero-gallery-ai.webp";
-import gallerySpace from "@/assets/hero-gallery-space.webp";
-import galleryCamps from "@/assets/hero-gallery-camps.webp";
-import galleryEarly from "@/assets/hero-gallery-early.webp";
-import galleryDrone from "@/assets/hero-gallery-drone.webp";
+import { BRAND } from "@/lib/brand";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -27,30 +22,24 @@ const fadeUp = {
 
 // Fallbacks — used only if the CMS row is missing, so the page can never
 // render empty. The live copy is edited in the CMS dashboard.
-const FALLBACK_SYSTEMS = [
-  { label: "ROBOTICS CORE", status: "ONLINE" },
-  { label: "AI UPLINK", status: "ONLINE" },
-  { label: "LAUNCH BAY", status: "READY" },
-];
+const FALLBACK_SYSTEMS = BRAND.divisions.map((d) => ({
+  label: d.label.toUpperCase(),
+  status: "OPEN",
+}));
 
-const SYSTEM_ICONS = [Cpu, Radio, Rocket];
+const SYSTEM_ICONS = [BookOpen, Users, GraduationCap];
 
-const FALLBACK_GALLERY = [
-  galleryEarly,
-  galleryRobotics,
-  galleryAI,
-  gallerySpace,
-  galleryDrone,
-  galleryCamps,
-].map((img) => ({ img, alt: "AstroBot activity" }));
+// No stock photography for the placeholder brand — the right-hand panel
+// shows only the division overview, not an image carousel.
+const FALLBACK_GALLERY: { img: string; alt: string }[] = [];
 
 // Slide timings: systems check dwells longer, images flip faster.
 const SYSTEMS_MS = 5000;
 const IMAGE_MS = 3600;
 
 const FALLBACK_STATS = [
-  { value: "23,000+", label: "STUDENTS" },
-  { value: "5–17", label: "AGES SERVED" },
+  { value: "1,200+", label: "STUDENTS" },
+  { value: "K–12", label: "GRADES SERVED" },
 ];
 
 export function Hero() {
@@ -58,23 +47,23 @@ export function Hero() {
   const content = useSiteContent();
   const c = useSection("hero");
 
-  const eyebrow = str(c, "eyebrow", "Robotics · Artificial Intelligence · Space Science");
-  const headline = str(c, "headline", "Engineering Minds");
-  const headlineGradient = str(c, "headline_gradient", "Beyond Earth");
+  const eyebrow = str(c, "eyebrow", "Lower School · Middle School · Upper School");
+  const headline = str(c, "headline", "Where Every Student");
+  const headlineGradient = str(c, "headline_gradient", "Finds Their Path");
   const subhead = str(
     c,
     "subhead",
-    "AstroBot Academy brings hands-on STEM to ages 5–17 — through Robotics Engineering, Artificial Intelligence and Space Science — delivered as a formal school subject (ECE–Grade 8) and through immersive camps and bootcamps across Pakistan.",
+    `${BRAND.name} is a K-12 private school built around academic rigor, character and community — from Kindergarten through Grade 12.`,
   );
-  const primaryLabel = str(c, "primary_cta_label", "Explore Programs");
+  const primaryLabel = str(c, "primary_cta_label", "Explore Academics");
   const primaryTarget = str(c, "primary_cta_target", "/programs");
-  const secondaryLabel = str(c, "secondary_cta_label", "For Schools");
-  const secondaryTarget = str(c, "secondary_cta_target", "/schools");
-  const systemsTitle = str(c, "systems_title", "SYSTEMS CHECK");
-  const systemsStatus = str(c, "systems_status", "GO");
-  const systemsFooter = str(c, "systems_footer", "All systems nominal");
-  const affiliationLabel = str(c, "affiliation_label", "AFFILIATION");
-  const affiliationValue = str(c, "affiliation_value", "Stellar Scholar Space Ed Initiative");
+  const secondaryLabel = str(c, "secondary_cta_label", "Admissions");
+  const secondaryTarget = str(c, "secondary_cta_target", "/admissions");
+  const systemsTitle = str(c, "systems_title", "OUR DIVISIONS");
+  const systemsStatus = str(c, "systems_status", "ENROLLING");
+  const systemsFooter = str(c, "systems_footer", "Now enrolling for the coming year");
+  const affiliationLabel = str(c, "affiliation_label", "ACCREDITATION");
+  const affiliationValue = str(c, "affiliation_value", BRAND.legalName);
 
   const systems = list<{ label: string; status: string }>(c, "systems", FALLBACK_SYSTEMS);
   const stats = list<{ value: string; label: string }>(c, "stats", FALLBACK_STATS);
@@ -84,7 +73,7 @@ export function Hero() {
       .map((row) => {
         const m = mediaById(content, row.media_id);
         const url = mediaUrl(m);
-        return url ? { img: url, alt: m?.alt_text ?? "AstroBot activity" } : null;
+        return url ? { img: url, alt: m?.alt_text ?? "Campus life" } : null;
       })
       .filter(Boolean) as { img: string; alt: string }[];
     return rows.length > 0 ? rows : FALLBACK_GALLERY;
@@ -239,7 +228,7 @@ export function Hero() {
                   >
                     <img
                       src={gallery[active - 1].img}
-                      alt={gallery[active - 1].alt || `AstroBot activity ${active}`}
+                      alt={gallery[active - 1].alt || `Campus life ${active}`}
 
                       width={1280}
                       height={800}

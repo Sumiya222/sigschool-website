@@ -1,9 +1,8 @@
 import { useMemo } from "react";
 import { Link } from "@tanstack/react-router";
 import { motion, useReducedMotion } from "framer-motion";
-import rocketEmblem from "@/assets/astrobot-rocket.webp";
-import stelAllianceLogo from "@/assets/partner-stelalliance.webp";
-import primeEdgeLogo from "@/assets/partner-primeedge.webp";
+import { GraduationCap } from "lucide-react";
+import { BRAND } from "@/lib/brand";
 
 /* ------------------------------------------------------------------ *
  * LOGO-FIRST "SOLAR SYSTEM" HERO
@@ -33,32 +32,32 @@ type Orbit = {
 // Inner → outer. Phases 0° / 240° / 120° (all 120° apart), decreasing ring opacity.
 const ORBITS: Orbit[] = [
   {
-    key: "robotics",
-    label: "Robotics",
+    key: "lower-school",
+    label: BRAND.divisions[0].label,
     rx: 158,
     color: "#67e8f9",
     ringOpacity: 0.5,
-    chipWidth: 96,
+    chipWidth: 108,
     begin: "-30s",
     moteBegin: "-29.4s",
   },
   {
-    key: "ai",
-    label: "Artificial Intelligence",
+    key: "middle-school",
+    label: BRAND.divisions[1].label,
     rx: 224,
     color: "#818cf8",
     ringOpacity: 0.32,
-    chipWidth: 176,
+    chipWidth: 118,
     begin: "-20s",
     moteBegin: "-19.4s",
   },
   {
-    key: "space-science",
-    label: "Space Science",
+    key: "upper-school",
+    label: BRAND.divisions[2].label,
     rx: 288,
     color: "#f5c56b",
     ringOpacity: 0.18,
-    chipWidth: 130,
+    chipWidth: 108,
     begin: "-10s",
     moteBegin: "-9.4s",
   },
@@ -160,7 +159,7 @@ export function FormationSequence() {
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       className="relative flex h-full min-h-[440px] w-full items-center justify-center overflow-hidden rounded-2xl border border-cyan/15 bg-[#05060f]/55 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] backdrop-blur-[2px]"
-      aria-label="AstroBot orbit system: Robotics, Artificial Intelligence, and Space Science orbiting one core"
+      aria-label={`${BRAND.shortName} orbit diagram: Lower School, Middle School, and Upper School orbiting one core`}
     >
       {/* HUD corner brackets to match the section frame */}
       <span aria-hidden className="hud-bracket left-2 top-2 border-l border-t opacity-50" />
@@ -209,7 +208,7 @@ export function FormationSequence() {
         {/* satellites + trailing motes */}
         {rings.map((r) => {
           if (reduceMotion) {
-            const frac = r.key === "robotics" ? 0 : r.key === "ai" ? 2 / 3 : 1 / 3;
+            const frac = r.key === "lower-school" ? 0 : r.key === "middle-school" ? 2 / 3 : 1 / 3;
             const p = pointAt(r.rx, r.ry, TILT, frac);
             return (
               <g key={`sat-${r.key}`} transform={`translate(${p.x} ${p.y})`}>
@@ -244,65 +243,27 @@ export function FormationSequence() {
         })}
       </svg>
 
-      {/* CENTER BRAND MARK — the whole center links home */}
+      {/* CENTER BRAND MARK — the whole center links home. No stock logo for the
+          placeholder brand, so a plain icon mark stands in. */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
         <Link
           to="/"
-          aria-label="AstroBot Academy — back to home"
-          className="pointer-events-auto group relative flex flex-col items-center rounded-full outline-none transition-transform duration-300 hover:scale-[1.04] focus-visible:ring-2 focus-visible:ring-gold-bright/70 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+          aria-label={`${BRAND.shortName} — back to home`}
+          className="pointer-events-auto group relative flex size-16 items-center justify-center rounded-full border border-cyan/30 bg-black/40 outline-none backdrop-blur-md transition-transform duration-300 hover:scale-[1.04] focus-visible:ring-2 focus-visible:ring-gold-bright/70 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
         >
-          <img
-            src={rocketEmblem}
-            alt="AstroBot Academy"
-            width={241}
-            height={330}
-            className="h-[82px] w-auto rotate-[40deg] drop-shadow-[0_0_12px_rgba(103,232,249,0.32)]"
+          <GraduationCap
+            className="size-8 text-cyan-bright drop-shadow-[0_0_12px_rgba(103,232,249,0.32)]"
+            strokeWidth={1.5}
+            aria-hidden
           />
         </Link>
       </div>
 
-      {/* Orbit stabilizers — the two companies behind AstroBot, pinned to the panel base */}
+      {/* Caption — pinned to the panel base */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 flex flex-col items-center gap-2.5 bg-gradient-to-t from-[#05060f] via-[#05060f]/85 to-transparent px-4 pb-4 pt-8">
         <p className="font-mono text-[0.58rem] uppercase tracking-[0.28em] text-gray-mid">
-          One core · Three orbits
+          One school · Three divisions
         </p>
-        <div className="flex items-center gap-2.5">
-          <span aria-hidden className="h-px w-6 bg-cyan/30" />
-          <span className="font-mono text-[0.52rem] font-semibold uppercase tracking-[0.26em] text-cyan/85">
-            Orbit Stabilizers
-          </span>
-          <span aria-hidden className="h-px w-6 bg-cyan/30" />
-        </div>
-        <div className="pointer-events-auto mt-1 flex items-stretch gap-3">
-          <a
-            href="https://stelalliance.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Visit StelAlliance website"
-            className="group flex items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2.5 outline-none backdrop-blur-[2px] transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan/30 hover:bg-white/[0.06] focus-visible:ring-2 focus-visible:ring-cyan/60"
-          >
-            <img
-              src={stelAllianceLogo}
-              alt="StelAlliance"
-              className="h-11 w-auto opacity-80 drop-shadow-[0_0_10px_rgba(103,232,249,0.25)] transition-opacity duration-300 group-hover:opacity-100"
-              draggable={false}
-            />
-          </a>
-          <a
-            href="https://www.primeedge-it.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Visit Prime Edge website"
-            className="group flex items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2.5 outline-none backdrop-blur-[2px] transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan/30 hover:bg-white/[0.06] focus-visible:ring-2 focus-visible:ring-cyan/60"
-          >
-            <img
-              src={primeEdgeLogo}
-              alt="Prime Edge"
-              className="h-11 w-auto opacity-80 drop-shadow-[0_0_10px_rgba(103,232,249,0.25)] transition-opacity duration-300 group-hover:opacity-100"
-              draggable={false}
-            />
-          </a>
-        </div>
       </div>
     </motion.div>
   );

@@ -11,8 +11,9 @@
  * this is verified without waiting for the schedule.
  */
 import { sendBrandedEmail, type EmailRow } from "@/lib/email.server";
+import { BRAND } from "@/lib/brand";
 
-const DASHBOARD_URL = "https://astrobotacademy.com/dashboard/admin/submissions";
+const DASHBOARD_URL = `https://${BRAND.domain}/dashboard/admin/submissions`;
 
 const INQUIRY_TYPE_LABEL: Record<string, string> = {
   parent: "Parent",
@@ -159,7 +160,7 @@ export async function runDailyDigest(): Promise<DigestResult> {
   const summary = `${total} new submission${total === 1 ? "" : "s"}: ${parts.join(", ")}.`;
 
   await sendBrandedEmail({
-    to: process.env.NOTIFY_EMAIL_TO || "contact@astrobotacademy.com",
+    to: process.env.NOTIFY_EMAIL_TO || BRAND.contactEmail,
     subject: `Daily digest: ${total} new submission${total === 1 ? "" : "s"}`,
     statusLabel: "DAILY DIGEST",
     heading: "Since the last digest",

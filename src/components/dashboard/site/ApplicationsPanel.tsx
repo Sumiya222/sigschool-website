@@ -11,6 +11,7 @@ import {
   Trash2,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { BRAND } from "@/lib/brand";
 import { toSafeErrorMessage } from "@/lib/db-error-message";
 import { verifyRowsAffected } from "@/lib/db-write-verify";
 import {
@@ -388,7 +389,7 @@ export function ApplicationsPanel() {
                     </Button>
                     <a
                       href={`mailto:${r.email}?subject=${encodeURIComponent(
-                        `Your application to AstroBot Academy${r.job_openings?.title ? ` — ${r.job_openings.title}` : ""}`,
+                        `Your application to ${BRAND.name}${r.job_openings?.title ? ` — ${r.job_openings.title}` : ""}`,
                       )}`}
                       className="inline-flex items-center gap-1.5 rounded-md border border-[color:var(--bp-line-strong)] px-2.5 py-1.5 text-xs text-[color:var(--bp-ink-2)] transition hover:border-[color:var(--bp-indigo)] hover:text-[color:var(--bp-indigo)]"
                     >

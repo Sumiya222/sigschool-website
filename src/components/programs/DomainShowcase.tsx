@@ -3,11 +3,9 @@ import { useSection, str, list } from "@/lib/site-content";
 
 import { useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Cog, Network, Orbit, type LucideIcon } from "lucide-react";
+import { ArrowRight, BookOpen, Users, GraduationCap, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
-import roboticsImg from "@/assets/hero-gallery-robotics.webp";
-import aiImg from "@/assets/hero-gallery-ai.webp";
-import spaceImg from "@/assets/hero-gallery-space.webp";
+import { BRAND } from "@/lib/brand";
 
 type Domain = {
   id: string;
@@ -18,58 +16,54 @@ type Domain = {
   bullets: string[];
   icon: LucideIcon;
   accent: string;
-  image: string;
   selectorDesc: string;
 };
 
 const DOMAINS: Domain[] = [
   {
-    id: "robotics",
-    code: "PROGRAM 01",
-    title: "Robotics Engineering",
-    tagline: "From first circuit to autonomous build.",
-    desc: "Physical, embedded systems taught end-to-end — students wire real circuits, program microcontrollers, and ship working machines they can pick up and hold.",
+    id: "lower",
+    code: "DIVISION 01",
+    title: BRAND.divisions[0].label,
+    tagline: BRAND.divisions[0].range,
+    desc: "Foundational literacy, math, and a love of learning — small classrooms where every student is known by name and every question is welcome.",
     bullets: [
-      "Circuit design, sensors, and actuator control",
-      "Arduino, microcontrollers, and embedded logic",
-      "Fully working robotic builds by term's end",
+      "Foundational reading, writing, and math",
+      "Hands-on science and discovery time",
+      "Homeroom teachers who stay with the class",
     ],
-    icon: Cog,
+    icon: BookOpen,
     accent: "#67e8f9",
-    image: roboticsImg,
-    selectorDesc: "Circuits, embedded systems, and hands-on machine builds.",
+    selectorDesc: "Foundational academics and a love of learning.",
   },
   {
-    id: "ai",
-    code: "PROGRAM 02",
-    title: "Artificial Intelligence",
-    tagline: "The logic behind decision-making machines.",
-    desc: "From pattern-finding to applied machine learning — students build intuition for how modern AI systems reason, learn, and make choices from data.",
+    id: "middle",
+    code: "DIVISION 02",
+    title: BRAND.divisions[1].label,
+    tagline: BRAND.divisions[1].range,
+    desc: "A bridge from childhood to young adulthood — students take on more independence, deeper coursework, and their first real clubs and teams.",
     bullets: [
-      "Logic, patterns, and computational thinking",
-      "Scratch, Python, and first ML models",
-      "Applied projects: chatbots, classifiers, agents",
+      "Departmentalized academics across core subjects",
+      "Advisory groups and study-skills coaching",
+      "First clubs, teams, and leadership roles",
     ],
-    icon: Network,
+    icon: Users,
     accent: "#818cf8",
-    image: aiImg,
-    selectorDesc: "Logic, pattern recognition, and applied machine learning.",
+    selectorDesc: "Growing independence and deeper coursework.",
   },
   {
-    id: "space",
-    code: "PROGRAM 03",
-    title: "Space Science",
-    tagline: "The environment engineering has to answer to.",
-    desc: "Orbital mechanics, mission design, and the physics of the space environment — the frame that gives every robotics and AI project a real-world destination.",
+    id: "upper",
+    code: "DIVISION 03",
+    title: BRAND.divisions[2].label,
+    tagline: BRAND.divisions[2].range,
+    desc: "College-preparatory rigor paired with real mentorship — advanced coursework, college counseling, and the space to find a genuine passion.",
     bullets: [
-      "Orbits, trajectories, and mission planning",
-      "Rocketry, habitats, and life-support systems",
-      "Simulations with KSP and physical launch builds",
+      "Honors and advanced coursework",
+      "Dedicated college and career counseling",
+      "Leadership, athletics, and the arts",
     ],
-    icon: Orbit,
+    icon: GraduationCap,
     accent: "#f5c56b",
-    image: spaceImg,
-    selectorDesc: "Orbital mechanics, mission design, and space environments.",
+    selectorDesc: "College-preparatory rigor and real mentorship.",
   },
 ];
 
@@ -92,7 +86,7 @@ export function DomainShowcase({
   exploreVariant = "scroll",
   className,
 }: DomainShowcaseProps = {}) {
-  const [activeId, setActiveId] = useState("robotics");
+  const [activeId, setActiveId] = useState("lower");
   const c = useSection("core_domains");
 
   // CMS copy is merged over the hardcoded spec so icons/accents/3D stay in code.
@@ -101,7 +95,7 @@ export function DomainShowcase({
     if (overrides.length === 0) return DOMAINS;
     return DOMAINS.map((d) => {
       const o = overrides.find((x) => x.id === d.id);
-      return o ? { ...d, ...o, icon: d.icon, accent: d.accent, image: d.image } : d;
+      return o ? { ...d, ...o, icon: d.icon, accent: d.accent } : d;
     });
   }, [c]);
 
@@ -125,10 +119,10 @@ export function DomainShowcase({
         transition={{ duration: 0.7, ease }}
         className="font-display text-[2.25rem] font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-[3.5rem]"
       >
-        Three disciplines.
+        Three divisions.
         <br />
         <span className="bg-gradient-to-r from-indigo-400 via-indigo-300 to-indigo-500 bg-clip-text text-transparent">
-          One mission.
+          One school.
         </span>
       </motion.h1>
       <motion.p
@@ -137,15 +131,15 @@ export function DomainShowcase({
         transition={{ duration: 0.7, ease, delay: 0.1 }}
         className="max-w-sm text-small leading-relaxed text-gray-mid lg:text-right"
       >
-        Every AstroBot student progresses through three pillars — designed to build fluency across
-        the sciences shaping the next century.
+        Every {BRAND.shortName} student moves through three connected divisions — built to grow with
+        them from their first day to graduation.
       </motion.p>
     </div>
   );
 
   return (
     <section
-      aria-label="Three disciplines showcase"
+      aria-label="Our three school divisions"
       className={cn("relative w-full pt-32 pb-12 lg:pt-40 lg:pb-20", className)}
     >
       <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-10">
@@ -180,19 +174,27 @@ export function DomainShowcase({
               style={{ color: active.accent }}
             />
 
-            {/* Image */}
+            {/* Placeholder visual — gradient panel + division icon, no stock photography */}
             <div className="relative h-56 overflow-hidden sm:h-72 lg:h-80">
               <AnimatePresence mode="wait">
-                <motion.img
-                  key={active.image}
-                  src={active.image}
-                  alt=""
+                <motion.div
+                  key={active.id}
                   initial={{ opacity: 0, scale: 1.04 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5, ease }}
-                  className="absolute inset-0 h-full w-full object-cover"
-                />
+                  className="absolute inset-0 flex items-center justify-center"
+                  style={{
+                    background: `radial-gradient(120% 120% at 50% 0%, color-mix(in oklab, ${active.accent} 20%, transparent) 0%, transparent 60%), #05060f`,
+                  }}
+                >
+                  <active.icon
+                    className="size-24 opacity-25 sm:size-32"
+                    style={{ color: active.accent }}
+                    strokeWidth={1}
+                    aria-hidden
+                  />
+                </motion.div>
               </AnimatePresence>
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/40" />
               <span

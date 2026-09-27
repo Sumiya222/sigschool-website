@@ -12,6 +12,7 @@
  * shipped with, so a CMS hiccup can never block a transactional email.
  */
 import { str, list, setting } from "@/lib/site-content";
+import { BRAND } from "@/lib/brand";
 
 /**
  * Like str(), but an intentionally-cleared field ("") is honored as blank
@@ -85,115 +86,112 @@ export type EmailContent = {
 };
 
 export const DEFAULT_EMAIL_CONTENT: EmailContent = {
-  fromAddress: "noreply@astrobotacademy.com",
-  whatsappUrl: "https://wa.me/923145978068",
-  contactAddress: "info@astrobotacademy.com",
+  fromAddress: `noreply@${BRAND.domain}`,
+  whatsappUrl: `tel:${BRAND.phone.replace(/[^+\d]/g, "")}`,
+  contactAddress: BRAND.contactEmail,
   footerNotice: "This inbox isn't monitored, so replies here won't reach us.",
-  contactLine: "For anything else, message us on WhatsApp or write to info@astrobotacademy.com.",
-  addressLine: "AstroBot Academy · NICAT–NASTP Alpha, Rawalpindi · astrobotacademy.com",
-  legalLine: "Stellar Scholar Space Education Initiative · Stelalliance (SMC-Private) Ltd",
+  contactLine: `For anything else, call us or write to ${BRAND.contactEmail}.`,
+  addressLine: `${BRAND.name} · ${BRAND.addressLine} · ${BRAND.domain}`,
+  legalLine: BRAND.legalName,
   parentInquiry: {
-    subject: "We've got your question — AstroBot Academy",
+    subject: `We've got your question — ${BRAND.name}`,
     stepsHeading: "While you wait",
     steps: [
       {
         n: "01",
-        title: "See what your child would actually build",
-        body: "Our students design, wire and program real hardware — rovers, satellites and sensor rigs. The Students page is the honest build log, not a brochure.",
+        title: "See a day in the life",
+        body: "The Campus Life page walks through a typical day across Lower, Middle and Upper School — classes, clubs and the daily schedule.",
       },
       {
         n: "02",
-        title: "Check the age track",
-        body: "Junior Tinkers (5–7), Young Innovators (8–12) and Future Engineers (13–17). Each track has its own pace, tools and safety rules.",
+        title: "Check the right division",
+        body: "Lower School (K–5), Middle School (6–8) and Upper School (9–12). Each division has its own building, schedule and faculty team.",
       },
       {
         n: "03",
-        title: "Watch for the next intake",
-        body: "Camp and workshop windows open a few times a year with limited seats. We will tell you directly when the next one opens.",
+        title: "Watch for the next open house",
+        body: "Campus tours and information sessions run a few times a year with limited spots. We'll let you know directly when the next one opens.",
       },
     ],
-    ctaLabel: "Explore the programs",
-    whatsappLine:
-      "Prefer to talk it through instead? You're welcome to reach our team directly on WhatsApp.",
+    ctaLabel: "Explore admissions",
+    whatsappLine: "Prefer to talk it through instead? You're welcome to call our admissions team.",
     footerNote: "You are receiving this because you sent an inquiry through our Contact page.",
   },
   schoolInquiry: {
-    subject: "Your school partnership inquiry — AstroBot Academy",
-    stepsHeading: "How the engagement runs",
+    subject: `Your inquiry — ${BRAND.name}`,
+    stepsHeading: "What happens next",
     steps: [
       {
         n: "01",
-        title: "Scoping call",
-        body: "Grade bands, section sizes, weekly slot length and your available room. Twenty minutes is usually enough.",
+        title: "Intro call",
+        body: "A short call to understand what you're looking for and point you to the right contact.",
       },
       {
         n: "02",
-        title: "Delivery specification",
-        body: "We send a written spec: what the academy supplies (instructors, kits, curriculum, assessment) and the short list your campus provides.",
+        title: "Follow-up",
+        body: "We'll send any additional information relevant to your inquiry.",
       },
       {
         n: "03",
-        title: "Pilot term, then scale",
-        body: "Most partners begin with one or two sections for a term, with reporting per student, before extending across grades.",
+        title: "Next steps",
+        body: "If a visit or meeting makes sense, we'll help arrange it.",
       },
     ],
-    ctaLabel: "Read the delivery specification",
-    whatsappLine:
-      "If your academic calendar has a fixed decision date, let us know on WhatsApp and we will work backwards from it.",
-    footerNote: "You are receiving this because your school submitted a partnership inquiry.",
+    ctaLabel: "Learn more about us",
+    whatsappLine: "If you have a deadline in mind, let us know and we'll work backwards from it.",
+    footerNote: "You are receiving this because you submitted an inquiry.",
   },
   generalInquiry: {
-    subject: "Your message to AstroBot Academy",
+    subject: `Your message to ${BRAND.name}`,
     hintText:
-      "In the meantime, the clearest picture of what we do is the student build log — real projects, documented as they were made.",
-    primaryCtaLabel: "See student work",
-    secondaryCtaLabel: "About the academy →",
+      "In the meantime, the clearest picture of what we do is our Academics and Campus Life pages.",
+    primaryCtaLabel: "See academics",
+    secondaryCtaLabel: "About the school →",
     footerNote: "You are receiving this because you sent a message through our Contact page.",
   },
   jobApplication: {
-    subject: "Your application to AstroBot Academy",
+    subject: `Your application to ${BRAND.name}`,
     stepsHeading: "Our process",
     steps: [
       {
         n: "01",
         title: "Review — within one week",
-        body: "We look for evidence you have built and taught real things, not only studied them.",
+        body: "We look for evidence you have taught and led real classrooms, not only studied education.",
       },
       {
         n: "02",
         title: "Conversation",
-        body: "A relaxed call about your background, the age group you would teach and how you explain hard ideas simply.",
+        body: "A relaxed call about your background, the age group you'd teach and your approach to the classroom.",
       },
       {
         n: "03",
         title: "Teaching demo",
-        body: "Shortlisted candidates run a short session with a real group. We pay for your time on the day.",
+        body: "Shortlisted candidates teach a short lesson with a real class. We pay for your time on the day.",
       },
     ],
     closingLine:
       "You will hear from us either way. If the answer is no, we will tell you plainly rather than leave you waiting.",
     ctaLabel: "View all open roles",
-    footerNote:
-      "You are receiving this because you applied through the AstroBot Academy careers page.",
+    footerNote: `You are receiving this because you applied through the ${BRAND.name} careers page.`,
   },
   campRegistration: {
-    subject: "Camp registration confirmed — AstroBot Academy",
+    subject: `Enrollment received — ${BRAND.name}`,
     stepsHeadingConfirmed: "Before day one",
     stepsConfirmed: [
       {
         n: "01",
         title: "Check the details above",
-        body: "Let us know on WhatsApp right away if anything needs correcting — especially your child's age, which sets the track and the tools they are allowed to use.",
+        body: "Let us know right away if anything needs correcting — especially your child's grade, which sets their division and classroom.",
       },
       {
         n: "02",
         title: "Joining instructions",
-        body: "Timings, the venue map, the drop-off and pick-up procedure and the kit list arrive closer to the start date.",
+        body: "Timings, the campus map, the drop-off and pick-up procedure and the supply list arrive closer to the start date.",
       },
       {
         n: "03",
         title: "What to bring",
-        body: "Just a water bottle and curiosity. Every component, tool and laptop is provided by the academy.",
+        body: "Just a water bottle and curiosity. The supply list will follow separately.",
       },
     ],
     stepsHeadingWaitlisted: "What happens now",
@@ -206,13 +204,12 @@ export const DEFAULT_EMAIL_CONTENT: EmailContent = {
       {
         n: "02",
         title: "We call before we email",
-        body: "If a seat opens close to the start date, we phone the number you gave us first.",
+        body: "If a spot opens close to the start date, we phone the number you gave us first.",
       },
     ],
-    ctaLabel: "View the program",
-    whatsappLine: "Any questions before the camp? Our team is just a WhatsApp message away.",
-    footerNote:
-      "You are receiving this because you registered a child for an AstroBot Academy camp.",
+    ctaLabel: "View admissions",
+    whatsappLine: "Any questions before the term starts? Our team is happy to help.",
+    footerNote: `You are receiving this because you registered a child at ${BRAND.name}.`,
   },
 };
 

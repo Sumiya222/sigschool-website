@@ -1,6 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { BRAND } from "@/lib/brand";
 import { toSafeErrorMessage } from "@/lib/db-error-message";
 import { verifyRowsAffected } from "@/lib/db-write-verify";
 import jsPDF from "jspdf";
@@ -1108,7 +1109,7 @@ function ResultCardTab({ sectionId, section }: { sectionId: string; section: Sec
       .filter(Boolean)
       .join(" · ");
     return {
-      title: "AstroBot — Section Result Card",
+      title: `${BRAND.shortName} — Section Result Card`,
       subtitle,
       filename:
         `result-card_${section.schools?.name ?? "school"}_G${section.grade}${section.section_name}_${activeTerm?.name ?? "term"}`.replace(

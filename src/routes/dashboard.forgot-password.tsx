@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import astrobotLogo from "@/assets/astrobot-logo-light.webp";
+import { Logo } from "@/components/Logo";
+import { BRAND } from "@/lib/brand";
 
 export const Route = createFileRoute("/dashboard/forgot-password")({
   head: () => ({
@@ -39,15 +40,10 @@ function ForgotPasswordPage() {
       <div className="w-full max-w-md">
         <div className="mb-6 flex flex-col items-center text-center">
           <Link to="/" aria-label="Back to homepage">
-            <img
-              src={astrobotLogo}
-              alt="AstroBot Academy"
-              className="h-11 w-auto"
-              draggable={false}
-            />
+            <Logo variant="light" className="h-11" />
           </Link>
           <div className="mt-4 font-mono text-[10px] font-semibold uppercase tracking-[0.24em] text-[color:var(--bp-muted)]">
-            AstroBot Mission Control
+            {BRAND.shortName} {BRAND.portalLabel}
           </div>
           <h1 className="mt-2 font-display text-2xl font-semibold text-[color:var(--bp-ink)]">
             Reset your password

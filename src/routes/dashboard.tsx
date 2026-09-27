@@ -1,5 +1,6 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
+import { BRAND } from "@/lib/brand";
 
 /**
  * Routes under /dashboard that must stay reachable without a session.
@@ -28,7 +29,7 @@ export const Route = createFileRoute("/dashboard")({
   },
   head: () => ({
     meta: [
-      { title: "Dashboard — AstroBot Academy" },
+      { title: `Dashboard — ${BRAND.name}` },
       // Intentionally hardcoded, not read from src/lib/site-config.ts's
       // SITE_INDEXABLE — Mission Control stays noindexed permanently, even
       // after that flag flips true for real launch.

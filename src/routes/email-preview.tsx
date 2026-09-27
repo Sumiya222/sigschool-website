@@ -9,8 +9,9 @@ import { getEmailContentForPreview } from "@/lib/email-content.functions";
 import type { EmailContent } from "@/lib/email-content.server";
 import { useRequireAnyRole } from "@/lib/dashboard-auth";
 import { DashboardLoading } from "@/components/dashboard/DashboardShell";
+import { BRAND } from "@/lib/brand";
 
-const TITLE = "Email templates preview — AstroBot Academy";
+const TITLE = `Email templates preview — ${BRAND.name}`;
 const DESCRIPTION = "Internal preview of the confirmation emails sent after each website form.";
 
 export const Route = createFileRoute("/email-preview")({
@@ -79,7 +80,7 @@ function buildItems(content: EmailContent) {
       key: "camp-waitlist",
       Comp: CampRegistration,
       displayName: "Camp registration — waitlisted",
-      subject: "You're on the waitlist — AstroBot Academy",
+      subject: `You're on the waitlist — ${BRAND.name}`,
       previewData: {
         ...campT.previewData,
         ...content.campRegistration,

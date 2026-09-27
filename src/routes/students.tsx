@@ -10,10 +10,10 @@ import { PjPhotoGallery } from "@/components/projects/PhotoGallery";
 import { PjFeaturedStudents } from "@/components/projects/FeaturedStudents";
 import { getGalleryImages } from "@/lib/gallery.functions";
 import { getFeaturedStudents } from "@/lib/featured-students.functions";
+import { BRAND } from "@/lib/brand";
 
-const TITLE = "Student Projects — AstroBot Academy";
-const DESCRIPTION =
-  "Robots, circuits, AI builds and rocketry designed, wired and debugged end to end by AstroBot Academy students, ages 5 to 17.";
+const TITLE = `Student Life | ${BRAND.name}`;
+const DESCRIPTION = `Achievements, performances, and campus moments from students across the Lower, Middle, and Upper School at ${BRAND.name}.`;
 
 export const Route = createFileRoute("/students")({
   loader: async () => {

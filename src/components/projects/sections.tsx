@@ -4,6 +4,7 @@ import { ArrowDownRight, ArrowUpRight, Camera, X } from "lucide-react";
 import { GoldButtonSheen, goldButtonClassName } from "@/components/GoldButton";
 import { Band, BandHeader, fadeUp, stagger } from "@/components/for-schools/Band";
 import { useOpenProjectRequest } from "@/components/projects/LightboxShell";
+import { BRAND } from "@/lib/brand";
 import {
   focalPosition,
   list,
@@ -26,28 +27,28 @@ function themeOf(c: Record<string, any>, fallback: Theme): Theme {
   return c.theme === "light" ? "light" : c.theme === "dark" ? "dark" : fallback;
 }
 
-/* Domain accents — one colour per discipline, reused by chips, tags and the
-   styled placeholder shown where photography does not exist yet. */
+/* Category accents — one colour per informal tag, reused by chips, tags and
+   the styled placeholder shown where photography does not exist yet. */
 const DOMAIN: Record<
   Domain,
   { label: string; dark: string; lightChip: string; lightTag: string; tint: string }
 > = {
   robotics: {
-    label: "Robotics",
+    label: "Academics",
     dark: "border-gold/35 bg-gold/10 text-gold-bright",
     lightChip: "border-gold/60 bg-gold/15 text-navy-950",
     lightTag: "border-gold/50 bg-gold/12 text-navy-900",
     tint: "from-gold/25 via-gold/8 to-transparent",
   },
   ai: {
-    label: "Artificial Intelligence",
+    label: "Arts & Activities",
     dark: "border-cyan/35 bg-cyan/10 text-cyan-bright",
     lightChip: "border-cyan/60 bg-cyan/15 text-navy-950",
     lightTag: "border-cyan/50 bg-cyan/12 text-navy-900",
     tint: "from-cyan/25 via-cyan/8 to-transparent",
   },
   space: {
-    label: "Space Science",
+    label: "Athletics",
     dark: "border-indigo-400/40 bg-indigo-400/10 text-indigo-200",
     lightChip: "border-indigo-500/60 bg-indigo-500/15 text-navy-950",
     lightTag: "border-indigo-500/45 bg-indigo-500/10 text-navy-900",
@@ -103,10 +104,10 @@ function PhotoPending({
 type Fact = { label: string; value: string };
 
 const HERO_FACTS: Fact[] = [
-  { label: "Disciplines", value: "Robotics · AI · Space Science" },
-  { label: "Age range", value: "5 to 17" },
-  { label: "Build outcome", value: "Student keeps the build" },
-  { label: "Method", value: "Simulate · wire · debug" },
+  { label: "Divisions", value: "Lower · Middle · Upper School" },
+  { label: "Grade range", value: "Kindergarten – Grade 12" },
+  { label: "Focus areas", value: "Academics · Arts · Athletics · Service" },
+  { label: "Community", value: "Every student known by name" },
 ];
 
 export function PjHero() {
@@ -131,7 +132,7 @@ export function PjHero() {
               aria-hidden
               className="led size-1.5 rounded-full bg-cyan shadow-[0_0_8px_var(--cyan)]"
             />
-            {str(c, "doc_ref", "Build Record · AB / PRJ")}
+            {str(c, "doc_ref", "Student Life · NP / LOG")}
           </span>
           <span>{str(c, "doc_rev", "Rev. 2026.1")}</span>
         </motion.div>
@@ -152,9 +153,9 @@ export function PjHero() {
               variants={fadeUp}
               className="mt-6 max-w-[22ch] font-display text-[2.5rem] font-bold leading-[1.02] tracking-tight text-foreground sm:text-[3.5rem] lg:text-[4.25rem]"
             >
-              <span className="block">{str(c, "headline", "Built by Students.")}</span>
+              <span className="block">{str(c, "headline", "This Is Student Life.")}</span>
               <span className="block bg-gradient-to-r from-gold-bright to-cyan-bright bg-clip-text text-transparent">
-                {str(c, "headline_gradient", "Taken Home.")}
+                {str(c, "headline_gradient", "In Every Division.")}
               </span>
             </motion.h1>
 
@@ -165,22 +166,22 @@ export function PjHero() {
               {str(
                 c,
                 "subhead",
-                "Every project here was designed, wired, debugged and finished by a student — not assembled from a kit with instructions.",
+                `From a first day in Lower School to commencement in the Upper School, every performance, win and project here belongs to a ${BRAND.shortName} student who showed up and did the work.`,
               )}
             </motion.p>
 
             <motion.div variants={fadeUp} className="mt-10 flex flex-wrap items-center gap-4">
-              <a href={str(c, "cta_target", "/schools")} className={goldButtonClassName}>
+              <a href={str(c, "cta_target", "/admissions")} className={goldButtonClassName}>
                 {GoldButtonSheen}
                 <span className="relative inline-flex items-center gap-2">
-                  {str(c, "cta_label", "Partner With Us")}
+                  {str(c, "cta_label", "Schedule a Visit")}
                 </span>
               </a>
               <a
                 href={str(c, "secondary_cta_target", "/programs")}
                 className="inline-flex items-center gap-2 rounded-full border border-foreground/18 px-5 py-2.5 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-foreground/80 transition-colors hover:border-cyan/50 hover:text-cyan"
               >
-                {str(c, "secondary_cta_label", "See the programs")}
+                {str(c, "secondary_cta_label", "Explore Academics")}
                 <ArrowDownRight className="size-3.5" aria-hidden />
               </a>
             </motion.div>
@@ -251,7 +252,7 @@ function FeaturedBand({
       >
         <motion.div variants={fadeUp} className="order-2 lg:order-1">
           <p className="font-mono text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-cyan">
-            {str(c, "eyebrow", "Featured build")}
+            {str(c, "eyebrow", "Featured moment")}
           </p>
           <h2 className="mt-5 font-display text-[2rem] font-bold leading-[1.06] tracking-tight text-foreground sm:text-[2.75rem]">
             {project.title}
@@ -278,7 +279,7 @@ function FeaturedBand({
             href={str(c, "cta_target", "#build-log")}
             className="mt-8 inline-flex items-center gap-2 rounded-full border border-foreground/18 px-5 py-2.5 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-foreground/80 transition-colors hover:border-cyan/50 hover:text-cyan"
           >
-            {str(c, "cta_label", "See the full build log")}
+            {str(c, "cta_label", "See more student achievements")}
             <ArrowDownRight className="size-3.5" aria-hidden />
           </a>
         </motion.div>
@@ -321,9 +322,9 @@ export function PjGallery() {
 
   const labels: Record<"all" | Domain, string> = {
     all: str(c, "filter_all_label", "All"),
-    robotics: str(c, "robotics_label", "Robotics"),
-    ai: str(c, "ai_label", "Artificial Intelligence"),
-    space: str(c, "space_label", "Space Science"),
+    robotics: str(c, "robotics_label", "Academics"),
+    ai: str(c, "ai_label", "Arts & Activities"),
+    space: str(c, "space_label", "Athletics"),
   };
   const photoPending = str(c, "photo_pending_label", "Photography pending");
   const unconfirmed = str(c, "unconfirmed_note", "Wording not yet confirmed");
@@ -352,22 +353,22 @@ export function PjGallery() {
   return (
     <Band
       theme={theme}
-      label="Project gallery"
+      label="Student achievements gallery"
       id="build-log"
-      sheet="Sheet 02 · Build log"
+      sheet="Sheet 02 · Student life"
       diagram="mesh"
     >
       <BandHeader
         theme={theme}
-        eyebrow={str(c, "eyebrow", "The Build Log")}
-        headline={str(c, "headline", "The Build Log.")}
+        eyebrow={str(c, "eyebrow", "Student Achievements")}
+        headline={str(c, "headline", "Student Achievements.")}
         subhead={str(c, "subhead", "")}
       />
 
       <div
         className="mt-9 flex flex-wrap gap-2.5"
         role="group"
-        aria-label="Filter projects by discipline"
+        aria-label="Filter student achievements"
       >
         {FILTERS.map((f) => {
           const on = f === active;
@@ -395,7 +396,7 @@ export function PjGallery() {
 
       {shown.length === 0 ? (
         <p className="mt-12 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-navy-900/50">
-          {str(c, "empty_label", "No projects in this discipline yet.")}
+          {str(c, "empty_label", "No achievements in this category yet.")}
         </p>
       ) : (
         <motion.ul
@@ -478,7 +479,7 @@ function GalleryCard({
             </p>
           ) : null}
           <span className="mt-auto pt-4 inline-flex items-center gap-1.5 font-mono text-[0.58rem] uppercase tracking-[0.2em] text-navy-900/60 transition group-hover:text-navy-950">
-            View build
+            View more
             <ArrowUpRight className="size-3" aria-hidden />
           </span>
         </div>
@@ -592,21 +593,21 @@ type Stage = { phase: string; grades: string; outcome: string };
 
 const STAGES: Stage[] = [
   {
-    phase: "Junior Tinkers",
-    grades: "Ages 5–7",
-    outcome: "Motors, lights and switches — first working machines.",
+    phase: "Lower School",
+    grades: "Kindergarten – Grade 5",
+    outcome: "Curiosity, foundational skills and first performances, projects and teams.",
   },
   {
-    phase: "Young Innovators",
-    grades: "Ages 8–12",
+    phase: "Middle School",
+    grades: "Grades 6 – 8",
     outcome:
-      "Sensors, circuit design and block coding — machines that respond to their environment.",
+      "Independent thinking, deeper coursework and leadership on the field, stage and in clubs.",
   },
   {
-    phase: "Future Engineers",
-    grades: "Ages 13–17",
+    phase: "Upper School",
+    grades: "Grades 9 – 12",
     outcome:
-      "Arduino, embedded logic and autonomous systems — machines that make their own decisions.",
+      "College-level rigor, varsity competition and portfolios that open doors after graduation.",
   },
 ];
 
@@ -621,7 +622,7 @@ export function PjProgression() {
       <BandHeader
         theme={theme}
         eyebrow={str(c, "eyebrow", "Progression")}
-        headline={str(c, "headline", "Complexity Builds With Age.")}
+        headline={str(c, "headline", "Growth Builds With Age.")}
         subhead={str(c, "subhead", "")}
       />
       <motion.ol
@@ -675,16 +676,24 @@ export function PjClosingCta() {
 
   const panels = [
     {
-      label: str(c, "school_label", "For schools"),
-      copy: str(c, "school_copy", ""),
-      ctaLabel: str(c, "school_cta_label", "Partner With Us"),
-      target: str(c, "school_cta_target", "/schools"),
+      label: str(c, "school_label", "See it in person"),
+      copy: str(
+        c,
+        "school_copy",
+        `Tour our campus, meet our teachers and see a typical day at ${BRAND.shortName} for yourself.`,
+      ),
+      ctaLabel: str(c, "school_cta_label", "Schedule a Visit"),
+      target: str(c, "school_cta_target", "/admissions"),
       primary: true,
     },
     {
-      label: str(c, "parent_label", "For parents"),
-      copy: str(c, "parent_copy", ""),
-      ctaLabel: str(c, "parent_cta_label", "Inquire"),
+      label: str(c, "parent_label", "Have questions"),
+      copy: str(
+        c,
+        "parent_copy",
+        "Our admissions team is happy to walk you through divisions, tuition and the application timeline.",
+      ),
+      ctaLabel: str(c, "parent_cta_label", "Contact Us"),
       target: str(c, "parent_cta_target", "/contact"),
       primary: false,
     },
@@ -701,8 +710,12 @@ export function PjClosingCta() {
       <BandHeader
         theme={theme}
         eyebrow={str(c, "eyebrow", "Next step")}
-        headline={str(c, "headline", "Want Your Students Building These?")}
-        subhead={str(c, "subhead", "")}
+        headline={str(c, "headline", "See Yourself Here.")}
+        subhead={str(
+          c,
+          "subhead",
+          `Every story on this page started with a family who came to visit. Come see what student life at ${BRAND.shortName} could look like for your child.`,
+        )}
       />
       <motion.div
         variants={stagger}

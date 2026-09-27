@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { ArrowLeft } from "lucide-react";
 
 import { supabase } from "@/integrations/supabase/client";
+import { BRAND } from "@/lib/brand";
 import { isHardcodedSuperAdmin } from "@/lib/super-admin";
 import { PageHeader, Panel, ToastProvider, cx } from "@/components/dashboard/ui";
 import { PageSectionsView } from "@/components/dashboard/site/PageSections";
@@ -45,13 +46,13 @@ const GROUPS: { heading: string; items: NavEntry[] }[] = [
     heading: "Pages",
     items: [
       { id: "page:home", label: "Home", description: "The front page of the website." },
-      { id: "page:about", label: "About", description: "Who AstroBot Academy is." },
+      { id: "page:about", label: "About", description: `Who ${BRAND.name} is.` },
       { id: "page:programs", label: "Programs", description: "What is on offer." },
       { id: "page:schools", label: "Schools", description: "The partnership pitch for schools." },
       { id: "page:students", label: "Students", description: "What students build." },
       { id: "page:news", label: "News", description: "Announcements and updates." },
       { id: "page:contact", label: "Contact", description: "How visitors reach you." },
-      { id: "page:careers", label: "Careers", description: "Working at AstroBot Academy." },
+      { id: "page:careers", label: "Careers", description: `Working at ${BRAND.name}.` },
       {
         id: "page:emails",
         label: "Emails",

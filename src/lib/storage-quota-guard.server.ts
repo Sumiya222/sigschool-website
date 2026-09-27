@@ -14,12 +14,14 @@
  * submission rate limits already bounding how fast the bucket can grow.
  * Tripping it means abuse, not a slow month.
  */
+import { BRAND } from "@/lib/brand";
+
 const QUOTA_BYTES = 5 * 1024 * 1024 * 1024; // 5GB
 const GB = 1024 * 1024 * 1024;
 
 export const STORAGE_QUOTA_REJECTION_MESSAGE =
   "We're unable to accept file attachments right now due to unusually high demand on our storage. " +
-  "Please email your documents to info@astrobotacademy.com, or reach us on WhatsApp at +92 314 5978068, " +
+  `Please email your documents to ${BRAND.contactEmail}, or call ${BRAND.phone}, ` +
   "and our team will complete this for you directly.";
 
 /**
@@ -116,7 +118,7 @@ async function sendQuotaWarningEmail(
   totalBytes: number,
 ): Promise<void> {
   const { sendBrandedEmail } = await import("@/lib/email.server");
-  const to = process.env.NOTIFY_EMAIL_TO || "contact@astrobotacademy.com";
+  const to = process.env.NOTIFY_EMAIL_TO || BRAND.contactEmail;
   const usedGb = (totalBytes / GB).toFixed(2);
   const capGb = (QUOTA_BYTES / GB).toFixed(0);
   const severe = thresholdPercent >= 80;

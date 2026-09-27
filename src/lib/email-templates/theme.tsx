@@ -1,9 +1,9 @@
 /**
- * Shared visual language for every AstroBot Academy email.
+ * Shared visual language for every {BRAND.name} email.
  *
- * Mirrors the site: near-black navy masthead, electric-indigo accent, cyan
- * hairline, mono eyebrow labels. Email clients only reliably support inline
- * styles, so everything here is a plain style object.
+ * Mirrors the site: deep navy masthead, warm brass accent, mono eyebrow
+ * labels. Email clients only reliably support inline styles, so everything
+ * here is a plain style object.
  *
  * Content passed as JSX children (Row values, Step bodies, etc.) is escaped
  * automatically by React's own rendering — the same guarantee normal JSX
@@ -18,20 +18,20 @@ import {
   Head,
   Hr,
   Html,
-  Img,
   Link,
   Preview,
   Row as RowLayout,
   Section,
   Text,
 } from "@react-email/components";
+import { BRAND } from "@/lib/brand";
 
 export const brand = {
-  navy: "#08081a",
-  navy800: "#1a1a44",
-  indigo: "#4f46e5",
-  indigoSoft: "#eef0ff",
-  cyan: "#22d3ee",
+  navy: "#0a1024",
+  navy800: "#1b2a4a",
+  indigo: "#b08d57",
+  indigoSoft: "#f3ede1",
+  cyan: "#b08d57",
   ink: "#12142b",
   ink2: "#4b5068",
   line: "#e4e5ef",
@@ -140,21 +140,7 @@ export const s = {
   mono,
 };
 
-export const SITE = "https://astrobotacademy.com";
-/**
- * Hosted, not embedded as a base64 data URI: several major mail clients
- * (Gmail included) don't reliably render inline `data:` image sources in
- * received mail, even though they render fine in local preview. A real,
- * publicly reachable URL is the only approach that works across clients —
- * standard practice for every commercial email service.
- *
- * Served from the same public site-media Storage bucket the Media Library
- * already uses (not a bundled public/ file), so these are live immediately
- * and don't depend on the app being redeployed.
- */
-const MEDIA_BASE = "https://asxwugnxcjiuituwpkyi.supabase.co/storage/v1/object/public/site-media";
-export const LOGO_URL = `${MEDIA_BASE}/email-assets/logo.png`;
-export const ROCKET_URL = `${MEDIA_BASE}/email-assets/rocket-black.png`;
+export const SITE = `https://${BRAND.domain}`;
 /**
  * Fallbacks below mirror src/lib/email-content.server.ts's
  * DEFAULT_EMAIL_CONTENT. This file has to stay client-safe (it's rendered
@@ -162,14 +148,12 @@ export const ROCKET_URL = `${MEDIA_BASE}/email-assets/rocket-black.png`;
  * server-only module directly — keep the two in sync by hand if either
  * changes.
  */
-export const CONTACT_EMAIL = "info@astrobotacademy.com";
-export const WHATSAPP_URL = "https://wa.me/923145978068";
+export const CONTACT_EMAIL = BRAND.contactEmail;
+export const WHATSAPP_URL = `tel:${BRAND.phone.replace(/[^+\d]/g, "")}`;
 export const FOOTER_NOTICE = "This inbox isn't monitored, so replies here won't reach us.";
-export const CONTACT_LINE = `For anything else, message us on WhatsApp or write to ${CONTACT_EMAIL}.`;
-export const ADDRESS_LINE =
-  "AstroBot Academy · NICAT–NASTP Alpha, Rawalpindi · astrobotacademy.com";
-export const LEGAL_LINE =
-  "Stellar Scholar Space Education Initiative · Stelalliance (SMC-Private) Ltd";
+export const CONTACT_LINE = `For anything else, call us or write to ${CONTACT_EMAIL}.`;
+export const ADDRESS_LINE = `${BRAND.name} · ${BRAND.addressLine} · ${BRAND.domain}`;
+export const LEGAL_LINE = BRAND.legalName;
 
 export type EmailStep = { n: string; title: string; body: string };
 
@@ -316,13 +300,17 @@ export function Shell({
         <Section style={s.wrap}>
           <Container style={s.container}>
             <Section style={s.masthead}>
-              <Img
-                src={LOGO_URL}
-                width="120"
-                height="33"
-                alt="AstroBot Academy"
-                style={{ display: "block" }}
-              />
+              <Text
+                style={{
+                  margin: 0,
+                  color: "#ffffff",
+                  fontSize: "18px",
+                  fontWeight: 700,
+                  letterSpacing: "-0.01em",
+                }}
+              >
+                {BRAND.name}
+              </Text>
               <Text style={s.docref}>{docRef}</Text>
             </Section>
             <Section style={s.mastheadRule} />
@@ -352,24 +340,12 @@ export function Shell({
                     <Text style={s.footerText}>
                       <AutoLinkText
                         text={addressLine}
-                        links={[{ match: "astrobotacademy.com", href: SITE }]}
+                        links={[{ match: BRAND.domain, href: SITE }]}
                       />
                     </Text>
                   ) : null}
                   {legalLine ? <Text style={s.footerText}>{legalLine}</Text> : null}
                   {reference ? <Text style={s.ref}>{reference}</Text> : null}
-                </ColumnLayout>
-                <ColumnLayout
-                  style={{ width: "40px", verticalAlign: "bottom" as const }}
-                  align="right"
-                >
-                  <Img
-                    src={ROCKET_URL}
-                    width="22"
-                    height="25"
-                    alt=""
-                    style={{ display: "block", marginLeft: "auto" }}
-                  />
                 </ColumnLayout>
               </RowLayout>
             </Section>

@@ -14,7 +14,6 @@ import { useServerFn } from "@tanstack/react-start";
 import appCss from "../styles.css?url";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
-import { ImmersiveBackground } from "@/components/immersive/ImmersiveBackground";
 import { Preloader } from "@/components/Preloader";
 import { getSiteContent } from "@/lib/site-content.functions";
 import { SiteContentContext } from "@/lib/site-content";
@@ -22,6 +21,7 @@ import { CampRegistrationProvider } from "@/components/camp/CampRegistrationProv
 import { CampAnnouncementBar } from "@/components/camp/CampAnnouncementBar";
 import { reportClientError } from "@/lib/client-error-report.functions";
 import { SITE_INDEXABLE } from "@/lib/site-config";
+import { BRAND } from "@/lib/brand";
 
 function NotFoundComponent() {
   return (
@@ -117,35 +117,32 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       // don't need to repeat this; TanStack Start merges route `head()`
       // results, so this applies everywhere it isn't overridden.
       ...(SITE_INDEXABLE ? [] : [{ name: "robots", content: "noindex, nofollow" }]),
-      { title: "AstroBot Academy — Robotics, AI & Space Science for Kids" },
+      { title: `${BRAND.name} — ${BRAND.tagline}` },
       {
         name: "description",
-        content:
-          "An immersive Mission Control experience. Hands-on Robotics, AI and Space Science programs for pre-school to Grade 8 students across Pakistan.",
+        content: `${BRAND.name} is a K-12 private school offering a full Lower, Middle and Upper School program built around academic rigor, character and community.`,
       },
-      { name: "author", content: "AstroBot Academy" },
+      { name: "author", content: BRAND.name },
       {
         property: "og:title",
-        content: "AstroBot Academy — Robotics, AI & Space Science for Kids",
+        content: `${BRAND.name} — ${BRAND.tagline}`,
       },
       {
         property: "og:description",
-        content:
-          "An immersive Mission Control experience. Hands-on Robotics, AI and Space Science programs for pre-school to Grade 8 students across Pakistan.",
+        content: `A K-12 private school offering a full Lower, Middle and Upper School program built around academic rigor, character and community.`,
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content: "AstroBot Academy — Robotics, AI & Space Science for Kids",
+        content: `${BRAND.name} — ${BRAND.tagline}`,
       },
       {
         name: "twitter:description",
-        content:
-          "An immersive Mission Control experience. Hands-on Robotics, AI and Space Science programs for pre-school to Grade 8 students across Pakistan.",
+        content: `A K-12 private school offering a full Lower, Middle and Upper School program built around academic rigor, character and community.`,
       },
-      { property: "og:image", content: "https://astrobotacademy.com/og-image.webp" },
-      { name: "twitter:image", content: "https://astrobotacademy.com/og-image.webp" },
+      { property: "og:image", content: `https://${BRAND.domain}/og-image.webp` },
+      { name: "twitter:image", content: `https://${BRAND.domain}/og-image.webp` },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -172,7 +169,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500;700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500;700&display=swap",
       },
     ],
   }),
@@ -202,23 +199,18 @@ function RootComponent() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isDashboard = pathname.startsWith("/dashboard");
 
-  // ImmersiveBackground and Preloader both render unconditionally, at the
-  // very top and in the same position in every branch below, so React never
-  // tears either of them down across a route change. This matters a lot more
-  // than it looks: the /dashboard layout route is `ssr: false` (client-only),
+  // Preloader renders unconditionally, at the very top and in the same
+  // position in every branch below, so React never tears it down across a
+  // route change. The /dashboard layout route is `ssr: false` (client-only),
   // and crossing that boundary combined with this component's isDashboard
   // branching was causing React to unmount/remount this whole subtree
-  // repeatedly in rapid succession — which tore down ImmersiveBackground's
-  // WebGL context (throwing "Context Lost") and reset Preloader before its
-  // counter could ever tick, leaving it stuck at 0% until a hard reload.
-  // Keeping both mounted for the whole session avoids that class of bug
-  // entirely. Trade-off: the boot animation now only plays once, on the
-  // very first load, rather than replaying every time you enter Mission
-  // Control.
+  // repeatedly in rapid succession, resetting Preloader before its counter
+  // could ever tick. Keeping it mounted for the whole session avoids that.
+  // Trade-off: the boot animation now only plays once, on the very first
+  // load, rather than replaying every time you enter the dashboard.
   if (isDashboard) {
     return (
       <QueryClientProvider client={queryClient}>
-        <ImmersiveBackground />
         <Preloader />
         <Outlet />
       </QueryClientProvider>
@@ -227,7 +219,6 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ImmersiveBackground />
       <Preloader />
       <SiteContentContext.Provider value={siteContent}>
         <a href="#main-content" className="skip-link">

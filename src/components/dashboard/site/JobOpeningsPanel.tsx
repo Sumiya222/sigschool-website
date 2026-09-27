@@ -318,7 +318,7 @@ export function JobOpeningsPanel() {
                 label="Location"
                 value={draft.location}
                 onChange={(v) => setDraft((d) => ({ ...d, location: v }))}
-                placeholder="Rawalpindi / Islamabad"
+                placeholder="Springfield campus"
               />
               {fieldErr.location ? (
                 <p className="mt-1 text-[11px] text-red-300">{fieldErr.location}</p>

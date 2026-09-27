@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CtHero, CtPaths, CtResponse } from "@/components/contact/sections";
+import { BRAND } from "@/lib/brand";
 
-const TITLE = "Contact AstroBot Academy — Parent & School Inquiries";
-const DESCRIPTION =
-  "Send an inquiry to AstroBot Academy, or reach us on WhatsApp, by email, or at NICAT-NASTP Alpha, Rawalpindi. Typical response within 24 hours.";
+const TITLE = `Contact | ${BRAND.name}`;
+const DESCRIPTION = `Send an inquiry to ${BRAND.name}, or reach us on WhatsApp, by email, or at ${BRAND.addressLine}. Typical response within 24 hours.`;
 
 export const Route = createFileRoute("/contact")({
   head: () => ({

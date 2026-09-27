@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { BRAND } from "@/lib/brand";
 import { useSchoolSession } from "@/lib/school-context";
 import { ExportButtons } from "@/components/dashboard/ExportButtons";
 import type { ExportPayload } from "@/lib/school-export";
@@ -135,7 +136,7 @@ function SchoolSummary() {
   const activeTerm = useMemo(() => terms.find((t) => t.id === termId), [terms, termId]);
 
   const buildPayload = (): ExportPayload => ({
-    title: "AstroBot — School-Wide Summary",
+    title: `${BRAND.shortName} — School-Wide Summary`,
     subtitle: `${schoolName || "School"} · Term: ${activeTerm?.name ?? ""}`,
     filename: `school-summary_${schoolName || "school"}_${activeTerm?.name ?? "term"}`.replace(
       /\s+/g,

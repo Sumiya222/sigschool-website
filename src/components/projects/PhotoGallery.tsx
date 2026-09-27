@@ -54,8 +54,12 @@ export function PjPhotoGallery({ images }: { images: GalleryImage[] }) {
       <BandHeader
         theme={theme}
         eyebrow={str(c, "eyebrow", "Gallery")}
-        headline={str(c, "headline", "From the Classroom.")}
-        subhead={str(c, "subhead", "Sessions, builds and showcases across our partner schools.")}
+        headline={str(c, "headline", "Around Campus.")}
+        subhead={str(
+          c,
+          "subhead",
+          "Classrooms, performances and everyday moments across every division.",
+        )}
       />
 
       <ul className="mt-10 gap-4 [column-fill:_balance] columns-1 sm:columns-2 lg:columns-3 xl:columns-4">

@@ -11,6 +11,7 @@ import {
   WHATSAPP_URL,
   type EmailStep,
 } from "./theme";
+import { BRAND } from "@/lib/brand";
 
 interface Props {
   parentName?: string;
@@ -89,7 +90,7 @@ const Email = ({
   contactLine,
   addressLine,
   legalLine,
-  footerNote = "You are receiving this because you registered a child for an AstroBot Academy camp.",
+  footerNote = `You are receiving this because you registered a child at ${BRAND.name}.`,
 }: Props) => (
   <Shell
     preview={
@@ -164,7 +165,7 @@ const Email = ({
 
 export const template = {
   component: Email,
-  subject: "Camp registration confirmed — AstroBot Academy",
+  subject: `Enrollment received — ${BRAND.name}`,
   displayName: "Camp registration confirmation",
   previewData: {
     parentName: "Nadia Rehman",
