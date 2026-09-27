@@ -31,6 +31,17 @@ uncoordinated passes.
   keeps a TS allowlist and a Postgres allowlist in sync), and a gitleaks
   secret scan. All green as of this writing — keep it that way.
 
+## Setup — use `npm ci`, not `npm install`
+
+`package.json` pins the exact Node/npm versions CI uses (`engines`). For a
+fresh clone, always run `npm ci` — it installs exactly what's in
+`package-lock.json` and never rewrites it. Only run `npm install` when
+you're deliberately adding/upgrading a dependency, and do it with the
+pinned npm version (`nvm use` / `corepack` or equivalent) — a different npm
+major version can rewrite the lockfile in a way CI's npm rejects with
+`EUSAGE`, breaking the build for everyone else on the next pull. This
+already happened once during the rebrand pass; don't reintroduce it.
+
 ## Conventions to follow
 
 **CMS-fallback pattern.** Every public page reads content through

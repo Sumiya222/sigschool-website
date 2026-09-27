@@ -3,6 +3,10 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
+  "engines": {
+    "node": "22.23.2",
+    "npm": "10.9.8"
+  },
   "//xlsxKnownRisk": "xlsx@0.18.5 has known CVEs (prototype pollution GHSA-4r6h-8v6p-xvw6, ReDoS GHSA-5pgg-2g8v-p4x9) with no npm-published fix — SheetJS only ships patched versions from their own CDN (cdn.sheetjs.com), not npm, and 0.18.5 is npm's latest. Accepted as of the 2026-08-04 dependency audit: usage is staff-only (roster import/export), behind auth, with row-count and file-size caps already enforced in code. Revisit if usage ever becomes public-facing, or if switching the install source off npm becomes worth the supply-chain trade-off.",
   "scripts": {
     "dev": "vite dev",
