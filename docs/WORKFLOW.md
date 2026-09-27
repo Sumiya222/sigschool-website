@@ -1,7 +1,8 @@
 # Branching & release workflow
 
 Three tiers, in order: **your feature branch → `develop` → `main`.**
-`main` is production — the only branch that deploys.
+`main` is meant to represent production — the branch that deploys, once a
+`deploy` job is wired up again (see below).
 
 ## Why this exists
 
@@ -25,14 +26,16 @@ on the live site — using only branches and CI, which are free.
    continuously-CI-checked integration branch — think of it as the
    staging layer. **Nothing deploys when `develop` changes.**
 4. When a batch of work on `develop` is actually ready to go live, open a
-   PR **from `develop` into `main`**. Merging that PR is the one action
-   that triggers the deploy job (`.github/workflows/ci.yml`, the `deploy`
-   job, gated on `github.ref == 'refs/heads/main'`) — independent of which
-   host is behind it (currently HostersPK; this would work unchanged if
-   that ever moves).
+   PR **from `develop` into `main`**. There's currently no `deploy` job —
+   it was removed (see `docs/SETUP.md` §9) since the repo had no working
+   deploy secrets and the hosting target isn't finalized. Once a host is
+   chosen, re-add a `deploy` job to `.github/workflows/ci.yml` gated on
+   `github.ref == 'refs/heads/main'` — merging a develop→main PR is meant
+   to be the one action that triggers it, independent of which host is
+   behind it.
 
 ```
-feature/x ──PR──▶ develop ──PR──▶ main ──▶ (auto-deploys)
+feature/x ──PR──▶ develop ──PR──▶ main ──▶ (deploy job: not yet configured)
 feature/y ──PR──▶ develop
 ```
 
@@ -56,5 +59,3 @@ feature/y ──PR──▶ develop
 
 For now: whoever has been designated to own production merges (the repo
 admin). Revisit this once the team has a rhythm going.
-
-<!-- workflow verified end-to-end 2026-09-27 -->

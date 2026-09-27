@@ -231,11 +231,21 @@ optional, before the real public launch:
 
 ---
 
-## 9. Deploying to HostersPK
+## 9. Deploying to HostersPK (reference only — not currently wired into CI)
 
-Target: cPanel + Passenger shared hosting, Node 22. Deploy is automatic —
-`.github/workflows/ci.yml`'s `deploy` job pushes over SSH on every push to
-`main`, gated on `quality` + `gitleaks` both passing. Follow this sequence
+**This section is no longer live.** The `deploy` job that used to push over
+SSH on every push to `main` was removed from `.github/workflows/ci.yml` —
+the repo had no deploy secrets configured, so it never actually succeeded,
+and the hosting target isn't finalized (this may end up deployed somewhere
+other than HostersPK). Kept below as reference: if you do stand up
+HostersPK (or similar cPanel/Passenger shared hosting behind a reverse
+proxy), the `HOST=127.0.0.1` binding fix in `scripts/hosterspk-entry.mjs`
+is worth reapplying regardless of host, for the security reason documented
+in that file. To bring deployment back, re-add a `deploy` job to `ci.yml`
+gated on `github.ref == 'refs/heads/main'` (same pattern as before) once a
+host is chosen and its secrets are set.
+
+Target: cPanel + Passenger shared hosting, Node 22. Follow this sequence
 in order; several steps depend on the one before it existing.
 
 1. **SSH key.** Generate a dedicated deploy keypair (no passphrase — CI
