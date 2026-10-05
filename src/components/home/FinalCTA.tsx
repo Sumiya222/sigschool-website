@@ -30,7 +30,7 @@ export function FinalCTA() {
 
   return (
     <section
-      aria-label="Visit or apply to Northbridge Preparatory School"
+      aria-label="Visit or apply to The Signature School"
       className="relative w-full py-24 sm:py-28"
     >
       <div className="mx-auto w-full max-w-3xl px-4 sm:px-6">

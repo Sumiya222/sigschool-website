@@ -120,7 +120,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: `${BRAND.name} — ${BRAND.tagline}` },
       {
         name: "description",
-        content: `${BRAND.name} is a K-12 private school offering a full Lower, Middle and Upper School program built around academic rigor, character and community.`,
+        content: `${BRAND.name} combines academic strength, technology fluency, financial literacy, character and practical real-world readiness.`,
       },
       { name: "author", content: BRAND.name },
       {
@@ -129,7 +129,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         property: "og:description",
-        content: `A K-12 private school offering a full Lower, Middle and Upper School program built around academic rigor, character and community.`,
+        content: `${BRAND.tagline}: education for knowledge, capability and real-world readiness.`,
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -139,10 +139,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         name: "twitter:description",
-        content: `A K-12 private school offering a full Lower, Middle and Upper School program built around academic rigor, character and community.`,
+        content: `${BRAND.tagline}: education for knowledge, capability and real-world readiness.`,
       },
-      { property: "og:image", content: `https://${BRAND.domain}/og-image.webp` },
-      { name: "twitter:image", content: `https://${BRAND.domain}/og-image.webp` },
+      { property: "og:image", content: "/og-image.webp" },
+      { name: "twitter:image", content: "/og-image.webp" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -169,7 +169,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500;700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@600;700;800&display=swap",
       },
     ],
   }),

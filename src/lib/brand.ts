@@ -1,22 +1,35 @@
-// Single source of truth for placeholder brand identity. Swap these values
-// (and the color tokens in src/styles.css) when a real brand is finalized —
-// everything else (email templates, PDFs, meta tags, footer, etc.) derives
-// from this file rather than hardcoding the name/contact info again.
+export const MISSING_CONTENT = "[TO BE PROVIDED BY SIGNATURE SCHOOL]";
+
 export const BRAND = {
-  name: "Northbridge Preparatory School",
-  shortName: "Northbridge Prep",
-  legalName: "Northbridge Preparatory School",
-  tagline: "Where Every Student Finds Their Path",
-  domain: "northbridgeprep.edu",
-  contactEmail: "hello@northbridgeprep.edu",
-  admissionsEmail: "admissions@northbridgeprep.edu",
-  careersEmail: "careers@northbridgeprep.edu",
-  phone: "+1 (555) 010-2040",
-  addressLine: "100 Founders Way, Springfield",
-  portalLabel: "Staff & Family Portal",
+  name: "The Signature School",
+  shortName: "Signature School",
+  legalName: "The Signature School",
+  tagline: "Learn To Earn",
+  domain: MISSING_CONTENT,
+  contactEmail: MISSING_CONTENT,
+  admissionsEmail: MISSING_CONTENT,
+  careersEmail: MISSING_CONTENT,
+  phone: MISSING_CONTENT,
+  addressLine: MISSING_CONTENT,
+  portalLabel: "Digital School",
   divisions: [
-    { label: "Lower School", range: "Kindergarten – Grade 5" },
-    { label: "Middle School", range: "Grades 6 – 8" },
-    { label: "Upper School", range: "Grades 9 – 12" },
+    { label: "Early Years", range: MISSING_CONTENT },
+    { label: "Primary", range: MISSING_CONTENT },
+    { label: "Middle School", range: MISSING_CONTENT },
+    { label: "Secondary", range: MISSING_CONTENT },
   ],
 } as const;
+
+export const BRAND_PILLARS = [
+  "Academics",
+  "Technology",
+  "Financial Literacy",
+  "Leadership & Character",
+] as const;
+export const LEARN_VALUES = [
+  { letter: "L", title: "Leadership & Character" },
+  { letter: "E", title: "Excellence in Education" },
+  { letter: "A", title: "Ambition & Entrepreneurship" },
+  { letter: "R", title: "Readiness for the Real World" },
+  { letter: "N", title: "Novel Technology & Innovation" },
+] as const;

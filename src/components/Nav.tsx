@@ -1,157 +1,159 @@
 import { useEffect, useState } from "react";
-import { Link } from "@tanstack/react-router";
-import { Menu, X } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
-import { GoldButtonSheen, goldButtonClassName } from "@/components/GoldButton";
-import { cn } from "@/lib/utils";
-import { useSiteContent } from "@/lib/site-content";
+import { Link, useRouterState } from "@tanstack/react-router";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { Logo } from "@/components/Logo";
-import { BRAND } from "@/lib/brand";
 
-// Fallback only — nav_items is the source of truth once the CMS has rows
-// for the "nav" location. Without this, an empty/unseeded table renders no
-// navbar at all instead of degrading gracefully (see Footer.tsx's
-// EXPLORE_LINKS for the same pattern).
-const FALLBACK_LINKS = [
-  { to: "/about", label: "About" },
-  { to: "/programs", label: "Academics" },
-  { to: "/admissions", label: "Admissions" },
-  { to: "/schools", label: "Campus Life" },
-  { to: "/students", label: "Student Life" },
-  { to: "/careers", label: "Careers" },
-  { to: "/contact", label: "Contact" },
+const groups = [
+  {
+    label: "About",
+    href: "/about",
+    items: [
+      ["Vision & Mission", "/about/vision-mission"],
+      ["Chairperson's Message", "/about/chairperson"],
+      ["Signature School at a Glance", "/about/at-a-glance"],
+      ["Teacher Training", "/about/teacher-training"],
+      ["News & Events", "/about/news-events"],
+      ["Alumni", "/about/alumni"],
+      ["Important Notices", "/about/notices"],
+      ["Signature School", "/about/signature-school"],
+    ],
+  },
+  {
+    label: "Academics",
+    href: "/academics",
+    items: [
+      ["Academic Overview", "/academics"],
+      ["Examinations", "/examinations"],
+      ["Teacher Development", "/teacher-development"],
+    ],
+  },
+  {
+    label: "Learning",
+    href: "/learn-to-earn",
+    items: [
+      ["Learn To Earn", "/learn-to-earn"],
+      ["Digital Learning", "/digital-learning"],
+      ["STEAM & Innovation", "/steam"],
+      ["Leadership", "/leadership"],
+      ["Student Wellbeing", "/student-wellbeing"],
+      ["Student Life", "/student-life"],
+    ],
+  },
+  {
+    label: "Digital School",
+    href: "/login",
+    items: [
+      ["Student Portal", "/digital-school/student-portal"],
+      ["Parent Portal", "/digital-school/parent-portal"],
+      ["Teacher Portal", "/digital-school/teacher-portal"],
+    ],
+  },
+  {
+    label: "Franchise",
+    href: "/franchise",
+    items: [
+      ["Why Signature", "/franchise#why-signature"],
+      ["Our Network", "/franchise#network"],
+      ["Franchise Models", "/franchise#models"],
+      ["Franchise Process", "/franchise#process"],
+      ["Partner Support", "/franchise#support"],
+      ["Technology", "/franchise#technology"],
+      ["Become a Partner", "/franchise/apply"],
+    ],
+  },
+  {
+    label: "More",
+    href: "/school",
+    items: [
+      ["Campuses", "/find-a-campus"],
+      ["FAQs", "/faqs"],
+      ["Support", "/support"],
+      ["Contact", "/contact"],
+    ],
+  },
 ] as const;
 
 export function Nav() {
-  const { navItems } = useSiteContent();
-  const cmsLinks: { to: string; label: string }[] = navItems
-    .filter((n) => n.location === "nav" && n.visible)
-    .sort((a, b) => a.order - b.order)
-    .map((n) => ({ to: n.target, label: n.label }));
-  const links = cmsLinks.length > 0 ? cmsLinks : FALLBACK_LINKS;
-
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  useEffect(() => setOpen(false), [pathname]);
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const escape = (event: KeyboardEvent) => event.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", escape);
+    return () => window.removeEventListener("keydown", escape);
   }, []);
-
-  // Lock body scroll while mobile menu is open
-  useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [open]);
-
   return (
-    <header
-      style={{ top: "var(--announce-h, 0px)" }}
-      className={cn(
-        "fixed inset-x-0 z-50 transition-colors duration-200 ease-out",
-        scrolled
-          ? "border-b border-border bg-navy-950/95 backdrop-blur-md"
-          : "border-b border-transparent bg-transparent",
-      )}
-    >
-      <div className="mx-auto flex h-18 w-full max-w-[1600px] items-center justify-between px-4 sm:px-6 lg:px-10">
-        {/* Logo */}
-        <Link
-          to="/"
-          className="flex items-center"
-          onClick={() => setOpen(false)}
-          aria-label={`${BRAND.name} home`}
-        >
-          <Logo variant="light" className="h-9 sm:h-10 lg:h-11" />
+    <header className="tss-header">
+      <div className="tss-utility">
+        <div className="tss-nav-wrap">
+          <span>Signature School • Learn to Earn</span>
+          <span>Digital-first learning for future-ready learners</span>
+        </div>
+      </div>
+      <div className="tss-nav-wrap">
+        <Link to="/" aria-label="The Signature School home">
+          <Logo variant="dark" />
         </Link>
-
-        {/* Desktop links */}
-        <nav aria-label="Main navigation" className="hidden items-center gap-1 lg:flex">
-          {links.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className="rounded-md px-3 py-2 text-small font-medium text-gray-mid transition-colors hover:text-offwhite"
-              activeProps={{ className: "text-gold hover:text-gold" }}
-            >
-              {link.label}
-            </Link>
+        <nav aria-label="Primary navigation" className="tss-desktop-nav">
+          <a className={pathname === "/" ? "active" : ""} href="/">
+            Home
+          </a>
+          {groups.map((group) => (
+            <div className="tss-nav-group" key={group.label}>
+              <a className={pathname.startsWith(group.href) ? "active" : ""} href={group.href}>
+                {group.label}
+                <ChevronDown aria-hidden className="size-3" />
+              </a>
+              <div
+                className={`tss-dropdown ${group.label === "About" ? "tss-about-dropdown" : ""}`}
+              >
+                <div>
+                  {group.items.map(([label, href]) => (
+                    <a key={href} href={href}>
+                      {label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
           ))}
         </nav>
-
-        {/* Right: CTA + hamburger */}
-        <div className="flex items-center gap-3">
-          <Link
-            to="/contact"
-            className={cn(goldButtonClassName, "hidden px-5 py-2.5 lg:inline-flex")}
-          >
-            {GoldButtonSheen}
-            <span className="relative inline-flex items-center gap-2">Inquire</span>
-          </Link>
+        <div className="tss-nav-actions">
+          <a href="/apply-online" className="tss-button tss-apply-button">
+            Apply Now
+          </a>
+          <a href="/login" className="tss-login-button">
+            Login Portal
+          </a>
           <button
-            type="button"
-            className="rounded-md p-2 text-offwhite lg:hidden"
+            aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
-            aria-controls="mobile-menu"
-            onClick={() => setOpen((v) => !v)}
+            onClick={() => setOpen(!open)}
+            className="tss-menu-button"
           >
-            {open ? (
-              <X className="size-6" aria-hidden="true" />
-            ) : (
-              <Menu className="size-6" aria-hidden="true" />
-            )}
-            <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
+            {open ? <X /> : <Menu />}
           </button>
         </div>
       </div>
-
-      {/* Mobile overlay */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            id="mobile-menu"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 top-18 z-40 flex flex-col bg-navy-950/98 px-6 py-8 backdrop-blur-lg lg:hidden"
-          >
-            <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
-              {links.map((link, i) => (
-                <motion.div
-                  key={link.to}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.05 * i, duration: 0.25 }}
-                >
-                  <Link
-                    to={link.to}
-                    onClick={() => setOpen(false)}
-                    className="block rounded-lg px-3 py-3 font-display text-subheading font-medium text-offwhite transition-colors hover:bg-navy-800"
-                    activeProps={{ className: "text-gold" }}
-                  >
-                    {link.label}
-                  </Link>
-                </motion.div>
+      {open && (
+        <nav aria-label="Mobile navigation" className="tss-mobile-nav">
+          <a href="/">Home</a>
+          {groups.map((group) => (
+            <details key={group.label}>
+              <summary>{group.label}</summary>
+              {group.items.map(([label, href]) => (
+                <a key={href} href={href}>
+                  {label}
+                </a>
               ))}
-            </nav>
-            <div className="mt-8">
-              <Link
-                to="/contact"
-                onClick={() => setOpen(false)}
-                className={cn(goldButtonClassName, "w-full")}
-              >
-                {GoldButtonSheen}
-                <span className="relative inline-flex items-center gap-2">Inquire</span>
-              </Link>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </details>
+          ))}
+          <a href="/login">Login Portal</a>
+          <a href="/apply-online" className="tss-button">
+            Apply Now
+          </a>
+        </nav>
+      )}
     </header>
   );
 }

@@ -1,8 +1,7 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
-
-/** Renamed to /schools. Permanent redirect so old links and bookmarks resolve. */
-export const Route = createFileRoute("/for-schools")({
-  beforeLoad: () => {
-    throw redirect({ to: "/schools", statusCode: 301 });
-  },
-});
+import { createFileRoute } from "@tanstack/react-router";
+import { PublicPage } from "@/components/institutional/PublicPage";
+import { PUBLIC_PAGES } from "@/lib/public-content";
+export const Route = createFileRoute("/for-schools")({ component: Page });
+function Page() {
+  return <PublicPage page={PUBLIC_PAGES["/franchise"]} />;
+}

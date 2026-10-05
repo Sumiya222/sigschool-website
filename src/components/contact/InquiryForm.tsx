@@ -103,7 +103,7 @@ const TRACKS: Track[] = [
           "Not sure yet — advise me",
         ],
       },
-      { key: "city", label: "City", kind: "text", placeholder: "Springfield" },
+      { key: "city", label: "City", kind: "text", placeholder: "Your city" },
       {
         key: "message",
         label: "What would you like to know?",

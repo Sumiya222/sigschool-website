@@ -11,19 +11,51 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AcademicsRouteImport } from './routes/academics'
+import { Route as AdmissionProcedureRouteImport } from './routes/admission-procedure'
 import { Route as AdmissionsRouteImport } from './routes/admissions'
+import { Route as ApplyOnlineRouteImport } from './routes/apply-online'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as DigitalLearningRouteImport } from './routes/digital-learning'
 import { Route as EmailPreviewRouteImport } from './routes/email-preview'
+import { Route as ExaminationsRouteImport } from './routes/examinations'
+import { Route as FaqsRouteImport } from './routes/faqs'
+import { Route as FindACampusRouteImport } from './routes/find-a-campus'
 import { Route as ForSchoolsRouteImport } from './routes/for-schools'
+import { Route as FranchiseRouteImport } from './routes/franchise'
+import { Route as FutureSkillsRouteImport } from './routes/future-skills'
+import { Route as LeadershipRouteImport } from './routes/leadership'
+import { Route as LearnToEarnRouteImport } from './routes/learn-to-earn'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as NewsEventsRouteImport } from './routes/news-events'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as SchoolRouteImport } from './routes/school'
 import { Route as SchoolsRouteImport } from './routes/schools'
+import { Route as SteamRouteImport } from './routes/steam'
+import { Route as StudentLifeRouteImport } from './routes/student-life'
+import { Route as StudentWellbeingRouteImport } from './routes/student-wellbeing'
 import { Route as StudentsRouteImport } from './routes/students'
+import { Route as SupportRouteImport } from './routes/support'
+import { Route as TeacherDevelopmentRouteImport } from './routes/teacher-development'
+import { Route as AboutIndexRouteImport } from './routes/about.index'
+import { Route as AboutAlumniRouteImport } from './routes/about.alumni'
+import { Route as AboutAtAGlanceRouteImport } from './routes/about.at-a-glance'
+import { Route as AboutChairpersonRouteImport } from './routes/about.chairperson'
+import { Route as AboutEducationalPhilosophyRouteImport } from './routes/about.educational-philosophy'
+import { Route as AboutLeadershipRouteImport } from './routes/about.leadership'
+import { Route as AboutNewsEventsRouteImport } from './routes/about.news-events'
+import { Route as AboutNoticesRouteImport } from './routes/about.notices'
+import { Route as AboutOurStoryRouteImport } from './routes/about.our-story'
+import { Route as AboutSignatureSchoolRouteImport } from './routes/about.signature-school'
+import { Route as AboutTeacherTrainingRouteImport } from './routes/about.teacher-training'
+import { Route as AboutVisionMissionRouteImport } from './routes/about.vision-mission'
 import { Route as ApiSendDigestRouteImport } from './routes/api/send-digest'
+import { Route as CareersApplyRouteImport } from './routes/careers.apply'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
 import { Route as DashboardAccountRouteImport } from './routes/dashboard.account'
 import { Route as DashboardAdminRouteImport } from './routes/dashboard.admin'
@@ -34,6 +66,17 @@ import { Route as DashboardLoginRouteImport } from './routes/dashboard.login'
 import { Route as DashboardResetPasswordRouteImport } from './routes/dashboard.reset-password'
 import { Route as DashboardSchoolRouteImport } from './routes/dashboard.school'
 import { Route as DashboardSignupRouteImport } from './routes/dashboard.signup'
+import { Route as DigitalSchoolParentPortalRouteImport } from './routes/digital-school.parent-portal'
+import { Route as DigitalSchoolStudentPortalRouteImport } from './routes/digital-school.student-portal'
+import { Route as DigitalSchoolTeacherPortalRouteImport } from './routes/digital-school.teacher-portal'
+import { Route as FranchiseApplyRouteImport } from './routes/franchise.apply'
+import { Route as NewsEventsIndexRouteImport } from './routes/news-events.index'
+import { Route as NewsEventsSlugRouteImport } from './routes/news-events.$slug'
+import { Route as SupportIndexRouteImport } from './routes/support.index'
+import { Route as SupportTicketsRouteImport } from './routes/support.tickets'
+import { Route as AboutNoticesIndexRouteImport } from './routes/about.notices.index'
+import { Route as AboutNoticesNoticeIdRouteImport } from './routes/about.notices.$noticeId'
+import { Route as AcademicsCalendarIdRouteImport } from './routes/academics.calendar.$id'
 import { Route as DashboardAdminIndexRouteImport } from './routes/dashboard.admin.index'
 import { Route as DashboardAdminAuditLogRouteImport } from './routes/dashboard.admin.audit-log'
 import { Route as DashboardAdminOverviewRouteImport } from './routes/dashboard.admin.overview'
@@ -72,9 +115,24 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AcademicsRoute = AcademicsRouteImport.update({
+  id: '/academics',
+  path: '/academics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdmissionProcedureRoute = AdmissionProcedureRouteImport.update({
+  id: '/admission-procedure',
+  path: '/admission-procedure',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdmissionsRoute = AdmissionsRouteImport.update({
   id: '/admissions',
   path: '/admissions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApplyOnlineRoute = ApplyOnlineRouteImport.update({
+  id: '/apply-online',
+  path: '/apply-online',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CareersRoute = CareersRouteImport.update({
@@ -92,14 +150,64 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DigitalLearningRoute = DigitalLearningRouteImport.update({
+  id: '/digital-learning',
+  path: '/digital-learning',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EmailPreviewRoute = EmailPreviewRouteImport.update({
   id: '/email-preview',
   path: '/email-preview',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExaminationsRoute = ExaminationsRouteImport.update({
+  id: '/examinations',
+  path: '/examinations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqsRoute = FaqsRouteImport.update({
+  id: '/faqs',
+  path: '/faqs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FindACampusRoute = FindACampusRouteImport.update({
+  id: '/find-a-campus',
+  path: '/find-a-campus',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ForSchoolsRoute = ForSchoolsRouteImport.update({
   id: '/for-schools',
   path: '/for-schools',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FranchiseRoute = FranchiseRouteImport.update({
+  id: '/franchise',
+  path: '/franchise',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FutureSkillsRoute = FutureSkillsRouteImport.update({
+  id: '/future-skills',
+  path: '/future-skills',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeadershipRoute = LeadershipRouteImport.update({
+  id: '/leadership',
+  path: '/leadership',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LearnToEarnRoute = LearnToEarnRouteImport.update({
+  id: '/learn-to-earn',
+  path: '/learn-to-earn',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsEventsRoute = NewsEventsRouteImport.update({
+  id: '/news-events',
+  path: '/news-events',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PartnersRoute = PartnersRouteImport.update({
@@ -122,9 +230,29 @@ const ProjectsRoute = ProjectsRouteImport.update({
   path: '/projects',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SchoolRoute = SchoolRouteImport.update({
+  id: '/school',
+  path: '/school',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SchoolsRoute = SchoolsRouteImport.update({
   id: '/schools',
   path: '/schools',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SteamRoute = SteamRouteImport.update({
+  id: '/steam',
+  path: '/steam',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentLifeRoute = StudentLifeRouteImport.update({
+  id: '/student-life',
+  path: '/student-life',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentWellbeingRoute = StudentWellbeingRouteImport.update({
+  id: '/student-wellbeing',
+  path: '/student-wellbeing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StudentsRoute = StudentsRouteImport.update({
@@ -132,10 +260,86 @@ const StudentsRoute = StudentsRouteImport.update({
   path: '/students',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SupportRoute = SupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeacherDevelopmentRoute = TeacherDevelopmentRouteImport.update({
+  id: '/teacher-development',
+  path: '/teacher-development',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutIndexRoute = AboutIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AboutRoute,
+} as any)
+const AboutAlumniRoute = AboutAlumniRouteImport.update({
+  id: '/alumni',
+  path: '/alumni',
+  getParentRoute: () => AboutRoute,
+} as any)
+const AboutAtAGlanceRoute = AboutAtAGlanceRouteImport.update({
+  id: '/at-a-glance',
+  path: '/at-a-glance',
+  getParentRoute: () => AboutRoute,
+} as any)
+const AboutChairpersonRoute = AboutChairpersonRouteImport.update({
+  id: '/chairperson',
+  path: '/chairperson',
+  getParentRoute: () => AboutRoute,
+} as any)
+const AboutEducationalPhilosophyRoute =
+  AboutEducationalPhilosophyRouteImport.update({
+    id: '/educational-philosophy',
+    path: '/educational-philosophy',
+    getParentRoute: () => AboutRoute,
+  } as any)
+const AboutLeadershipRoute = AboutLeadershipRouteImport.update({
+  id: '/leadership',
+  path: '/leadership',
+  getParentRoute: () => AboutRoute,
+} as any)
+const AboutNewsEventsRoute = AboutNewsEventsRouteImport.update({
+  id: '/news-events',
+  path: '/news-events',
+  getParentRoute: () => AboutRoute,
+} as any)
+const AboutNoticesRoute = AboutNoticesRouteImport.update({
+  id: '/notices',
+  path: '/notices',
+  getParentRoute: () => AboutRoute,
+} as any)
+const AboutOurStoryRoute = AboutOurStoryRouteImport.update({
+  id: '/our-story',
+  path: '/our-story',
+  getParentRoute: () => AboutRoute,
+} as any)
+const AboutSignatureSchoolRoute = AboutSignatureSchoolRouteImport.update({
+  id: '/signature-school',
+  path: '/signature-school',
+  getParentRoute: () => AboutRoute,
+} as any)
+const AboutTeacherTrainingRoute = AboutTeacherTrainingRouteImport.update({
+  id: '/teacher-training',
+  path: '/teacher-training',
+  getParentRoute: () => AboutRoute,
+} as any)
+const AboutVisionMissionRoute = AboutVisionMissionRouteImport.update({
+  id: '/vision-mission',
+  path: '/vision-mission',
+  getParentRoute: () => AboutRoute,
+} as any)
 const ApiSendDigestRoute = ApiSendDigestRouteImport.update({
   id: '/api/send-digest',
   path: '/api/send-digest',
   getParentRoute: () => rootRouteImport,
+} as any)
+const CareersApplyRoute = CareersApplyRouteImport.update({
+  id: '/apply',
+  path: '/apply',
+  getParentRoute: () => CareersRoute,
 } as any)
 const DashboardIndexRoute = DashboardIndexRouteImport.update({
   id: '/',
@@ -186,6 +390,64 @@ const DashboardSignupRoute = DashboardSignupRouteImport.update({
   id: '/signup',
   path: '/signup',
   getParentRoute: () => DashboardRoute,
+} as any)
+const DigitalSchoolParentPortalRoute =
+  DigitalSchoolParentPortalRouteImport.update({
+    id: '/digital-school/parent-portal',
+    path: '/digital-school/parent-portal',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DigitalSchoolStudentPortalRoute =
+  DigitalSchoolStudentPortalRouteImport.update({
+    id: '/digital-school/student-portal',
+    path: '/digital-school/student-portal',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DigitalSchoolTeacherPortalRoute =
+  DigitalSchoolTeacherPortalRouteImport.update({
+    id: '/digital-school/teacher-portal',
+    path: '/digital-school/teacher-portal',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const FranchiseApplyRoute = FranchiseApplyRouteImport.update({
+  id: '/apply',
+  path: '/apply',
+  getParentRoute: () => FranchiseRoute,
+} as any)
+const NewsEventsIndexRoute = NewsEventsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => NewsEventsRoute,
+} as any)
+const NewsEventsSlugRoute = NewsEventsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => NewsEventsRoute,
+} as any)
+const SupportIndexRoute = SupportIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SupportRoute,
+} as any)
+const SupportTicketsRoute = SupportTicketsRouteImport.update({
+  id: '/tickets',
+  path: '/tickets',
+  getParentRoute: () => SupportRoute,
+} as any)
+const AboutNoticesIndexRoute = AboutNoticesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AboutNoticesRoute,
+} as any)
+const AboutNoticesNoticeIdRoute = AboutNoticesNoticeIdRouteImport.update({
+  id: '/$noticeId',
+  path: '/$noticeId',
+  getParentRoute: () => AboutNoticesRoute,
+} as any)
+const AcademicsCalendarIdRoute = AcademicsCalendarIdRouteImport.update({
+  id: '/calendar/$id',
+  path: '/calendar/$id',
+  getParentRoute: () => AcademicsRoute,
 } as any)
 const DashboardAdminIndexRoute = DashboardAdminIndexRouteImport.update({
   id: '/',
@@ -339,20 +601,51 @@ const DashboardAdminSchoolsSchoolIdSectionsSectionIdSessionsRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/about': typeof AboutRouteWithChildren
+  '/academics': typeof AcademicsRouteWithChildren
+  '/admission-procedure': typeof AdmissionProcedureRoute
   '/admissions': typeof AdmissionsRoute
-  '/careers': typeof CareersRoute
+  '/apply-online': typeof ApplyOnlineRoute
+  '/careers': typeof CareersRouteWithChildren
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/digital-learning': typeof DigitalLearningRoute
   '/email-preview': typeof EmailPreviewRoute
+  '/examinations': typeof ExaminationsRoute
+  '/faqs': typeof FaqsRoute
+  '/find-a-campus': typeof FindACampusRoute
   '/for-schools': typeof ForSchoolsRoute
+  '/franchise': typeof FranchiseRouteWithChildren
+  '/future-skills': typeof FutureSkillsRoute
+  '/leadership': typeof LeadershipRoute
+  '/learn-to-earn': typeof LearnToEarnRoute
+  '/login': typeof LoginRoute
+  '/news-events': typeof NewsEventsRouteWithChildren
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
   '/programs': typeof ProgramsRoute
   '/projects': typeof ProjectsRoute
+  '/school': typeof SchoolRoute
   '/schools': typeof SchoolsRoute
+  '/steam': typeof SteamRoute
+  '/student-life': typeof StudentLifeRoute
+  '/student-wellbeing': typeof StudentWellbeingRoute
   '/students': typeof StudentsRoute
+  '/support': typeof SupportRouteWithChildren
+  '/teacher-development': typeof TeacherDevelopmentRoute
+  '/about/alumni': typeof AboutAlumniRoute
+  '/about/at-a-glance': typeof AboutAtAGlanceRoute
+  '/about/chairperson': typeof AboutChairpersonRoute
+  '/about/educational-philosophy': typeof AboutEducationalPhilosophyRoute
+  '/about/leadership': typeof AboutLeadershipRoute
+  '/about/news-events': typeof AboutNewsEventsRoute
+  '/about/notices': typeof AboutNoticesRouteWithChildren
+  '/about/our-story': typeof AboutOurStoryRoute
+  '/about/signature-school': typeof AboutSignatureSchoolRoute
+  '/about/teacher-training': typeof AboutTeacherTrainingRoute
+  '/about/vision-mission': typeof AboutVisionMissionRoute
   '/api/send-digest': typeof ApiSendDigestRoute
+  '/careers/apply': typeof CareersApplyRoute
   '/dashboard/account': typeof DashboardAccountRoute
   '/dashboard/admin': typeof DashboardAdminRouteWithChildren
   '/dashboard/cms': typeof DashboardCmsRouteWithChildren
@@ -362,7 +655,18 @@ export interface FileRoutesByFullPath {
   '/dashboard/reset-password': typeof DashboardResetPasswordRoute
   '/dashboard/school': typeof DashboardSchoolRouteWithChildren
   '/dashboard/signup': typeof DashboardSignupRoute
+  '/digital-school/parent-portal': typeof DigitalSchoolParentPortalRoute
+  '/digital-school/student-portal': typeof DigitalSchoolStudentPortalRoute
+  '/digital-school/teacher-portal': typeof DigitalSchoolTeacherPortalRoute
+  '/franchise/apply': typeof FranchiseApplyRoute
+  '/news-events/$slug': typeof NewsEventsSlugRoute
+  '/support/tickets': typeof SupportTicketsRoute
+  '/about/': typeof AboutIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/news-events/': typeof NewsEventsIndexRoute
+  '/support/': typeof SupportIndexRoute
+  '/about/notices/$noticeId': typeof AboutNoticesNoticeIdRoute
+  '/academics/calendar/$id': typeof AcademicsCalendarIdRoute
   '/dashboard/admin/audit-log': typeof DashboardAdminAuditLogRoute
   '/dashboard/admin/overview': typeof DashboardAdminOverviewRoute
   '/dashboard/admin/promotion': typeof DashboardAdminPromotionRoute
@@ -374,6 +678,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/admin/whitelist': typeof DashboardAdminWhitelistRoute
   '/dashboard/school/invoices': typeof DashboardSchoolInvoicesRoute
   '/dashboard/school/summary': typeof DashboardSchoolSummaryRoute
+  '/about/notices/': typeof AboutNoticesIndexRoute
   '/dashboard/admin/': typeof DashboardAdminIndexRoute
   '/dashboard/cms/': typeof DashboardCmsIndexRoute
   '/dashboard/instructor/': typeof DashboardInstructorIndexRoute
@@ -393,25 +698,63 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/academics': typeof AcademicsRouteWithChildren
+  '/admission-procedure': typeof AdmissionProcedureRoute
   '/admissions': typeof AdmissionsRoute
-  '/careers': typeof CareersRoute
+  '/apply-online': typeof ApplyOnlineRoute
+  '/careers': typeof CareersRouteWithChildren
   '/contact': typeof ContactRoute
+  '/digital-learning': typeof DigitalLearningRoute
   '/email-preview': typeof EmailPreviewRoute
+  '/examinations': typeof ExaminationsRoute
+  '/faqs': typeof FaqsRoute
+  '/find-a-campus': typeof FindACampusRoute
   '/for-schools': typeof ForSchoolsRoute
+  '/franchise': typeof FranchiseRouteWithChildren
+  '/future-skills': typeof FutureSkillsRoute
+  '/leadership': typeof LeadershipRoute
+  '/learn-to-earn': typeof LearnToEarnRoute
+  '/login': typeof LoginRoute
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
   '/programs': typeof ProgramsRoute
   '/projects': typeof ProjectsRoute
+  '/school': typeof SchoolRoute
   '/schools': typeof SchoolsRoute
+  '/steam': typeof SteamRoute
+  '/student-life': typeof StudentLifeRoute
+  '/student-wellbeing': typeof StudentWellbeingRoute
   '/students': typeof StudentsRoute
+  '/teacher-development': typeof TeacherDevelopmentRoute
+  '/about/alumni': typeof AboutAlumniRoute
+  '/about/at-a-glance': typeof AboutAtAGlanceRoute
+  '/about/chairperson': typeof AboutChairpersonRoute
+  '/about/educational-philosophy': typeof AboutEducationalPhilosophyRoute
+  '/about/leadership': typeof AboutLeadershipRoute
+  '/about/news-events': typeof AboutNewsEventsRoute
+  '/about/our-story': typeof AboutOurStoryRoute
+  '/about/signature-school': typeof AboutSignatureSchoolRoute
+  '/about/teacher-training': typeof AboutTeacherTrainingRoute
+  '/about/vision-mission': typeof AboutVisionMissionRoute
   '/api/send-digest': typeof ApiSendDigestRoute
+  '/careers/apply': typeof CareersApplyRoute
   '/dashboard/account': typeof DashboardAccountRoute
   '/dashboard/forgot-password': typeof DashboardForgotPasswordRoute
   '/dashboard/login': typeof DashboardLoginRoute
   '/dashboard/reset-password': typeof DashboardResetPasswordRoute
   '/dashboard/signup': typeof DashboardSignupRoute
+  '/digital-school/parent-portal': typeof DigitalSchoolParentPortalRoute
+  '/digital-school/student-portal': typeof DigitalSchoolStudentPortalRoute
+  '/digital-school/teacher-portal': typeof DigitalSchoolTeacherPortalRoute
+  '/franchise/apply': typeof FranchiseApplyRoute
+  '/news-events/$slug': typeof NewsEventsSlugRoute
+  '/support/tickets': typeof SupportTicketsRoute
+  '/about': typeof AboutIndexRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/news-events': typeof NewsEventsIndexRoute
+  '/support': typeof SupportIndexRoute
+  '/about/notices/$noticeId': typeof AboutNoticesNoticeIdRoute
+  '/academics/calendar/$id': typeof AcademicsCalendarIdRoute
   '/dashboard/admin/audit-log': typeof DashboardAdminAuditLogRoute
   '/dashboard/admin/overview': typeof DashboardAdminOverviewRoute
   '/dashboard/admin/promotion': typeof DashboardAdminPromotionRoute
@@ -423,6 +766,7 @@ export interface FileRoutesByTo {
   '/dashboard/admin/whitelist': typeof DashboardAdminWhitelistRoute
   '/dashboard/school/invoices': typeof DashboardSchoolInvoicesRoute
   '/dashboard/school/summary': typeof DashboardSchoolSummaryRoute
+  '/about/notices': typeof AboutNoticesIndexRoute
   '/dashboard/admin': typeof DashboardAdminIndexRoute
   '/dashboard/cms': typeof DashboardCmsIndexRoute
   '/dashboard/instructor': typeof DashboardInstructorIndexRoute
@@ -443,20 +787,51 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/about': typeof AboutRouteWithChildren
+  '/academics': typeof AcademicsRouteWithChildren
+  '/admission-procedure': typeof AdmissionProcedureRoute
   '/admissions': typeof AdmissionsRoute
-  '/careers': typeof CareersRoute
+  '/apply-online': typeof ApplyOnlineRoute
+  '/careers': typeof CareersRouteWithChildren
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/digital-learning': typeof DigitalLearningRoute
   '/email-preview': typeof EmailPreviewRoute
+  '/examinations': typeof ExaminationsRoute
+  '/faqs': typeof FaqsRoute
+  '/find-a-campus': typeof FindACampusRoute
   '/for-schools': typeof ForSchoolsRoute
+  '/franchise': typeof FranchiseRouteWithChildren
+  '/future-skills': typeof FutureSkillsRoute
+  '/leadership': typeof LeadershipRoute
+  '/learn-to-earn': typeof LearnToEarnRoute
+  '/login': typeof LoginRoute
+  '/news-events': typeof NewsEventsRouteWithChildren
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
   '/programs': typeof ProgramsRoute
   '/projects': typeof ProjectsRoute
+  '/school': typeof SchoolRoute
   '/schools': typeof SchoolsRoute
+  '/steam': typeof SteamRoute
+  '/student-life': typeof StudentLifeRoute
+  '/student-wellbeing': typeof StudentWellbeingRoute
   '/students': typeof StudentsRoute
+  '/support': typeof SupportRouteWithChildren
+  '/teacher-development': typeof TeacherDevelopmentRoute
+  '/about/alumni': typeof AboutAlumniRoute
+  '/about/at-a-glance': typeof AboutAtAGlanceRoute
+  '/about/chairperson': typeof AboutChairpersonRoute
+  '/about/educational-philosophy': typeof AboutEducationalPhilosophyRoute
+  '/about/leadership': typeof AboutLeadershipRoute
+  '/about/news-events': typeof AboutNewsEventsRoute
+  '/about/notices': typeof AboutNoticesRouteWithChildren
+  '/about/our-story': typeof AboutOurStoryRoute
+  '/about/signature-school': typeof AboutSignatureSchoolRoute
+  '/about/teacher-training': typeof AboutTeacherTrainingRoute
+  '/about/vision-mission': typeof AboutVisionMissionRoute
   '/api/send-digest': typeof ApiSendDigestRoute
+  '/careers/apply': typeof CareersApplyRoute
   '/dashboard/account': typeof DashboardAccountRoute
   '/dashboard/admin': typeof DashboardAdminRouteWithChildren
   '/dashboard/cms': typeof DashboardCmsRouteWithChildren
@@ -466,7 +841,18 @@ export interface FileRoutesById {
   '/dashboard/reset-password': typeof DashboardResetPasswordRoute
   '/dashboard/school': typeof DashboardSchoolRouteWithChildren
   '/dashboard/signup': typeof DashboardSignupRoute
+  '/digital-school/parent-portal': typeof DigitalSchoolParentPortalRoute
+  '/digital-school/student-portal': typeof DigitalSchoolStudentPortalRoute
+  '/digital-school/teacher-portal': typeof DigitalSchoolTeacherPortalRoute
+  '/franchise/apply': typeof FranchiseApplyRoute
+  '/news-events/$slug': typeof NewsEventsSlugRoute
+  '/support/tickets': typeof SupportTicketsRoute
+  '/about/': typeof AboutIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/news-events/': typeof NewsEventsIndexRoute
+  '/support/': typeof SupportIndexRoute
+  '/about/notices/$noticeId': typeof AboutNoticesNoticeIdRoute
+  '/academics/calendar/$id': typeof AcademicsCalendarIdRoute
   '/dashboard/admin/audit-log': typeof DashboardAdminAuditLogRoute
   '/dashboard/admin/overview': typeof DashboardAdminOverviewRoute
   '/dashboard/admin/promotion': typeof DashboardAdminPromotionRoute
@@ -478,6 +864,7 @@ export interface FileRoutesById {
   '/dashboard/admin/whitelist': typeof DashboardAdminWhitelistRoute
   '/dashboard/school/invoices': typeof DashboardSchoolInvoicesRoute
   '/dashboard/school/summary': typeof DashboardSchoolSummaryRoute
+  '/about/notices/': typeof AboutNoticesIndexRoute
   '/dashboard/admin/': typeof DashboardAdminIndexRoute
   '/dashboard/cms/': typeof DashboardCmsIndexRoute
   '/dashboard/instructor/': typeof DashboardInstructorIndexRoute
@@ -500,19 +887,50 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/academics'
+    | '/admission-procedure'
     | '/admissions'
+    | '/apply-online'
     | '/careers'
     | '/contact'
     | '/dashboard'
+    | '/digital-learning'
     | '/email-preview'
+    | '/examinations'
+    | '/faqs'
+    | '/find-a-campus'
     | '/for-schools'
+    | '/franchise'
+    | '/future-skills'
+    | '/leadership'
+    | '/learn-to-earn'
+    | '/login'
+    | '/news-events'
     | '/partners'
     | '/privacy'
     | '/programs'
     | '/projects'
+    | '/school'
     | '/schools'
+    | '/steam'
+    | '/student-life'
+    | '/student-wellbeing'
     | '/students'
+    | '/support'
+    | '/teacher-development'
+    | '/about/alumni'
+    | '/about/at-a-glance'
+    | '/about/chairperson'
+    | '/about/educational-philosophy'
+    | '/about/leadership'
+    | '/about/news-events'
+    | '/about/notices'
+    | '/about/our-story'
+    | '/about/signature-school'
+    | '/about/teacher-training'
+    | '/about/vision-mission'
     | '/api/send-digest'
+    | '/careers/apply'
     | '/dashboard/account'
     | '/dashboard/admin'
     | '/dashboard/cms'
@@ -522,7 +940,18 @@ export interface FileRouteTypes {
     | '/dashboard/reset-password'
     | '/dashboard/school'
     | '/dashboard/signup'
+    | '/digital-school/parent-portal'
+    | '/digital-school/student-portal'
+    | '/digital-school/teacher-portal'
+    | '/franchise/apply'
+    | '/news-events/$slug'
+    | '/support/tickets'
+    | '/about/'
     | '/dashboard/'
+    | '/news-events/'
+    | '/support/'
+    | '/about/notices/$noticeId'
+    | '/academics/calendar/$id'
     | '/dashboard/admin/audit-log'
     | '/dashboard/admin/overview'
     | '/dashboard/admin/promotion'
@@ -534,6 +963,7 @@ export interface FileRouteTypes {
     | '/dashboard/admin/whitelist'
     | '/dashboard/school/invoices'
     | '/dashboard/school/summary'
+    | '/about/notices/'
     | '/dashboard/admin/'
     | '/dashboard/cms/'
     | '/dashboard/instructor/'
@@ -553,25 +983,63 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/about'
+    | '/academics'
+    | '/admission-procedure'
     | '/admissions'
+    | '/apply-online'
     | '/careers'
     | '/contact'
+    | '/digital-learning'
     | '/email-preview'
+    | '/examinations'
+    | '/faqs'
+    | '/find-a-campus'
     | '/for-schools'
+    | '/franchise'
+    | '/future-skills'
+    | '/leadership'
+    | '/learn-to-earn'
+    | '/login'
     | '/partners'
     | '/privacy'
     | '/programs'
     | '/projects'
+    | '/school'
     | '/schools'
+    | '/steam'
+    | '/student-life'
+    | '/student-wellbeing'
     | '/students'
+    | '/teacher-development'
+    | '/about/alumni'
+    | '/about/at-a-glance'
+    | '/about/chairperson'
+    | '/about/educational-philosophy'
+    | '/about/leadership'
+    | '/about/news-events'
+    | '/about/our-story'
+    | '/about/signature-school'
+    | '/about/teacher-training'
+    | '/about/vision-mission'
     | '/api/send-digest'
+    | '/careers/apply'
     | '/dashboard/account'
     | '/dashboard/forgot-password'
     | '/dashboard/login'
     | '/dashboard/reset-password'
     | '/dashboard/signup'
+    | '/digital-school/parent-portal'
+    | '/digital-school/student-portal'
+    | '/digital-school/teacher-portal'
+    | '/franchise/apply'
+    | '/news-events/$slug'
+    | '/support/tickets'
+    | '/about'
     | '/dashboard'
+    | '/news-events'
+    | '/support'
+    | '/about/notices/$noticeId'
+    | '/academics/calendar/$id'
     | '/dashboard/admin/audit-log'
     | '/dashboard/admin/overview'
     | '/dashboard/admin/promotion'
@@ -583,6 +1051,7 @@ export interface FileRouteTypes {
     | '/dashboard/admin/whitelist'
     | '/dashboard/school/invoices'
     | '/dashboard/school/summary'
+    | '/about/notices'
     | '/dashboard/admin'
     | '/dashboard/cms'
     | '/dashboard/instructor'
@@ -603,19 +1072,50 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/academics'
+    | '/admission-procedure'
     | '/admissions'
+    | '/apply-online'
     | '/careers'
     | '/contact'
     | '/dashboard'
+    | '/digital-learning'
     | '/email-preview'
+    | '/examinations'
+    | '/faqs'
+    | '/find-a-campus'
     | '/for-schools'
+    | '/franchise'
+    | '/future-skills'
+    | '/leadership'
+    | '/learn-to-earn'
+    | '/login'
+    | '/news-events'
     | '/partners'
     | '/privacy'
     | '/programs'
     | '/projects'
+    | '/school'
     | '/schools'
+    | '/steam'
+    | '/student-life'
+    | '/student-wellbeing'
     | '/students'
+    | '/support'
+    | '/teacher-development'
+    | '/about/alumni'
+    | '/about/at-a-glance'
+    | '/about/chairperson'
+    | '/about/educational-philosophy'
+    | '/about/leadership'
+    | '/about/news-events'
+    | '/about/notices'
+    | '/about/our-story'
+    | '/about/signature-school'
+    | '/about/teacher-training'
+    | '/about/vision-mission'
     | '/api/send-digest'
+    | '/careers/apply'
     | '/dashboard/account'
     | '/dashboard/admin'
     | '/dashboard/cms'
@@ -625,7 +1125,18 @@ export interface FileRouteTypes {
     | '/dashboard/reset-password'
     | '/dashboard/school'
     | '/dashboard/signup'
+    | '/digital-school/parent-portal'
+    | '/digital-school/student-portal'
+    | '/digital-school/teacher-portal'
+    | '/franchise/apply'
+    | '/news-events/$slug'
+    | '/support/tickets'
+    | '/about/'
     | '/dashboard/'
+    | '/news-events/'
+    | '/support/'
+    | '/about/notices/$noticeId'
+    | '/academics/calendar/$id'
     | '/dashboard/admin/audit-log'
     | '/dashboard/admin/overview'
     | '/dashboard/admin/promotion'
@@ -637,6 +1148,7 @@ export interface FileRouteTypes {
     | '/dashboard/admin/whitelist'
     | '/dashboard/school/invoices'
     | '/dashboard/school/summary'
+    | '/about/notices/'
     | '/dashboard/admin/'
     | '/dashboard/cms/'
     | '/dashboard/instructor/'
@@ -657,20 +1169,42 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
+  AboutRoute: typeof AboutRouteWithChildren
+  AcademicsRoute: typeof AcademicsRouteWithChildren
+  AdmissionProcedureRoute: typeof AdmissionProcedureRoute
   AdmissionsRoute: typeof AdmissionsRoute
-  CareersRoute: typeof CareersRoute
+  ApplyOnlineRoute: typeof ApplyOnlineRoute
+  CareersRoute: typeof CareersRouteWithChildren
   ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRouteWithChildren
+  DigitalLearningRoute: typeof DigitalLearningRoute
   EmailPreviewRoute: typeof EmailPreviewRoute
+  ExaminationsRoute: typeof ExaminationsRoute
+  FaqsRoute: typeof FaqsRoute
+  FindACampusRoute: typeof FindACampusRoute
   ForSchoolsRoute: typeof ForSchoolsRoute
+  FranchiseRoute: typeof FranchiseRouteWithChildren
+  FutureSkillsRoute: typeof FutureSkillsRoute
+  LeadershipRoute: typeof LeadershipRoute
+  LearnToEarnRoute: typeof LearnToEarnRoute
+  LoginRoute: typeof LoginRoute
+  NewsEventsRoute: typeof NewsEventsRouteWithChildren
   PartnersRoute: typeof PartnersRoute
   PrivacyRoute: typeof PrivacyRoute
   ProgramsRoute: typeof ProgramsRoute
   ProjectsRoute: typeof ProjectsRoute
+  SchoolRoute: typeof SchoolRoute
   SchoolsRoute: typeof SchoolsRoute
+  SteamRoute: typeof SteamRoute
+  StudentLifeRoute: typeof StudentLifeRoute
+  StudentWellbeingRoute: typeof StudentWellbeingRoute
   StudentsRoute: typeof StudentsRoute
+  SupportRoute: typeof SupportRouteWithChildren
+  TeacherDevelopmentRoute: typeof TeacherDevelopmentRoute
   ApiSendDigestRoute: typeof ApiSendDigestRoute
+  DigitalSchoolParentPortalRoute: typeof DigitalSchoolParentPortalRoute
+  DigitalSchoolStudentPortalRoute: typeof DigitalSchoolStudentPortalRoute
+  DigitalSchoolTeacherPortalRoute: typeof DigitalSchoolTeacherPortalRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -689,11 +1223,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/academics': {
+      id: '/academics'
+      path: '/academics'
+      fullPath: '/academics'
+      preLoaderRoute: typeof AcademicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admission-procedure': {
+      id: '/admission-procedure'
+      path: '/admission-procedure'
+      fullPath: '/admission-procedure'
+      preLoaderRoute: typeof AdmissionProcedureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admissions': {
       id: '/admissions'
       path: '/admissions'
       fullPath: '/admissions'
       preLoaderRoute: typeof AdmissionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/apply-online': {
+      id: '/apply-online'
+      path: '/apply-online'
+      fullPath: '/apply-online'
+      preLoaderRoute: typeof ApplyOnlineRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/careers': {
@@ -717,6 +1272,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/digital-learning': {
+      id: '/digital-learning'
+      path: '/digital-learning'
+      fullPath: '/digital-learning'
+      preLoaderRoute: typeof DigitalLearningRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/email-preview': {
       id: '/email-preview'
       path: '/email-preview'
@@ -724,11 +1286,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EmailPreviewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/examinations': {
+      id: '/examinations'
+      path: '/examinations'
+      fullPath: '/examinations'
+      preLoaderRoute: typeof ExaminationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faqs': {
+      id: '/faqs'
+      path: '/faqs'
+      fullPath: '/faqs'
+      preLoaderRoute: typeof FaqsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/find-a-campus': {
+      id: '/find-a-campus'
+      path: '/find-a-campus'
+      fullPath: '/find-a-campus'
+      preLoaderRoute: typeof FindACampusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/for-schools': {
       id: '/for-schools'
       path: '/for-schools'
       fullPath: '/for-schools'
       preLoaderRoute: typeof ForSchoolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/franchise': {
+      id: '/franchise'
+      path: '/franchise'
+      fullPath: '/franchise'
+      preLoaderRoute: typeof FranchiseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/future-skills': {
+      id: '/future-skills'
+      path: '/future-skills'
+      fullPath: '/future-skills'
+      preLoaderRoute: typeof FutureSkillsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leadership': {
+      id: '/leadership'
+      path: '/leadership'
+      fullPath: '/leadership'
+      preLoaderRoute: typeof LeadershipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/learn-to-earn': {
+      id: '/learn-to-earn'
+      path: '/learn-to-earn'
+      fullPath: '/learn-to-earn'
+      preLoaderRoute: typeof LearnToEarnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news-events': {
+      id: '/news-events'
+      path: '/news-events'
+      fullPath: '/news-events'
+      preLoaderRoute: typeof NewsEventsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/partners': {
@@ -759,11 +1384,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/school': {
+      id: '/school'
+      path: '/school'
+      fullPath: '/school'
+      preLoaderRoute: typeof SchoolRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/schools': {
       id: '/schools'
       path: '/schools'
       fullPath: '/schools'
       preLoaderRoute: typeof SchoolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/steam': {
+      id: '/steam'
+      path: '/steam'
+      fullPath: '/steam'
+      preLoaderRoute: typeof SteamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student-life': {
+      id: '/student-life'
+      path: '/student-life'
+      fullPath: '/student-life'
+      preLoaderRoute: typeof StudentLifeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student-wellbeing': {
+      id: '/student-wellbeing'
+      path: '/student-wellbeing'
+      fullPath: '/student-wellbeing'
+      preLoaderRoute: typeof StudentWellbeingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/students': {
@@ -773,12 +1426,117 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/support': {
+      id: '/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof SupportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teacher-development': {
+      id: '/teacher-development'
+      path: '/teacher-development'
+      fullPath: '/teacher-development'
+      preLoaderRoute: typeof TeacherDevelopmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/': {
+      id: '/about/'
+      path: '/'
+      fullPath: '/about/'
+      preLoaderRoute: typeof AboutIndexRouteImport
+      parentRoute: typeof AboutRoute
+    }
+    '/about/alumni': {
+      id: '/about/alumni'
+      path: '/alumni'
+      fullPath: '/about/alumni'
+      preLoaderRoute: typeof AboutAlumniRouteImport
+      parentRoute: typeof AboutRoute
+    }
+    '/about/at-a-glance': {
+      id: '/about/at-a-glance'
+      path: '/at-a-glance'
+      fullPath: '/about/at-a-glance'
+      preLoaderRoute: typeof AboutAtAGlanceRouteImport
+      parentRoute: typeof AboutRoute
+    }
+    '/about/chairperson': {
+      id: '/about/chairperson'
+      path: '/chairperson'
+      fullPath: '/about/chairperson'
+      preLoaderRoute: typeof AboutChairpersonRouteImport
+      parentRoute: typeof AboutRoute
+    }
+    '/about/educational-philosophy': {
+      id: '/about/educational-philosophy'
+      path: '/educational-philosophy'
+      fullPath: '/about/educational-philosophy'
+      preLoaderRoute: typeof AboutEducationalPhilosophyRouteImport
+      parentRoute: typeof AboutRoute
+    }
+    '/about/leadership': {
+      id: '/about/leadership'
+      path: '/leadership'
+      fullPath: '/about/leadership'
+      preLoaderRoute: typeof AboutLeadershipRouteImport
+      parentRoute: typeof AboutRoute
+    }
+    '/about/news-events': {
+      id: '/about/news-events'
+      path: '/news-events'
+      fullPath: '/about/news-events'
+      preLoaderRoute: typeof AboutNewsEventsRouteImport
+      parentRoute: typeof AboutRoute
+    }
+    '/about/notices': {
+      id: '/about/notices'
+      path: '/notices'
+      fullPath: '/about/notices'
+      preLoaderRoute: typeof AboutNoticesRouteImport
+      parentRoute: typeof AboutRoute
+    }
+    '/about/our-story': {
+      id: '/about/our-story'
+      path: '/our-story'
+      fullPath: '/about/our-story'
+      preLoaderRoute: typeof AboutOurStoryRouteImport
+      parentRoute: typeof AboutRoute
+    }
+    '/about/signature-school': {
+      id: '/about/signature-school'
+      path: '/signature-school'
+      fullPath: '/about/signature-school'
+      preLoaderRoute: typeof AboutSignatureSchoolRouteImport
+      parentRoute: typeof AboutRoute
+    }
+    '/about/teacher-training': {
+      id: '/about/teacher-training'
+      path: '/teacher-training'
+      fullPath: '/about/teacher-training'
+      preLoaderRoute: typeof AboutTeacherTrainingRouteImport
+      parentRoute: typeof AboutRoute
+    }
+    '/about/vision-mission': {
+      id: '/about/vision-mission'
+      path: '/vision-mission'
+      fullPath: '/about/vision-mission'
+      preLoaderRoute: typeof AboutVisionMissionRouteImport
+      parentRoute: typeof AboutRoute
+    }
     '/api/send-digest': {
       id: '/api/send-digest'
       path: '/api/send-digest'
       fullPath: '/api/send-digest'
       preLoaderRoute: typeof ApiSendDigestRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/careers/apply': {
+      id: '/careers/apply'
+      path: '/apply'
+      fullPath: '/careers/apply'
+      preLoaderRoute: typeof CareersApplyRouteImport
+      parentRoute: typeof CareersRoute
     }
     '/dashboard/': {
       id: '/dashboard/'
@@ -849,6 +1607,83 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard/signup'
       preLoaderRoute: typeof DashboardSignupRouteImport
       parentRoute: typeof DashboardRoute
+    }
+    '/digital-school/parent-portal': {
+      id: '/digital-school/parent-portal'
+      path: '/digital-school/parent-portal'
+      fullPath: '/digital-school/parent-portal'
+      preLoaderRoute: typeof DigitalSchoolParentPortalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/digital-school/student-portal': {
+      id: '/digital-school/student-portal'
+      path: '/digital-school/student-portal'
+      fullPath: '/digital-school/student-portal'
+      preLoaderRoute: typeof DigitalSchoolStudentPortalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/digital-school/teacher-portal': {
+      id: '/digital-school/teacher-portal'
+      path: '/digital-school/teacher-portal'
+      fullPath: '/digital-school/teacher-portal'
+      preLoaderRoute: typeof DigitalSchoolTeacherPortalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/franchise/apply': {
+      id: '/franchise/apply'
+      path: '/apply'
+      fullPath: '/franchise/apply'
+      preLoaderRoute: typeof FranchiseApplyRouteImport
+      parentRoute: typeof FranchiseRoute
+    }
+    '/news-events/': {
+      id: '/news-events/'
+      path: '/'
+      fullPath: '/news-events/'
+      preLoaderRoute: typeof NewsEventsIndexRouteImport
+      parentRoute: typeof NewsEventsRoute
+    }
+    '/news-events/$slug': {
+      id: '/news-events/$slug'
+      path: '/$slug'
+      fullPath: '/news-events/$slug'
+      preLoaderRoute: typeof NewsEventsSlugRouteImport
+      parentRoute: typeof NewsEventsRoute
+    }
+    '/support/': {
+      id: '/support/'
+      path: '/'
+      fullPath: '/support/'
+      preLoaderRoute: typeof SupportIndexRouteImport
+      parentRoute: typeof SupportRoute
+    }
+    '/support/tickets': {
+      id: '/support/tickets'
+      path: '/tickets'
+      fullPath: '/support/tickets'
+      preLoaderRoute: typeof SupportTicketsRouteImport
+      parentRoute: typeof SupportRoute
+    }
+    '/about/notices/': {
+      id: '/about/notices/'
+      path: '/'
+      fullPath: '/about/notices/'
+      preLoaderRoute: typeof AboutNoticesIndexRouteImport
+      parentRoute: typeof AboutNoticesRoute
+    }
+    '/about/notices/$noticeId': {
+      id: '/about/notices/$noticeId'
+      path: '/$noticeId'
+      fullPath: '/about/notices/$noticeId'
+      preLoaderRoute: typeof AboutNoticesNoticeIdRouteImport
+      parentRoute: typeof AboutNoticesRoute
+    }
+    '/academics/calendar/$id': {
+      id: '/academics/calendar/$id'
+      path: '/calendar/$id'
+      fullPath: '/academics/calendar/$id'
+      preLoaderRoute: typeof AcademicsCalendarIdRouteImport
+      parentRoute: typeof AcademicsRoute
     }
     '/dashboard/admin/': {
       id: '/dashboard/admin/'
@@ -1042,6 +1877,75 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AboutNoticesRouteChildren {
+  AboutNoticesNoticeIdRoute: typeof AboutNoticesNoticeIdRoute
+  AboutNoticesIndexRoute: typeof AboutNoticesIndexRoute
+}
+
+const AboutNoticesRouteChildren: AboutNoticesRouteChildren = {
+  AboutNoticesNoticeIdRoute: AboutNoticesNoticeIdRoute,
+  AboutNoticesIndexRoute: AboutNoticesIndexRoute,
+}
+
+const AboutNoticesRouteWithChildren = AboutNoticesRoute._addFileChildren(
+  AboutNoticesRouteChildren,
+)
+
+interface AboutRouteChildren {
+  AboutAlumniRoute: typeof AboutAlumniRoute
+  AboutAtAGlanceRoute: typeof AboutAtAGlanceRoute
+  AboutChairpersonRoute: typeof AboutChairpersonRoute
+  AboutEducationalPhilosophyRoute: typeof AboutEducationalPhilosophyRoute
+  AboutLeadershipRoute: typeof AboutLeadershipRoute
+  AboutNewsEventsRoute: typeof AboutNewsEventsRoute
+  AboutNoticesRoute: typeof AboutNoticesRouteWithChildren
+  AboutOurStoryRoute: typeof AboutOurStoryRoute
+  AboutSignatureSchoolRoute: typeof AboutSignatureSchoolRoute
+  AboutTeacherTrainingRoute: typeof AboutTeacherTrainingRoute
+  AboutVisionMissionRoute: typeof AboutVisionMissionRoute
+  AboutIndexRoute: typeof AboutIndexRoute
+}
+
+const AboutRouteChildren: AboutRouteChildren = {
+  AboutAlumniRoute: AboutAlumniRoute,
+  AboutAtAGlanceRoute: AboutAtAGlanceRoute,
+  AboutChairpersonRoute: AboutChairpersonRoute,
+  AboutEducationalPhilosophyRoute: AboutEducationalPhilosophyRoute,
+  AboutLeadershipRoute: AboutLeadershipRoute,
+  AboutNewsEventsRoute: AboutNewsEventsRoute,
+  AboutNoticesRoute: AboutNoticesRouteWithChildren,
+  AboutOurStoryRoute: AboutOurStoryRoute,
+  AboutSignatureSchoolRoute: AboutSignatureSchoolRoute,
+  AboutTeacherTrainingRoute: AboutTeacherTrainingRoute,
+  AboutVisionMissionRoute: AboutVisionMissionRoute,
+  AboutIndexRoute: AboutIndexRoute,
+}
+
+const AboutRouteWithChildren = AboutRoute._addFileChildren(AboutRouteChildren)
+
+interface AcademicsRouteChildren {
+  AcademicsCalendarIdRoute: typeof AcademicsCalendarIdRoute
+}
+
+const AcademicsRouteChildren: AcademicsRouteChildren = {
+  AcademicsCalendarIdRoute: AcademicsCalendarIdRoute,
+}
+
+const AcademicsRouteWithChildren = AcademicsRoute._addFileChildren(
+  AcademicsRouteChildren,
+)
+
+interface CareersRouteChildren {
+  CareersApplyRoute: typeof CareersApplyRoute
+}
+
+const CareersRouteChildren: CareersRouteChildren = {
+  CareersApplyRoute: CareersApplyRoute,
+}
+
+const CareersRouteWithChildren =
+  CareersRoute._addFileChildren(CareersRouteChildren)
+
 interface DashboardAdminRouteChildren {
   DashboardAdminAuditLogRoute: typeof DashboardAdminAuditLogRoute
   DashboardAdminOverviewRoute: typeof DashboardAdminOverviewRoute
@@ -1170,22 +2074,83 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
   DashboardRouteChildren,
 )
 
+interface FranchiseRouteChildren {
+  FranchiseApplyRoute: typeof FranchiseApplyRoute
+}
+
+const FranchiseRouteChildren: FranchiseRouteChildren = {
+  FranchiseApplyRoute: FranchiseApplyRoute,
+}
+
+const FranchiseRouteWithChildren = FranchiseRoute._addFileChildren(
+  FranchiseRouteChildren,
+)
+
+interface NewsEventsRouteChildren {
+  NewsEventsSlugRoute: typeof NewsEventsSlugRoute
+  NewsEventsIndexRoute: typeof NewsEventsIndexRoute
+}
+
+const NewsEventsRouteChildren: NewsEventsRouteChildren = {
+  NewsEventsSlugRoute: NewsEventsSlugRoute,
+  NewsEventsIndexRoute: NewsEventsIndexRoute,
+}
+
+const NewsEventsRouteWithChildren = NewsEventsRoute._addFileChildren(
+  NewsEventsRouteChildren,
+)
+
+interface SupportRouteChildren {
+  SupportTicketsRoute: typeof SupportTicketsRoute
+  SupportIndexRoute: typeof SupportIndexRoute
+}
+
+const SupportRouteChildren: SupportRouteChildren = {
+  SupportTicketsRoute: SupportTicketsRoute,
+  SupportIndexRoute: SupportIndexRoute,
+}
+
+const SupportRouteWithChildren =
+  SupportRoute._addFileChildren(SupportRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
+  AboutRoute: AboutRouteWithChildren,
+  AcademicsRoute: AcademicsRouteWithChildren,
+  AdmissionProcedureRoute: AdmissionProcedureRoute,
   AdmissionsRoute: AdmissionsRoute,
-  CareersRoute: CareersRoute,
+  ApplyOnlineRoute: ApplyOnlineRoute,
+  CareersRoute: CareersRouteWithChildren,
   ContactRoute: ContactRoute,
   DashboardRoute: DashboardRouteWithChildren,
+  DigitalLearningRoute: DigitalLearningRoute,
   EmailPreviewRoute: EmailPreviewRoute,
+  ExaminationsRoute: ExaminationsRoute,
+  FaqsRoute: FaqsRoute,
+  FindACampusRoute: FindACampusRoute,
   ForSchoolsRoute: ForSchoolsRoute,
+  FranchiseRoute: FranchiseRouteWithChildren,
+  FutureSkillsRoute: FutureSkillsRoute,
+  LeadershipRoute: LeadershipRoute,
+  LearnToEarnRoute: LearnToEarnRoute,
+  LoginRoute: LoginRoute,
+  NewsEventsRoute: NewsEventsRouteWithChildren,
   PartnersRoute: PartnersRoute,
   PrivacyRoute: PrivacyRoute,
   ProgramsRoute: ProgramsRoute,
   ProjectsRoute: ProjectsRoute,
+  SchoolRoute: SchoolRoute,
   SchoolsRoute: SchoolsRoute,
+  SteamRoute: SteamRoute,
+  StudentLifeRoute: StudentLifeRoute,
+  StudentWellbeingRoute: StudentWellbeingRoute,
   StudentsRoute: StudentsRoute,
+  SupportRoute: SupportRouteWithChildren,
+  TeacherDevelopmentRoute: TeacherDevelopmentRoute,
   ApiSendDigestRoute: ApiSendDigestRoute,
+  DigitalSchoolParentPortalRoute: DigitalSchoolParentPortalRoute,
+  DigitalSchoolStudentPortalRoute: DigitalSchoolStudentPortalRoute,
+  DigitalSchoolTeacherPortalRoute: DigitalSchoolTeacherPortalRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

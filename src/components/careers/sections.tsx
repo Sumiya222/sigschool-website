@@ -131,7 +131,7 @@ export function CrHero() {
   );
 }
 
-/* ── 2 · Why Northbridge — light ───────────────────────────────────────── */
+/* ── 2 · Why Signature School — light ──────────────────────────────────── */
 
 const WHY_ICONS = [Users, Clock, Cpu, Building2];
 

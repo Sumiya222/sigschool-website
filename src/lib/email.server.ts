@@ -89,7 +89,7 @@ export type BrandedEmailOptions = {
   steps?: EmailStep[];
   ctaLabel?: string;
   ctaUrl?: string;
-  /** Human sign-off shown before the footer, e.g. "The Northbridge Prep Team". */
+  /** Human sign-off shown before the footer, e.g. "The Signature School Team". */
   signOff?: string;
   footerNote?: string;
   /** Unique reference ID, e.g. "INQ-2026-0184". */

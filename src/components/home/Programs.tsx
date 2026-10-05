@@ -82,7 +82,7 @@ export function Programs() {
       lead={str(
         c,
         "subhead",
-        "Academics anchor every day, with clubs, arts, and athletics rounding out the experience — the pillars that make up life at Northbridge Prep.",
+        "Academics anchor every day, supported by technology fluency, character and practical real-world readiness.",
       )}
     >
       {/* Three parallel public programs — equal-weight cards, no dead space */}

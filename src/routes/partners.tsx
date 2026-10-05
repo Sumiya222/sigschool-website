@@ -1,8 +1,7 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
-
-/** /partners was retired — partner information lives on /about. */
-export const Route = createFileRoute("/partners")({
-  beforeLoad: () => {
-    throw redirect({ to: "/about", statusCode: 301 });
-  },
-});
+import { createFileRoute } from "@tanstack/react-router";
+import { PublicPage } from "@/components/institutional/PublicPage";
+import { PUBLIC_PAGES } from "@/lib/public-content";
+export const Route = createFileRoute("/partners")({ component: Page });
+function Page() {
+  return <PublicPage page={PUBLIC_PAGES["/franchise"]} />;
+}
