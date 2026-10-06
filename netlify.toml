@@ -4,7 +4,9 @@
 # tells Netlify how to run that build and where the output lands.
 [build]
   command = "npm run build"
-  publish = "dist"
+  publish = ".output/public"
 
 [build.environment]
-  NODE_VERSION = "22"
+  NODE_VERSION = "22.23.2"
+  NITRO_PRESET_TARGET = "netlify"
+
