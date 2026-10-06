@@ -1,5 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { PublicPage } from "@/components/institutional/PublicPage";
+import { Outlet, createFileRoute } from "@tanstack/react-router";
 import { PUBLIC_PAGES } from "@/lib/public-content";
 import { BRAND } from "@/lib/brand";
 const page = PUBLIC_PAGES["/franchise"];
@@ -10,8 +9,8 @@ export const Route = createFileRoute("/franchise")({
       { name: "description", content: page.intro },
     ],
   }),
-  component: Page,
+  component: FranchiseLayout,
 });
-function Page() {
-  return <PublicPage page={page} />;
+function FranchiseLayout() {
+  return <Outlet />;
 }

@@ -5045,6 +5045,309 @@
   }
 }
 
+/* Why Signature franchise journey. */
+.franchise-why-hero {
+  position: relative;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 48px 0 58px;
+  background: linear-gradient(118deg, #062650 0%, #0b376f 58%, #15558f 100%);
+  color: #fff;
+}
+.franchise-why-hero::after {
+  content: "";
+  position: absolute;
+  right: -120px;
+  bottom: -240px;
+  width: 520px;
+  height: 520px;
+  border: 1px solid rgb(212 175 55 / 0.35);
+  border-radius: 50%;
+}
+.franchise-why-hero .tss-container {
+  position: relative;
+  z-index: 1;
+}
+.franchise-why-hero h1 {
+  max-width: 1150px;
+  margin: 13px 0 18px;
+  color: #fff;
+  font-size: clamp(3rem, 5vw, 5rem);
+  font-weight: 400 !important;
+  line-height: 1;
+}
+.franchise-why-hero h2 {
+  margin: 0 0 18px;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+}
+.franchise-why-hero > .tss-container > p:last-child {
+  max-width: 650px;
+  margin: 0;
+  color: #e3edf7;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+.franchise-journey-page {
+  min-height: 100vh;
+  padding: 54px 20px 70px;
+  background: #eef6ff;
+  color: #0b2d5b;
+}
+.franchise-journey-inner {
+  width: min(1160px, 100%);
+  margin-inline: auto;
+}
+#main-content .franchise-journey-page h1 {
+  margin: 12px 0 32px;
+  color: #0b2d5b;
+  font-size: clamp(2.8rem, 5vw, 4.4rem);
+  font-weight: 700 !important;
+  line-height: 1;
+}
+
+/* Consistent homepage typography scale for every public route. */
+#main-content {
+  --public-title-size: clamp(2.55rem, 4vw, 4rem);
+  --public-section-size: clamp(1.8rem, 3vw, 2.65rem);
+  --public-card-size: 1.2rem;
+  --public-body-size: 0.86rem;
+}
+#main-content :is(.about-page-hero, .compact-page-hero, .tss-hero, .ref-inner-hero) h1 {
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: var(--public-title-size);
+  line-height: 1;
+}
+#main-content :is(.about-section, .tss-section, .ref-section, .recorded-content) > div > h2 {
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: var(--public-section-size);
+  line-height: 1.08;
+}
+#main-content
+  :is(
+    .about-entry-grid,
+    .about-pillar-grid,
+    .about-training-grid,
+    .support-audience-grid,
+    .contact-support-grid
+  )
+  h3,
+#main-content :is(.support-audience-grid, .contact-support-grid) h2 {
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: var(--public-card-size) !important;
+  line-height: 1.25;
+}
+#main-content
+  :is(
+    .about-section,
+    .tss-section,
+    .ref-section,
+    .recorded-content,
+    .support-reference,
+    .contact-reference,
+    .campus-finder
+  )
+  :is(p, li) {
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: var(--public-body-size);
+  line-height: 1.6;
+}
+.franchise-timeline {
+  position: relative;
+  display: grid;
+  gap: 16px;
+}
+.franchise-timeline::before {
+  content: "";
+  position: absolute;
+  top: 25px;
+  bottom: 25px;
+  left: 21px;
+  width: 2px;
+  background: #cfe0ef;
+}
+.franchise-timeline article {
+  position: relative;
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 22px;
+  align-items: center;
+}
+.franchise-timeline article > span {
+  position: relative;
+  z-index: 1;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff2c9;
+  color: #b77900;
+  box-shadow: 0 8px 20px rgb(185 127 0 / 0.15);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+.franchise-timeline article > div {
+  min-height: 108px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 22px;
+  border: 1px solid #d1e1ed;
+  border-radius: 12px;
+  background: rgb(255 255 255 / 0.68);
+  box-shadow: 0 10px 26px rgb(9 48 91 / 0.06);
+}
+.franchise-timeline h2 {
+  margin: 0 0 9px;
+  color: #0b2d5b;
+  font-size: 1.25rem !important;
+  font-weight: 400 !important;
+}
+.franchise-timeline p {
+  margin: 0;
+  color: #4f7090;
+  font-size: 0.84rem !important;
+  line-height: 1.55;
+}
+.franchise-journey-cta {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: #dfb62f;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+@media (max-width: 600px) {
+  .franchise-why-hero {
+    min-height: 300px;
+    padding: 38px 0 44px;
+  }
+  .franchise-why-hero h1 {
+    font-size: 2.65rem;
+  }
+  .franchise-journey-page {
+    padding: 42px 16px 54px;
+  }
+  .franchise-journey-page h1 {
+    font-size: 2.5rem;
+  }
+  .franchise-timeline article {
+    grid-template-columns: 38px 1fr;
+    gap: 12px;
+  }
+  .franchise-timeline article > span {
+    width: 38px;
+    height: 38px;
+  }
+  .franchise-timeline::before {
+    left: 18px;
+  }
+}
+
+/* Franchise partnership request. */
+.franchise-apply-hero {
+  min-height: 300px !important;
+  padding: 34px 0 42px !important;
+}
+.franchise-apply-hero h1 {
+  max-width: 1100px;
+  font-size: clamp(2.8rem, 5vw, 4.8rem) !important;
+  font-weight: 400 !important;
+}
+.franchise-apply-section {
+  padding: 42px 20px 54px;
+  background: #eef6ff;
+}
+.franchise-partner-form {
+  width: min(1040px, 100%);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 18px;
+  padding: 30px 34px 34px;
+  border: 1px solid #b9d8f0;
+  border-radius: 17px;
+  background: rgb(255 255 255 / 0.66);
+  box-shadow: 0 18px 45px rgb(10 49 91 / 0.11);
+}
+.franchise-partner-form h2 {
+  grid-column: 1 / -1;
+  margin: 0 0 8px;
+  color: #0b2d5b;
+  font-size: 2rem !important;
+  font-weight: 400 !important;
+}
+.franchise-partner-form label {
+  display: grid;
+  gap: 6px;
+  color: #385c80;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+.franchise-partner-form label > span {
+  color: #b67e08;
+}
+.franchise-partner-form :is(input, select, textarea) {
+  width: 100%;
+  min-height: 42px;
+  padding: 9px 12px;
+  border: 1px solid #c4d8e9;
+  border-radius: 7px;
+  background: #fff;
+  color: #173e65;
+  outline: 0;
+  font-size: 0.82rem;
+}
+.franchise-partner-form :is(input, select, textarea):focus {
+  border-color: #d4af37;
+  box-shadow: 0 0 0 3px rgb(212 175 55 / 0.13);
+}
+.franchise-partner-form textarea {
+  min-height: 92px;
+  resize: vertical;
+}
+.franchise-partner-form button {
+  min-height: 44px;
+  justify-self: start;
+  padding: 10px 21px;
+  border: 0;
+  border-radius: 999px;
+  background: #dfb62f;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.franchise-partner-form button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+.franchise-partner-form .contact-form-status {
+  grid-column: 1 / -1;
+}
+@media (max-width: 700px) {
+  .franchise-apply-hero {
+    min-height: 240px !important;
+  }
+  .franchise-partner-form {
+    grid-template-columns: 1fr;
+    padding: 25px 20px;
+  }
+  .franchise-partner-form h2,
+  .franchise-partner-form .contact-form-status {
+    grid-column: auto;
+  }
+}
+
 /* Compact campus finder. */
 .campus-finder {
   min-height: 520px;

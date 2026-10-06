@@ -69,6 +69,7 @@ import { Route as DashboardSignupRouteImport } from './routes/dashboard.signup'
 import { Route as DigitalSchoolParentPortalRouteImport } from './routes/digital-school.parent-portal'
 import { Route as DigitalSchoolStudentPortalRouteImport } from './routes/digital-school.student-portal'
 import { Route as DigitalSchoolTeacherPortalRouteImport } from './routes/digital-school.teacher-portal'
+import { Route as FranchiseIndexRouteImport } from './routes/franchise.index'
 import { Route as FranchiseApplyRouteImport } from './routes/franchise.apply'
 import { Route as NewsEventsIndexRouteImport } from './routes/news-events.index'
 import { Route as NewsEventsSlugRouteImport } from './routes/news-events.$slug'
@@ -409,6 +410,11 @@ const DigitalSchoolTeacherPortalRoute =
     path: '/digital-school/teacher-portal',
     getParentRoute: () => rootRouteImport,
   } as any)
+const FranchiseIndexRoute = FranchiseIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => FranchiseRoute,
+} as any)
 const FranchiseApplyRoute = FranchiseApplyRouteImport.update({
   id: '/apply',
   path: '/apply',
@@ -663,6 +669,7 @@ export interface FileRoutesByFullPath {
   '/support/tickets': typeof SupportTicketsRoute
   '/about/': typeof AboutIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/franchise/': typeof FranchiseIndexRoute
   '/news-events/': typeof NewsEventsIndexRoute
   '/support/': typeof SupportIndexRoute
   '/about/notices/$noticeId': typeof AboutNoticesNoticeIdRoute
@@ -710,7 +717,6 @@ export interface FileRoutesByTo {
   '/faqs': typeof FaqsRoute
   '/find-a-campus': typeof FindACampusRoute
   '/for-schools': typeof ForSchoolsRoute
-  '/franchise': typeof FranchiseRouteWithChildren
   '/future-skills': typeof FutureSkillsRoute
   '/leadership': typeof LeadershipRoute
   '/learn-to-earn': typeof LearnToEarnRoute
@@ -751,6 +757,7 @@ export interface FileRoutesByTo {
   '/support/tickets': typeof SupportTicketsRoute
   '/about': typeof AboutIndexRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/franchise': typeof FranchiseIndexRoute
   '/news-events': typeof NewsEventsIndexRoute
   '/support': typeof SupportIndexRoute
   '/about/notices/$noticeId': typeof AboutNoticesNoticeIdRoute
@@ -849,6 +856,7 @@ export interface FileRoutesById {
   '/support/tickets': typeof SupportTicketsRoute
   '/about/': typeof AboutIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/franchise/': typeof FranchiseIndexRoute
   '/news-events/': typeof NewsEventsIndexRoute
   '/support/': typeof SupportIndexRoute
   '/about/notices/$noticeId': typeof AboutNoticesNoticeIdRoute
@@ -948,6 +956,7 @@ export interface FileRouteTypes {
     | '/support/tickets'
     | '/about/'
     | '/dashboard/'
+    | '/franchise/'
     | '/news-events/'
     | '/support/'
     | '/about/notices/$noticeId'
@@ -995,7 +1004,6 @@ export interface FileRouteTypes {
     | '/faqs'
     | '/find-a-campus'
     | '/for-schools'
-    | '/franchise'
     | '/future-skills'
     | '/leadership'
     | '/learn-to-earn'
@@ -1036,6 +1044,7 @@ export interface FileRouteTypes {
     | '/support/tickets'
     | '/about'
     | '/dashboard'
+    | '/franchise'
     | '/news-events'
     | '/support'
     | '/about/notices/$noticeId'
@@ -1133,6 +1142,7 @@ export interface FileRouteTypes {
     | '/support/tickets'
     | '/about/'
     | '/dashboard/'
+    | '/franchise/'
     | '/news-events/'
     | '/support/'
     | '/about/notices/$noticeId'
@@ -1629,6 +1639,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DigitalSchoolTeacherPortalRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/franchise/': {
+      id: '/franchise/'
+      path: '/'
+      fullPath: '/franchise/'
+      preLoaderRoute: typeof FranchiseIndexRouteImport
+      parentRoute: typeof FranchiseRoute
+    }
     '/franchise/apply': {
       id: '/franchise/apply'
       path: '/apply'
@@ -2076,10 +2093,12 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
 
 interface FranchiseRouteChildren {
   FranchiseApplyRoute: typeof FranchiseApplyRoute
+  FranchiseIndexRoute: typeof FranchiseIndexRoute
 }
 
 const FranchiseRouteChildren: FranchiseRouteChildren = {
   FranchiseApplyRoute: FranchiseApplyRoute,
+  FranchiseIndexRoute: FranchiseIndexRoute,
 }
 
 const FranchiseRouteWithChildren = FranchiseRoute._addFileChildren(

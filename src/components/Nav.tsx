@@ -53,11 +53,6 @@ const groups = [
     href: "/franchise",
     items: [
       ["Why Signature", "/franchise#why-signature"],
-      ["Our Network", "/franchise#network"],
-      ["Franchise Models", "/franchise#models"],
-      ["Franchise Process", "/franchise#process"],
-      ["Partner Support", "/franchise#support"],
-      ["Technology", "/franchise#technology"],
       ["Become a Partner", "/franchise/apply"],
     ],
   },
