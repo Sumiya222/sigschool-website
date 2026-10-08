@@ -62,14 +62,24 @@ export const PUBLIC_PAGES: Record<string, PublicPage> = {
   "/about/vision-mission": {
     title: "Vision & Mission",
     eyebrow: "About",
-    intro: "The approved institutional vision and mission are awaiting confirmation.",
-    sections: [missing("Official Vision"), missing("Official Mission")],
+    intro:
+      "The Signature Schools combines accessible education, strong academics, values and digital learning to prepare every child for the future.",
+    sections: [
+      {
+        title: "Our Vision",
+        body: "To develop confident, ethical and future-ready learners through a modern digital learning ecosystem that empowers every child to learn deeply, lead responsibly and grow with purpose.",
+      },
+      {
+        title: "Our Mission",
+        body: "To provide accessible, high-quality and value-integrated education through a bookless digital model that combines strong academics, technology, project-based learning, creativity, life skills, character development and real-world readiness.",
+      },
+    ],
   },
   "/about/chairperson": {
     title: "Chairperson's Message",
     eyebrow: "About",
-    intro: MISSING_CONTENT,
-    sections: [missing("Chairperson name, title, photograph and approved message")],
+    intro: "Engr. Dr. Muhammad Afzal (Lt. Gen. Retd., HI(M)) — Chairperson",
+    sections: [missing("Approved Chairperson portrait and 80–120 word profile")],
   },
   "/about/educational-philosophy": {
     title: "Educational Philosophy",
@@ -515,11 +525,11 @@ Object.assign(PUBLIC_PAGES, {
     sections: [
       {
         title: "Our Vision",
-        body: "To develop a future-ready generation equipped with knowledge, character, confidence, creativity and practical skills to lead and contribute meaningfully to the world.",
+        body: "To develop confident, ethical and future-ready learners through a modern digital learning ecosystem that empowers every child to learn deeply, lead responsibly and grow with purpose.",
       },
       {
         title: "Our Mission",
-        body: "Signature School aims to provide technology-enabled education that develops academic excellence, character, creativity, critical thinking, communication, leadership, digital literacy, collaboration, problem-solving and entrepreneurial thinking.",
+        body: "To provide accessible, high-quality and value-integrated education through a bookless digital model that combines strong academics, technology, project-based learning, creativity, life skills, character development and real-world readiness.",
         items: [
           "Academic Excellence",
           "Character",
@@ -828,39 +838,40 @@ Object.assign(PUBLIC_PAGES, {
   "/faqs": {
     eyebrow: "Help Center",
     title: "Frequently Asked Questions",
-    intro: "Helpful answers for the Signature community across school life and support.",
+    intro:
+      "Helpful answers about The Signature Schools, admissions, learning and partnership opportunities.",
     sections: [
       {
-        title: "What makes Signature School different?",
-        body: "Signature School is positioned as a modern, digital-first and future-focused learning community.",
+        title: "What is The Signature Schools?",
+        body: "A modern school network built around a digital, bookless, value-integrated and future-ready learning model.",
       },
       {
-        title: "How can I apply?",
-        body: "Use the Apply Online page to begin an admission request.",
+        title: "Which classes are offered?",
+        body: "The model is designed from Early Childhood Education (ECE) through Grade 7, with expansion according to campus approvals and academic planning.",
       },
       {
-        title: "Where can I find calendar information?",
-        body: "Academic calendar books and their detail pages are available under Academics.",
+        title: "What does ‘bookless digital school’ mean?",
+        body: "Students learn through structured digital content, teacher-guided instruction, projects, activities and carefully designed learning resources rather than depending only on traditional textbooks.",
       },
       {
-        title: "Will every learner use the same tools?",
-        body: "Digital learning experiences and approved platform access may vary by programme and grade.",
+        title: "What makes the school different?",
+        body: "The programme blends core academics with digital learning, project-based learning, character education, financial literacy, entrepreneurship, culture, creativity, technology, robotics and future skills.",
       },
       {
-        title: "What activities are available?",
-        body: "Student life offerings are developed around activities, clubs, events and experiences.",
+        title: "How are students assessed?",
+        body: "Assessment is continuous and includes classwork, activities, projects, formative assessment and term-based evaluation according to the school assessment policy.",
       },
       {
-        title: "Can transfer students apply?",
-        body: "The application form includes a transfer option; the final process is subject to campus review.",
+        title: "How can parents apply for admission?",
+        body: "Parents may contact the school through the official phone number, email, website inquiry form or nearest campus.",
       },
       {
-        title: "How can I become a partner?",
-        body: "Use the partnership request route to register interest.",
+        title: "Does the school provide technology-based learning?",
+        body: "Yes. Digital learning is a central part of the model and is designed to improve engagement, access to content, creativity and practical learning.",
       },
       {
-        title: "How do I apply for a role?",
-        body: "Use the careers page to explore categories and submit an application.",
+        title: "How can someone apply for a franchise?",
+        body: "Prospective partners can use the dedicated franchise inquiry form, followed by screening, orientation and formal documentation.",
       },
     ],
   },

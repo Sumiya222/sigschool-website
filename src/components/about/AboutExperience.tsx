@@ -2,11 +2,19 @@ import { useEffect, useState, type ReactNode } from "react";
 import {
   ArrowLeft,
   ArrowRight,
+  BookOpenCheck,
+  Building2,
   Check,
   ChevronLeft,
   ChevronRight,
   Download,
+  GraduationCap,
+  HeartHandshake,
+  Lightbulb,
   MapPin,
+  MonitorSmartphone,
+  School,
+  Users,
   X,
 } from "lucide-react";
 import { aboutCards, learningModel } from "@/data/aboutData";
@@ -125,7 +133,7 @@ export function AboutOverviewPage() {
       <Hero
         title="About Signature School"
         subtitle="Learning Today. Leading Tomorrow."
-        description="Signature School is a modern, digital-first learning environment designed to develop academically strong, confident, creative and future-ready learners."
+        description="The Signature Schools creates a learning environment where technology supports understanding, teachers guide discovery, and students build the knowledge, skills, values and confidence needed for the future."
       />
       <Section eyebrow="Explore Our School" title="Discover Signature School">
         <div className="about-entry-grid">
@@ -244,16 +252,17 @@ export function VisionMissionPage() {
           <article>
             <h2>Our Vision</h2>
             <p>
-              “To develop a future-ready generation equipped with knowledge, character, confidence,
-              creativity and practical skills to lead and contribute meaningfully to the world.”
+              To develop confident, ethical and future-ready learners through a modern digital
+              learning ecosystem that empowers every child to learn deeply, lead responsibly and
+              grow with purpose.
             </p>
           </article>
           <article>
             <h2>Our Mission</h2>
             <p>
-              Signature School aims to provide technology-enabled education that develops academic
-              excellence, character, creativity, critical thinking, communication, leadership,
-              digital literacy, collaboration, problem-solving and entrepreneurial thinking.
+              To provide accessible, high-quality and value-integrated education through a bookless
+              digital model that combines strong academics, technology, project-based learning,
+              creativity, life skills, character development and real-world readiness.
             </p>
           </article>
         </div>
@@ -289,7 +298,8 @@ export function ChairpersonPage() {
           </div>
           <article>
             <p className="ref-kicker">Chairperson — Signature School</p>
-            <h3>[Chairperson Name — To Be Provided]</h3>
+            <h3>Engr. Dr. Muhammad Afzal</h3>
+            <p>Lt. Gen. (Retd.), HI(M) — Chairperson</p>
             <blockquote>
               Welcome to Signature School. Our purpose is to create an educational environment in
               which every learner can build strong academic foundations, develop sound character and
@@ -299,8 +309,8 @@ export function ChairpersonPage() {
               to help students become thoughtful, capable and responsible future leaders.
             </blockquote>
             <p className="about-note">
-              The official Chairperson name, photograph and approved message are required before
-              publication.
+              The approved Chairperson portrait and official 80–120 word profile are still required
+              before publication.
             </p>
           </article>
         </div>
@@ -320,20 +330,37 @@ export function ChairpersonPage() {
 }
 
 export function AtAGlancePage() {
+  const statIcons = [Building2, GraduationCap, Users, MapPin, BookOpenCheck, School];
+  const ecosystemIcons = [
+    GraduationCap,
+    Users,
+    HeartHandshake,
+    Building2,
+    MonitorSmartphone,
+    Lightbulb,
+  ];
+
   return (
-    <>
+    <div className="glance-page">
       <Hero
         title="Signature School at a Glance"
         subtitle="A Connected Ecosystem for Future-Ready Learning"
+        description="A clear view of the people, places and learning systems that shape the Signature School experience."
       />
-      <Section eyebrow="Institutional Overview" title="At a Glance">
+      <Section eyebrow="Institutional Overview" title="Our school in focus">
         <div className="about-stats">
-          {schoolStats.map((stat) => (
-            <article key={stat.label}>
-              <strong>{stat.value}</strong>
-              <span>{stat.label}</span>
-            </article>
-          ))}
+          {schoolStats.map((stat, index) => {
+            const Icon = statIcons[index % statIcons.length];
+            return (
+              <article key={stat.label}>
+                <div>
+                  <Icon aria-hidden />
+                </div>
+                <strong>{stat.value}</strong>
+                <span>{stat.label}</span>
+              </article>
+            );
+          })}
         </div>
       </Section>
       <Section
@@ -343,10 +370,14 @@ export function AtAGlancePage() {
       >
         <div className="about-map">
           <div className="about-map-grid" aria-hidden="true"></div>
+          <div className="about-map-orbit" aria-hidden="true"></div>
           {campuses.map((campus) => (
             <article key={campus.id}>
-              <MapPin />
+              <span>
+                <MapPin aria-hidden />
+              </span>
               <div>
+                <small>Campus directory</small>
                 <h3>{campus.name}</h3>
                 <p>{campus.city}</p>
                 <span>{campus.area}</span>
@@ -357,16 +388,22 @@ export function AtAGlancePage() {
       </Section>
       <Section eyebrow="Connected Community" title="Our Educational Ecosystem">
         <div className="about-pillar-grid about-six">
-          {ecosystem.map(([title, body]) => (
-            <article key={title}>
-              <h3>{title}</h3>
-              <p>{body}</p>
-            </article>
-          ))}
+          {ecosystem.map(([title, body], index) => {
+            const Icon = ecosystemIcons[index % ecosystemIcons.length];
+            return (
+              <article key={title}>
+                <span>
+                  <Icon aria-hidden />
+                </span>
+                <h3>{title}</h3>
+                <p>{body}</p>
+              </article>
+            );
+          })}
         </div>
       </Section>
       <Cta />
-    </>
+    </div>
   );
 }
 

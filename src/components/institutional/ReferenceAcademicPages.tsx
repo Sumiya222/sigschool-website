@@ -1,18 +1,16 @@
 import { Check, ArrowRight } from "lucide-react";
 
 const ageEligibility = [
-  "Preschool",
-  "Prep / KG",
-  "Class 1",
-  "Class 2",
-  "Class 3",
-  "Class 4",
-  "Class 5",
-  "Class 6",
-  "Class 7",
-  "Class 8",
-  "Class 9",
-  "Class 10",
+  { name: "Pre-Nursery", minimum: "2.5 years", maximum: "3.5 years" },
+  { name: "Nursery", minimum: "3.5 years", maximum: "4.5 years" },
+  { name: "KG / Kindergarten", minimum: "4.5 years", maximum: "5.5 years" },
+  { name: "Grade 1", minimum: "5.5 years", maximum: "6.5 years" },
+  { name: "Grade 2", minimum: "6.5 years", maximum: "7.5 years" },
+  { name: "Grade 3", minimum: "7.5 years", maximum: "8.5 years" },
+  { name: "Grade 4", minimum: "8.5 years", maximum: "9.5 years" },
+  { name: "Grade 5", minimum: "9.5 years", maximum: "10.5 years" },
+  { name: "Grade 6", minimum: "10.5 years", maximum: "11.5 years" },
+  { name: "Grade 7", minimum: "11.5 years", maximum: "12.5 years" },
 ] as const;
 
 const academicCalendars = [
@@ -153,19 +151,19 @@ export function AdmissionProcedurePage() {
                 </tr>
               </thead>
               <tbody>
-                {ageEligibility.map((name) => (
+                {ageEligibility.map(({ name, minimum, maximum }) => (
                   <tr key={name}>
                     <td>{name}</td>
-                    <td>[To Be Provided]</td>
-                    <td>[To Be Provided]</td>
+                    <td>{minimum}</td>
+                    <td>{maximum}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
           <Notice>
-            Official Signature School age limits have not yet been provided. These markers must be
-            replaced only with approved information.
+            These age ranges are suggested guidance. The final cut-off date and any age relaxation
+            remain subject to the approved Signature School admissions policy.
           </Notice>
         </div>
       </section>

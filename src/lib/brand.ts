@@ -4,7 +4,7 @@ export const BRAND = {
   name: "The Signature School",
   shortName: "Signature School",
   legalName: "The Signature School",
-  tagline: "Learn To Earn",
+  tagline: "Learn, Lead and Grow",
   domain: MISSING_CONTENT,
   contactEmail: MISSING_CONTENT,
   admissionsEmail: MISSING_CONTENT,

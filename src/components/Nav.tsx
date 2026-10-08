@@ -81,7 +81,7 @@ export function Nav() {
     <header className="tss-header">
       <div className="tss-utility">
         <div className="tss-nav-wrap">
-          <span>Signature School • Learn to Earn</span>
+          <span>Signature School • Learn, Lead and Grow</span>
           <span>Digital-first learning for future-ready learners</span>
         </div>
       </div>

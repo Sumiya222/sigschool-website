@@ -12,19 +12,19 @@ This document lists the remaining placeholder content in the website and explain
 
 ## Quick priority checklist
 
-| Priority | Missing information | Where to enter it |
-|---|---|---|
-| High | Official phone, email, address and domain | `src/lib/brand.ts` or Dashboard → CMS → Contact Details |
-| High | Campus directory and campus filters | `src/data/campusData.ts` and `src/routes/find-a-campus.tsx` |
-| High | Chairperson name, photograph and approved message | `src/components/about/AboutExperience.tsx` and an image in `src/assets/` |
-| High | Official grade age limits | `src/components/institutional/ReferenceAcademicPages.tsx` |
-| High | Privacy policy and safeguarding policy | `src/routes/privacy.tsx` and `src/components/institutional/ReferenceLearningPage.tsx` |
-| Medium | Official news articles, dates and photography | `src/data/newsData.ts` and `src/assets/` |
-| Medium | Official notices, dates and attachments | `src/data/noticeData.ts` and `public/` |
-| Medium | Official school gallery photographs | `src/data/schoolGalleryData.ts` and `src/assets/` |
-| Medium | Leadership details and biographies | `src/components/about/AboutExperience.tsx` |
-| Medium | Academic calendar dates | `src/components/institutional/ReferenceAcademicPages.tsx` |
-| Low | Careers vacancies and portal feature access | `src/lib/public-content.ts` or the CMS collections |
+| Priority | Missing information                                                    | Where to enter it                                                                     |
+| -------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| High     | Official phone, email, address and domain                              | `src/lib/brand.ts` or Dashboard → CMS → Contact Details                               |
+| High     | Campus directory and campus filters                                    | `src/data/campusData.ts` and `src/routes/find-a-campus.tsx`                           |
+| High     | Chairperson photograph and approved 80–120 word profile                | `src/components/about/AboutExperience.tsx` and an image in `src/assets/`              |
+| High     | Final admissions cut-off date and confirmation of suggested age ranges | `src/components/institutional/ReferenceAcademicPages.tsx`                             |
+| High     | Privacy policy and safeguarding policy                                 | `src/routes/privacy.tsx` and `src/components/institutional/ReferenceLearningPage.tsx` |
+| Medium   | Official news articles, dates and photography                          | `src/data/newsData.ts` and `src/assets/`                                              |
+| Medium   | Official notices, dates and attachments                                | `src/data/noticeData.ts` and `public/`                                                |
+| Medium   | Official school gallery photographs                                    | `src/data/schoolGalleryData.ts` and `src/assets/`                                     |
+| Medium   | Leadership details and biographies                                     | `src/components/about/AboutExperience.tsx`                                            |
+| Medium   | Academic calendar dates                                                | `src/components/institutional/ReferenceAcademicPages.tsx`                             |
+| Low      | Careers vacancies and portal feature access                            | `src/lib/public-content.ts` or the CMS collections                                    |
 
 ---
 
@@ -136,9 +136,10 @@ Replace “Campus list to be provided” after the campus directory is approved.
 
 ### Current placeholders
 
-- Chairperson’s official name
 - Official chairperson photograph
-- Approved chairperson message
+- Approved 80–120 word chairperson profile/message
+
+The supplied content sheet identifies the Chairperson as **Engr. Dr. Muhammad Afzal (Lt. Gen. Retd., HI(M))**. This has been entered on the public page.
 
 ### Enter the data here
 
@@ -146,11 +147,7 @@ Page content:
 
 `src/components/about/AboutExperience.tsx` → `ChairpersonPage`
 
-Replace:
-
-- `[Chairperson Name — To Be Provided]`
-- the temporary photograph label
-- the draft message with the approved message
+Replace the temporary photograph and the draft message with approved material when supplied.
 
 ### Photograph
 
@@ -334,18 +331,21 @@ Do not publish approximate numbers unless they are explicitly labelled and appro
 
 `/admission-procedure`
 
-### Current placeholders
+### Current status
 
-- Minimum age for each class
-- Maximum age for each class
+Suggested minimum and maximum ages from Pre-Nursery through Grade 7 have been entered from `sigschool-content.docx`. They remain visibly identified as suggested guidance.
+
+### Remaining confirmation required
+
+- Final admissions cut-off date
+- Approval of the suggested age ranges
+- Any permitted age relaxation
 
 ### Enter the data here
 
 `src/components/institutional/ReferenceAcademicPages.tsx`
 
-Find the admission age-limit table and replace every `[To Be Provided]` cell with approved age criteria.
-
-Also remove the note saying the official age limits have not yet been provided after the table is complete.
+After formal approval, update the age-limit table if required and remove its provisional-policy notice.
 
 ---
 
@@ -500,21 +500,21 @@ Do not assume every marker in `public-content.ts` is currently visible.
 
 ## Content ownership summary
 
-| Content type | Preferred input location |
-|---|---|
-| Contact details | Dashboard CMS → Contact Details; fallback in `src/lib/brand.ts` |
-| Homepage/CMS page sections | Dashboard CMS → Pages |
-| CMS images | Dashboard CMS → Media Library / Gallery |
-| Statistics/testimonials/claims | Dashboard CMS → Collections |
-| Job openings | Dashboard CMS → Job Openings |
-| News articles | `src/data/newsData.ts` |
-| Notices | `src/data/noticeData.ts` |
-| Campus directory | `src/data/campusData.ts` and `src/routes/find-a-campus.tsx` |
-| About gallery | `src/data/schoolGalleryData.ts` |
-| Teacher training | `src/data/teacherTrainingData.ts` |
-| Chairperson/leadership | `src/components/about/AboutExperience.tsx` |
-| Admissions/calendars | `src/components/institutional/ReferenceAcademicPages.tsx` |
-| Policies | Respective route/component or approved PDF in `public/downloads/` |
+| Content type                   | Preferred input location                                          |
+| ------------------------------ | ----------------------------------------------------------------- |
+| Contact details                | Dashboard CMS → Contact Details; fallback in `src/lib/brand.ts`   |
+| Homepage/CMS page sections     | Dashboard CMS → Pages                                             |
+| CMS images                     | Dashboard CMS → Media Library / Gallery                           |
+| Statistics/testimonials/claims | Dashboard CMS → Collections                                       |
+| Job openings                   | Dashboard CMS → Job Openings                                      |
+| News articles                  | `src/data/newsData.ts`                                            |
+| Notices                        | `src/data/noticeData.ts`                                          |
+| Campus directory               | `src/data/campusData.ts` and `src/routes/find-a-campus.tsx`       |
+| About gallery                  | `src/data/schoolGalleryData.ts`                                   |
+| Teacher training               | `src/data/teacherTrainingData.ts`                                 |
+| Chairperson/leadership         | `src/components/about/AboutExperience.tsx`                        |
+| Admissions/calendars           | `src/components/institutional/ReferenceAcademicPages.tsx`         |
+| Policies                       | Respective route/component or approved PDF in `public/downloads/` |
 
 ## Final verification after replacing placeholders
 

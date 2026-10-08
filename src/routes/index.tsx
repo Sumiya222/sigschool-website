@@ -4,6 +4,9 @@ import hero from "@/assets/signature-school-hero-v2.png";
 import learning from "@/assets/reference-home/learning-experience.png";
 import campus from "@/assets/reference-home/campus-life.png";
 import studentLife from "@/assets/reference-home/student-life.png";
+import airUniversityLogo from "@/assets/trusted/air-university.png";
+import tdcpLogo from "@/assets/trusted/tdcp.png";
+import universityOfGujratLogo from "@/assets/trusted/university-of-gujrat.png";
 import { BRAND } from "@/lib/brand";
 
 export const Route = createFileRoute("/")({
@@ -77,6 +80,15 @@ const admissionCards = [
     "Apply Online",
     "/apply-online",
   ],
+] as const;
+
+const trustedOrganizations = [
+  { logo: airUniversityLogo, name: "Air University" },
+  { logo: tdcpLogo, name: "Tourism Development Corporation of Punjab" },
+  { logo: universityOfGujratLogo, name: "University of Gujrat" },
+  { logo: airUniversityLogo, name: "Air University" },
+  { logo: tdcpLogo, name: "Tourism Development Corporation of Punjab" },
+  { logo: universityOfGujratLogo, name: "University of Gujrat" },
 ] as const;
 
 function HomePage() {
@@ -166,19 +178,25 @@ function HomePage() {
             <b>SCHOOL CAMPUS</b>
           </div>
           <aside>
-            <article>
-              <b>▣ Our Vision</b>
+            <article className="home-purpose-card home-vision-card">
+              <span>01</span>
+              <b>Our Vision</b>
               <p>
-                To create a global community of lifelong learners who lead with purpose and make a
-                positive impact.
+                To develop confident, ethical and future-ready learners through a modern digital
+                learning ecosystem that empowers every child to learn deeply, lead responsibly and
+                grow with purpose.
               </p>
+              <a href="/about/vision-mission">Explore our direction →</a>
             </article>
-            <article>
-              <b>☼ Our Mission</b>
+            <article className="home-purpose-card home-mission-card">
+              <span>02</span>
+              <b>Our Mission</b>
               <p>
-                To provide a world-class education through an innovative digital learning
-                experience.
+                To provide accessible, high-quality and value-integrated education through a
+                bookless digital model combining academics, technology, creativity, life skills and
+                real-world readiness.
               </p>
+              <a href="/about/vision-mission">Read vision and mission →</a>
             </article>
           </aside>
         </div>
@@ -241,6 +259,33 @@ function HomePage() {
                 Explore Franchise Details
               </a>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="trusted-section" aria-labelledby="trusted-title">
+        <div className="reference-container trusted-heading">
+          <p>Trusted By</p>
+          <h2 id="trusted-title">110+ Leading Universities And Companies</h2>
+          <span aria-hidden />
+          <p>Our students thrive in top universities and companies worldwide.</p>
+        </div>
+
+        <div className="trusted-marquee" aria-label="Trusted universities and companies">
+          <div className="trusted-marquee-track">
+            {[0, 1].map((group) => (
+              <div className="trusted-logo-group" aria-hidden={group === 1} key={group}>
+                {trustedOrganizations.map((organization, index) => (
+                  <article
+                    className="trusted-logo-card"
+                    key={`${group}-${organization.name}-${index}`}
+                  >
+                    <img src={organization.logo} alt={`${organization.name} logo`} />
+                    <span>{organization.name}</span>
+                  </article>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </section>
