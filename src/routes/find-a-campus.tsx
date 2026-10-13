@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { BRAND } from "@/lib/brand";
 
 export const Route = createFileRoute("/find-a-campus")({ component: CampusFinderPage });
 
@@ -38,7 +39,7 @@ function CampusFinderPage() {
             <dl>
               <div>
                 <dt>Address:</dt>
-                <dd>[Official address to be provided]</dd>
+                <dd>{BRAND.addressLine}</dd>
               </div>
               <div>
                 <dt>Phone:</dt>

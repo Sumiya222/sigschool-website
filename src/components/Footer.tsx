@@ -44,16 +44,28 @@ export function Footer() {
           </a>
           <p>Future-ready learning for confident, capable and caring young people.</p>
           <div className="tss-socials" aria-label="Social media">
-            <a href="/contact" aria-label="Facebook contact">
+            <a
+              href={BRAND.social.facebook}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="The Signature Schools on Facebook"
+            >
               f
             </a>
-            <a href="/contact" aria-label="Instagram contact">
+            <a
+              href={BRAND.social.instagram}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="The Signature Schools on Instagram"
+            >
               ◎
             </a>
-            <a href="/contact" aria-label="YouTube contact">
-              ▶
-            </a>
-            <a href="/contact" aria-label="LinkedIn contact">
+            <a
+              href={BRAND.social.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="The Signature School on LinkedIn"
+            >
               in
             </a>
           </div>
@@ -72,14 +84,18 @@ export function Footer() {
 
         <div className="tss-footer-contact">
           <h2>Contact Us</h2>
-          <a href="/contact">
-            <Phone aria-hidden /> Official phone to be provided
+          <a href="tel:+923000515557">
+            <Phone aria-hidden /> {BRAND.phone}
           </a>
-          <a href="/contact">
-            <Mail aria-hidden /> Official email to be provided
+          <a href={`mailto:${BRAND.contactEmail}`}>
+            <Mail aria-hidden /> {BRAND.contactEmail}
           </a>
-          <a href="/find-a-campus">
-            <MapPin aria-hidden /> Official address to be provided
+          <a
+            href={`https://maps.google.com/?q=${encodeURIComponent(BRAND.addressLine)}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <MapPin aria-hidden /> {BRAND.addressLine}
           </a>
         </div>
       </div>
