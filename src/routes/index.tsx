@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import type { CSSProperties } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
+import { BookOpenCheck, Compass, Eye, Laptop, Sparkles, X } from "lucide-react";
 import hero from "@/assets/signature-school-hero-v2.png";
 import learning from "@/assets/reference-home/learning-experience.png";
 import campus from "@/assets/reference-home/campus-life.png";
@@ -83,17 +84,105 @@ const admissionCards = [
 ] as const;
 
 const trustedOrganizations = [
-  { logo: airUniversityLogo, name: "Air University" },
-  { logo: tdcpLogo, name: "Tourism Development Corporation of Punjab" },
-  { logo: universityOfGujratLogo, name: "University of Gujrat" },
-  { logo: airUniversityLogo, name: "Air University" },
-  { logo: tdcpLogo, name: "Tourism Development Corporation of Punjab" },
-  { logo: universityOfGujratLogo, name: "University of Gujrat" },
+  { logo: airUniversityLogo, name: "Air University", tone: "air" },
+  { logo: tdcpLogo, name: "Tourism Development Corporation of Punjab", tone: "tdcp" },
+  { logo: universityOfGujratLogo, name: "University of Gujrat", tone: "uog" },
+  { logo: airUniversityLogo, name: "Air University", tone: "air" },
+  { logo: tdcpLogo, name: "Tourism Development Corporation of Punjab", tone: "tdcp" },
+  { logo: universityOfGujratLogo, name: "University of Gujrat", tone: "uog" },
 ] as const;
 
 function HomePage() {
+  const [showWelcome, setShowWelcome] = useState(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("signature-welcome-dismissed") !== "true") {
+      setShowWelcome(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!showWelcome) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeWelcome();
+    };
+    document.addEventListener("keydown", closeOnEscape);
+    document.body.classList.add("welcome-popup-open");
+    return () => {
+      document.removeEventListener("keydown", closeOnEscape);
+      document.body.classList.remove("welcome-popup-open");
+    };
+  }, [showWelcome]);
+
+  function closeWelcome() {
+    sessionStorage.setItem("signature-welcome-dismissed", "true");
+    setShowWelcome(false);
+  }
+
   return (
     <div className="reference-home">
+      {showWelcome ? (
+        <div className="school-welcome-overlay" role="presentation" onMouseDown={closeWelcome}>
+          <section
+            className="school-welcome-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="school-welcome-title"
+            aria-describedby="school-welcome-description"
+            onMouseDown={(event) => event.stopPropagation()}
+          >
+            <button
+              className="school-welcome-close"
+              type="button"
+              onClick={closeWelcome}
+              aria-label="Close welcome message"
+              autoFocus
+            >
+              <X aria-hidden />
+            </button>
+            <div className="school-welcome-mark" aria-hidden="true">
+              <Sparkles />
+            </div>
+            <p className="school-welcome-kicker">Welcome to The Signature School</p>
+            <h2 id="school-welcome-title">A bookless school built for tomorrow</h2>
+            <p id="school-welcome-description">
+              Where great teaching, purposeful technology and practical learning come together to
+              help every child learn, lead and grow.
+            </p>
+            <div className="school-welcome-features">
+              <div>
+                <BookOpenCheck aria-hidden />
+                <span>
+                  <strong>Bookless learning</strong>
+                  Engaging digital resources
+                </span>
+              </div>
+              <div>
+                <Laptop aria-hidden />
+                <span>
+                  <strong>Digital-first classrooms</strong>
+                  Technology with purpose
+                </span>
+              </div>
+              <div>
+                <Sparkles aria-hidden />
+                <span>
+                  <strong>Future-ready skills</strong>
+                  Confidence, creativity and leadership
+                </span>
+              </div>
+            </div>
+            <div className="school-welcome-actions">
+              <button type="button" onClick={closeWelcome}>
+                Explore the school
+              </button>
+              <a href="/apply-online" onClick={closeWelcome}>
+                Apply online
+              </a>
+            </div>
+          </section>
+        </div>
+      ) : null}
       <section
         className="reference-hero"
         style={{ "--reference-hero": `url(${hero})` } as CSSProperties}
@@ -177,9 +266,12 @@ function HomePage() {
             <br />
             <b>SCHOOL CAMPUS</b>
           </div>
-          <aside>
+          <aside className="home-purpose-showcase">
             <article className="home-purpose-card home-vision-card">
-              <span>01</span>
+              <div className="home-purpose-icon" aria-hidden="true">
+                <Eye />
+              </div>
+              <span>Our future</span>
               <b>Our Vision</b>
               <p>
                 To develop confident, ethical and future-ready learners through a modern digital
@@ -189,7 +281,10 @@ function HomePage() {
               <a href="/about/vision-mission">Explore our direction →</a>
             </article>
             <article className="home-purpose-card home-mission-card">
-              <span>02</span>
+              <div className="home-purpose-icon" aria-hidden="true">
+                <Compass />
+              </div>
+              <span>Our purpose</span>
               <b>Our Mission</b>
               <p>
                 To provide accessible, high-quality and value-integrated education through a
@@ -277,8 +372,9 @@ function HomePage() {
               <div className="trusted-logo-group" aria-hidden={group === 1} key={group}>
                 {trustedOrganizations.map((organization, index) => (
                   <article
-                    className="trusted-logo-card"
+                    className={`trusted-logo-card trusted-logo-${organization.tone}`}
                     key={`${group}-${organization.name}-${index}`}
+                    data-tone={organization.tone}
                   >
                     <img src={organization.logo} alt={`${organization.name} logo`} />
                     <span>{organization.name}</span>

@@ -2,18 +2,17 @@ import { useEffect, useState, type ReactNode } from "react";
 import {
   ArrowLeft,
   ArrowRight,
-  BookOpenCheck,
-  Building2,
   Check,
   ChevronLeft,
   ChevronRight,
   Download,
+  Building2,
   GraduationCap,
-  HeartHandshake,
-  Lightbulb,
+  Globe2,
+  Handshake,
   MapPin,
   MonitorSmartphone,
-  School,
+  ShieldCheck,
   Users,
   X,
 } from "lucide-react";
@@ -330,79 +329,147 @@ export function ChairpersonPage() {
 }
 
 export function AtAGlancePage() {
-  const statIcons = [Building2, GraduationCap, Users, MapPin, BookOpenCheck, School];
   const ecosystemIcons = [
     GraduationCap,
     Users,
-    HeartHandshake,
+    Handshake,
     Building2,
     MonitorSmartphone,
-    Lightbulb,
+    ShieldCheck,
   ];
 
   return (
-    <div className="glance-page">
+    <div className="institution-page">
       <Hero
         title="Signature School at a Glance"
         subtitle="A Connected Ecosystem for Future-Ready Learning"
         description="A clear view of the people, places and learning systems that shape the Signature School experience."
       />
-      <Section eyebrow="Institutional Overview" title="Our school in focus">
-        <div className="about-stats">
-          {schoolStats.map((stat, index) => {
-            const Icon = statIcons[index % statIcons.length];
-            return (
-              <article key={stat.label}>
-                <div>
-                  <Icon aria-hidden />
-                </div>
-                <strong>{stat.value}</strong>
-                <span>{stat.label}</span>
-              </article>
-            );
-          })}
-        </div>
-      </Section>
-      <Section
-        eyebrow="Our School Network"
-        title="A configurable campus network"
-        intro="No real campus location is shown until verified data is supplied."
-      >
-        <div className="about-map">
-          <div className="about-map-grid" aria-hidden="true"></div>
-          <div className="about-map-orbit" aria-hidden="true"></div>
-          {campuses.map((campus) => (
-            <article key={campus.id}>
-              <span>
-                <MapPin aria-hidden />
-              </span>
-              <div>
-                <small>Campus directory</small>
-                <h3>{campus.name}</h3>
-                <p>{campus.city}</p>
-                <span>{campus.area}</span>
+
+      <section className="institution-overview">
+        <div className="institution-color-orb institution-color-orb-one" aria-hidden="true"></div>
+        <div className="institution-color-orb institution-color-orb-two" aria-hidden="true"></div>
+        <div className="tss-container">
+          <div className="institution-heading">
+            <div>
+              <p className="ref-kicker">Institutional Overview</p>
+              <h2>Our school in focus</h2>
+            </div>
+            <p>
+              A concise institutional view of the scale, reach and learning structure of The
+              Signature Schools. Verified figures will appear here when officially confirmed.
+            </p>
+          </div>
+          <div className="institution-trust-line" aria-label="Signature School qualities">
+            <span>Digital-first learning</span>
+            <span>Future-ready skills</span>
+            <span>Connected school community</span>
+          </div>
+          <dl className="institution-metrics">
+            {schoolStats.map((stat, index) => (
+              <div key={stat.label}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <dd>{stat.value}</dd>
+                <dt>{stat.label}</dt>
               </div>
-            </article>
-          ))}
+            ))}
+          </dl>
         </div>
-      </Section>
-      <Section eyebrow="Connected Community" title="Our Educational Ecosystem">
-        <div className="about-pillar-grid about-six">
-          {ecosystem.map(([title, body], index) => {
-            const Icon = ecosystemIcons[index % ecosystemIcons.length];
-            return (
-              <article key={title}>
-                <span>
-                  <Icon aria-hidden />
-                </span>
-                <h3>{title}</h3>
-                <p>{body}</p>
-              </article>
-            );
-          })}
+      </section>
+
+      <section className="institution-network">
+        <div className="institution-network-glow" aria-hidden="true"></div>
+        <div className="tss-container institution-network-layout">
+          <div className="institution-network-copy">
+            <p className="ref-kicker">Our School Network</p>
+            <h2>A connected campus network</h2>
+            <p>
+              The campus directory will present verified locations, offered grades and contact
+              details. No unconfirmed campus information is published.
+            </p>
+            <a href="/find-a-campus">
+              Explore the campus directory <ArrowRight aria-hidden />
+            </a>
+            <a className="institution-network-secondary" href="/apply-online">
+              Begin an application <ArrowRight aria-hidden />
+            </a>
+          </div>
+          <div className="institution-network-visual">
+            <div className="institution-network-lines" aria-hidden="true"></div>
+            <div className="institution-3d-system" aria-hidden="true">
+              <span className="institution-3d-core"></span>
+              <span className="institution-3d-ring institution-3d-ring-one"></span>
+              <span className="institution-3d-ring institution-3d-ring-two"></span>
+              <span className="institution-3d-ring institution-3d-ring-three"></span>
+              <i className="institution-3d-node institution-3d-node-one"></i>
+              <i className="institution-3d-node institution-3d-node-two"></i>
+              <i className="institution-3d-node institution-3d-node-three"></i>
+            </div>
+            {campuses.map((campus) => (
+              <div className="institution-location" key={campus.id}>
+                <MapPin aria-hidden />
+                <div>
+                  <small>Campus information</small>
+                  <h3>{campus.name}</h3>
+                  <p>{campus.city}</p>
+                  <span>{campus.area}</span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      </Section>
-      <Cta />
+      </section>
+
+      <section className="institution-ecosystem">
+        <div className="institution-ecosystem-aura" aria-hidden="true"></div>
+        <div className="tss-container">
+          <div className="institution-heading">
+            <div>
+              <p className="ref-kicker">Connected Community</p>
+              <h2>Our educational ecosystem</h2>
+            </div>
+            <p>
+              Learning is strengthened when students, teachers, parents, campuses and technology
+              work as one connected system.
+            </p>
+          </div>
+          <div className="institution-ecosystem-stage">
+            <div className="institution-ecosystem-rings" aria-hidden="true"></div>
+            <div className="institution-ecosystem-hub">
+              <Globe2 aria-hidden="true" />
+              <small>The Signature Schools</small>
+              <strong>One Community</strong>
+            </div>
+            <div className="institution-ecosystem-list">
+              {ecosystem.map(([title, body], index) => {
+                const Icon = ecosystemIcons[index % ecosystemIcons.length];
+                return (
+                  <article key={title}>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <i aria-hidden="true">
+                      <Icon />
+                    </i>
+                    <h3>{title}</h3>
+                    <p>{body}</p>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+          <div className="institution-community-cta">
+            <div>
+              <small>Your journey starts here</small>
+              <strong>Discover a school community built around every learner.</strong>
+            </div>
+            <div>
+              <a href="/find-a-campus">Find a campus</a>
+              <a href="/apply-online">
+                Apply now <ArrowRight aria-hidden />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

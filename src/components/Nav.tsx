@@ -13,7 +13,6 @@ const groups = [
       ["Signature School at a Glance", "/about/at-a-glance"],
       ["Teacher Training", "/about/teacher-training"],
       ["News & Events", "/about/news-events"],
-      ["Alumni", "/about/alumni"],
       ["Important Notices", "/about/notices"],
       ["Signature School", "/about/signature-school"],
     ],
@@ -24,7 +23,6 @@ const groups = [
     items: [
       ["Academic Overview", "/academics"],
       ["Examinations", "/examinations"],
-      ["Teacher Development", "/teacher-development"],
     ],
   },
   {

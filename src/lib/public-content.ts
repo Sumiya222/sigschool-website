@@ -987,9 +987,12 @@ Object.assign(PUBLIC_PAGES, {
     intro:
       "Get in touch with Signature School for admissions, campus, academic, support or partnership enquiries.",
     sections: [
-      { title: "Phone", body: "+92 51 2345678" },
-      { title: "Email", body: "info@signatureschool.edu.pk" },
-      { title: "Location", body: "Islamabad, Pakistan" },
+      { title: "Phone", body: "+92 300 0515557" },
+      { title: "Email", body: "info@thesignatureschool.com" },
+      {
+        title: "Location",
+        body: "Plot No. 11, Tulip Road, near Giga Mall, Gate No. 03, Facing GT Road, DHA Phase II, Islamabad, Pakistan",
+      },
     ],
     actions: [{ label: "Find a Campus", href: "/find-a-campus" }],
   },
